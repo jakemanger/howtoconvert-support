@@ -19,7 +19,7 @@
 To install the app on Mac, Windows or Linux, you can pay what you want to get prebuilt executables from the [official website](https://howtoconvert.co/app).
 Any purchase supports ongoing development and helps maintain the [free demo](https://howtoconvert.co).
 
-If you want to contribute, raise an [issue](https://github.com/jakemanger/howtoconvert-support/issues/new/choose), submit a [pull request](https://github.com/jakemanger/howtoconvert-support/pulls) or disclose a [vulnerability](https://github.com/jakemanger/howtoconvert-support/security).
+If you want to contribute, raise an [issue](https://github.com/jakemanger/howtoconvert-support/issues/new/choose) or disclose a [vulnerability](https://github.com/jakemanger/howtoconvert-support/security).
 
 ## Projects that need support
 
