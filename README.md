@@ -16,7 +16,7 @@
 
 ## Install
 
-To install the app on Mac, Windows or Linux, you can purchase prebuilt executables from the [official website](https://howtoconvert.co/app).
+To install the app on Mac, Windows or Linux, you can purchase prebuilt executables from the [official website](https://howtoconvert.co/).
 Any purchase supports ongoing development and helps maintain the [free demo](https://howtoconvert.co).
 
 If you want to contribute, raise an [issue](https://github.com/jakemanger/howtoconvert-support/issues/new/choose) or disclose a [vulnerability](https://github.com/jakemanger/howtoconvert-support/security).
