@@ -1,0 +1,544 @@
+{
+  "schema": 1,
+  "bundle": "tools-2026.10.0",
+  "repository": "jakemanger/howtoconvert-support",
+  "writtenOfferContact": "jake@howtoconvert.co",
+  "upstream": {
+    "v104-mac_arm64": {
+      "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/mac_arm64.zip",
+      "sha256": "9e1962ef04a5de4937bc4a034eaaecded11205fb2f28a2f74a6e9dd0513b3b84",
+      "root": "mac_arm64"
+    },
+    "v104-mac_x86_64": {
+      "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/mac_x86_64.zip",
+      "sha256": "c4028c4ffdef1560e83e4ec10148868940ddb901cb295e07bb40bf3a84f0ea15",
+      "root": "mac_x86_64"
+    },
+    "v104-linux_x86_64": {
+      "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/linux_x86_64.zip",
+      "sha256": "fd7e47eb564c73a0ead7c7d7811cf9d1ee3d32bc68d690e25a237981f18d6831",
+      "root": "linux_x86_64"
+    },
+    "v104-linux_arm64": {
+      "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/linux_arm64.zip",
+      "sha256": "9ba3a5039c862e4d00730621facfb44f0074aeca8a3e1dee934005370502ac13",
+      "root": "linux_arm64"
+    },
+    "v104-windows_x86_64": {
+      "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/windows_x86_64.zip",
+      "sha256": "32df8fc54d51f5d28b9bbf90828ee986bff74a40ef2a31bcd01e0aacce400956",
+      "root": "windows_x86_64"
+    },
+    "magick-windows_x86_64": {
+      "url": "https://github.com/ImageMagick/ImageMagick/releases/download/7.1.2-32/ImageMagick-7.1.2-32-portable-Q16-HDRI-x64.7z",
+      "sha256": "bac9155acac3147c460082282e01646596c054c613c77e6616f7e3ad0ed38e54"
+    },
+    "magick-linux_x86_64": {
+      "url": "https://github.com/ImageMagick/ImageMagick/releases/download/7.1.2-32/ImageMagick-7.1.2-32-gcc-x86_64.AppImage",
+      "sha256": "d456cab221b5fc1c396768a026d0a33ee8665f7119c7fea7151b960c69058b21"
+    },
+    "libreoffice-mac_arm64": {
+      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/mac/aarch64/LibreOffice_26.2.6_MacOS_aarch64.dmg",
+      "sha256": "94bb3248df074c225490a8a6d1d9dc87c7d6783dbb7a8e9f0d0c3d94348552af"
+    },
+    "libreoffice-mac_x86_64": {
+      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/mac/x86_64/LibreOffice_26.2.6_MacOS_x86-64.dmg",
+      "sha256": "135b8a95b8133396d54bf8e726dbc0066145efa0d785963fc3d4592acbfcfe5b"
+    },
+    "libreoffice-windows_x86_64": {
+      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/win/x86_64/LibreOffice_26.2.6_Win_x86-64.msi",
+      "sha256": "f9877032fd908beb9c0ddf06df4af5c2e85f419c42e14876c4cce5aae5fb2660"
+    },
+    "libreoffice-linux_x86_64": {
+      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/deb/x86_64/LibreOffice_26.2.6_Linux_x86-64_deb.tar.gz",
+      "sha256": "fd0e8f8f2408dd2e5b90286e60f3f97cf566ba441cd48cfc5bcc68067303e0bc"
+    },
+    "libreoffice-linux_arm64": {
+      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/deb/aarch64/LibreOffice_26.2.6_Linux_aarch64_deb.tar.gz",
+      "sha256": "f8e8b1d30abde0d530d727ce1b26909ccbedc3d76bcf75d93b3dd5fcd5b8d278"
+    },
+    "tex-darwin": {
+      "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-darwin-v2026.10.tar.xz",
+      "sha256": "e40c294efae81026d8cc8d12c09d2dd456d268efe7fe092410478bc1973fd40f"
+    },
+    "tex-linux_x86_64": {
+      "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-linux-x86_64-v2026.10.tar.xz",
+      "sha256": "4d519d6236ee6798e3ec0d8e2093d1fda01aeb267aa22c2a5586d76bcfce6566"
+    },
+    "tex-linux_arm64": {
+      "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-linux-arm64-v2026.10.tar.xz",
+      "sha256": "1bc5465c7a7c6f13e13c1b54a52147577eb3f389033af0444bc097698eb6653f"
+    },
+    "tex-windows_x86_64": {
+      "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-windows-v2026.10.exe",
+      "sha256": "36c329c644683d981a668419d13c8804696e2816ae4d287ad755788fee231a31"
+    }
+  },
+  "tools": {
+    "ffmpeg": {
+      "name": "FFmpeg",
+      "license": "GPL-3.0-or-later",
+      "licenseFiles": [
+        "GPL-3.0.txt",
+        "GPL-2.0.txt",
+        "LGPL-2.1.txt"
+      ],
+      "homepage": "https://ffmpeg.org",
+      "verifyArgs": [
+        "-version"
+      ],
+      "platforms": {
+        "mac_arm64": {
+          "version": "8.1.1",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_arm64",
+            "paths": [
+              "ffmpeg"
+            ]
+          },
+          "bin": "ffmpeg/ffmpeg",
+          "origin": "Static GPL build by Martin Riedl (https://www.martin-riedl.de/ffmpeg/)",
+          "sources": [
+            "ffmpeg-8.1.1"
+          ]
+        },
+        "mac_x86_64": {
+          "version": "7.1",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_x86_64",
+            "paths": [
+              "ffmpeg"
+            ]
+          },
+          "bin": "ffmpeg/ffmpeg",
+          "origin": "Static GPL build by Helmut K. C. Tessarek (https://evermeet.cx/ffmpeg/)",
+          "sources": [
+            "ffmpeg-7.1"
+          ]
+        },
+        "linux_x86_64": {
+          "version": "N-118350-ge20ee9f9ae",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-linux_x86_64",
+            "paths": [
+              "ffmpeg"
+            ]
+          },
+          "bin": "ffmpeg/bin/ffmpeg",
+          "origin": "GPL build from BtbN/FFmpeg-Builds, 2025-01-24 (https://github.com/BtbN/FFmpeg-Builds)",
+          "sources": [
+            "ffmpeg-e20ee9f9ae"
+          ]
+        },
+        "linux_arm64": {
+          "version": "N-118350-ge20ee9f9ae",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-linux_arm64",
+            "paths": [
+              "ffmpeg"
+            ]
+          },
+          "bin": "ffmpeg/bin/ffmpeg",
+          "origin": "GPL build from BtbN/FFmpeg-Builds, 2025-01-24 (https://github.com/BtbN/FFmpeg-Builds)",
+          "sources": [
+            "ffmpeg-e20ee9f9ae"
+          ]
+        },
+        "windows_x86_64": {
+          "version": "7.1",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-windows_x86_64",
+            "paths": [
+              "ffmpeg"
+            ]
+          },
+          "bin": "ffmpeg/bin/ffmpeg.exe",
+          "origin": "GPL full build by Gyan Doshi (https://www.gyan.dev/ffmpeg/builds/)",
+          "sources": [
+            "ffmpeg-7.1"
+          ]
+        }
+      }
+    },
+    "pandoc": {
+      "name": "Pandoc",
+      "license": "GPL-2.0-or-later",
+      "licenseFiles": [
+        "GPL-2.0.txt"
+      ],
+      "homepage": "https://pandoc.org",
+      "verifyArgs": [
+        "--version"
+      ],
+      "platforms": {
+        "mac_arm64": {
+          "version": "3.6.2",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_arm64",
+            "paths": [
+              "pandoc"
+            ]
+          },
+          "bin": "pandoc/bin/pandoc",
+          "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
+          "sources": [
+            "pandoc-3.6.2"
+          ]
+        },
+        "mac_x86_64": {
+          "version": "3.6.2",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_x86_64",
+            "paths": [
+              "pandoc"
+            ]
+          },
+          "bin": "pandoc/bin/pandoc",
+          "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
+          "sources": [
+            "pandoc-3.6.2"
+          ]
+        },
+        "linux_x86_64": {
+          "version": "3.6.2",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-linux_x86_64",
+            "paths": [
+              "pandoc"
+            ]
+          },
+          "bin": "pandoc/bin/pandoc",
+          "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
+          "sources": [
+            "pandoc-3.6.2"
+          ]
+        },
+        "linux_arm64": {
+          "version": "3.6.2",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-linux_arm64",
+            "paths": [
+              "pandoc"
+            ]
+          },
+          "bin": "pandoc/bin/pandoc",
+          "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
+          "sources": [
+            "pandoc-3.6.2"
+          ]
+        },
+        "windows_x86_64": {
+          "version": "3.6.2",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-windows_x86_64",
+            "paths": [
+              "pandoc"
+            ]
+          },
+          "bin": "pandoc/pandoc.exe",
+          "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
+          "sources": [
+            "pandoc-3.6.2"
+          ]
+        }
+      }
+    },
+    "magick": {
+      "name": "ImageMagick",
+      "license": "ImageMagick",
+      "licenseFiles": [
+        "ImageMagick.txt"
+      ],
+      "homepage": "https://imagemagick.org",
+      "verifyArgs": [
+        "--version"
+      ],
+      "platforms": {
+        "mac_arm64": {
+          "version": "7.1.1-47",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_arm64",
+            "paths": [
+              "magick"
+            ],
+            "extra": {
+              ".xcpkg": "magick/.xcpkg"
+            }
+          },
+          "bin": "magick/bin/magick",
+          "origin": "xcpkg build of ImageMagick with LibRaw (https://github.com/leleliu008/xcpkg)",
+          "sources": [
+            "imagemagick-7.1.1-47"
+          ]
+        },
+        "mac_x86_64": {
+          "version": "7.1.1-47",
+          "package": {
+            "type": "zip-subdir",
+            "upstream": "v104-mac_x86_64",
+            "paths": [
+              "magick"
+            ]
+          },
+          "bin": "magick/bin/magick",
+          "origin": "xcpkg build of ImageMagick (https://github.com/leleliu008/xcpkg)",
+          "sources": [
+            "imagemagick-7.1.1-47"
+          ]
+        },
+        "linux_x86_64": {
+          "version": "7.1.2-32",
+          "package": {
+            "type": "appimage-extract",
+            "upstream": "magick-linux_x86_64",
+            "wrapper": "bin/magick"
+          },
+          "bin": "magick/bin/magick",
+          "origin": "Official ImageMagick AppImage, extracted into a portable folder (https://github.com/ImageMagick/ImageMagick/releases/tag/7.1.2-32)",
+          "sources": [
+            "imagemagick-7.1.2-32"
+          ]
+        },
+        "windows_x86_64": {
+          "version": "7.1.2-32",
+          "package": {
+            "type": "7z-extract",
+            "upstream": "magick-windows_x86_64"
+          },
+          "bin": "magick/magick.exe",
+          "origin": "Official ImageMagick portable Q16-HDRI x64 build (https://github.com/ImageMagick/ImageMagick/releases/tag/7.1.2-32)",
+          "sources": [
+            "imagemagick-7.1.2-32"
+          ]
+        }
+      }
+    },
+    "libreoffice": {
+      "name": "LibreOffice",
+      "license": "MPL-2.0 (with LGPL-3.0-or-later and other components)",
+      "licenseFiles": [
+        "MPL-2.0.txt",
+        "LGPL-3.0.txt"
+      ],
+      "homepage": "https://www.libreoffice.org",
+      "verifyArgs": [
+        "--headless",
+        "--version"
+      ],
+      "platforms": {
+        "mac_arm64": {
+          "version": "26.2.6",
+          "package": {
+            "type": "as-is",
+            "upstream": "libreoffice-mac_arm64",
+            "format": "dmg",
+            "app": "LibreOffice.app"
+          },
+          "bin": "LibreOffice.app/Contents/MacOS/soffice",
+          "installTo": "applications",
+          "origin": "Official, signed and notarized The Document Foundation disk image (unchanged)",
+          "sources": [
+            "libreoffice-26.2.6"
+          ]
+        },
+        "mac_x86_64": {
+          "version": "26.2.6",
+          "package": {
+            "type": "as-is",
+            "upstream": "libreoffice-mac_x86_64",
+            "format": "dmg",
+            "app": "LibreOffice.app"
+          },
+          "bin": "LibreOffice.app/Contents/MacOS/soffice",
+          "installTo": "applications",
+          "origin": "Official, signed and notarized The Document Foundation disk image (unchanged)",
+          "sources": [
+            "libreoffice-26.2.6"
+          ]
+        },
+        "windows_x86_64": {
+          "version": "26.2.6",
+          "package": {
+            "type": "msi-admin",
+            "upstream": "libreoffice-windows_x86_64"
+          },
+          "bin": "libreoffice/program/soffice.com",
+          "origin": "Official The Document Foundation MSI, extracted into a portable folder",
+          "sources": [
+            "libreoffice-26.2.6"
+          ]
+        },
+        "linux_x86_64": {
+          "version": "26.2.6",
+          "package": {
+            "type": "deb-extract",
+            "upstream": "libreoffice-linux_x86_64",
+            "programDir": "opt/libreoffice26.2"
+          },
+          "bin": "libreoffice/program/soffice",
+          "origin": "Official The Document Foundation .deb packages, extracted into a portable folder",
+          "sources": [
+            "libreoffice-26.2.6"
+          ]
+        },
+        "linux_arm64": {
+          "version": "26.2.6",
+          "package": {
+            "type": "deb-extract",
+            "upstream": "libreoffice-linux_arm64",
+            "programDir": "opt/libreoffice26.2"
+          },
+          "bin": "libreoffice/program/soffice",
+          "origin": "Official The Document Foundation .deb packages, extracted into a portable folder",
+          "sources": [
+            "libreoffice-26.2.6"
+          ]
+        }
+      }
+    },
+    "tex": {
+      "name": "TinyTeX (TeX Live)",
+      "license": "TeX Live free-software licenses (GPL-2.0, LPPL and others); TinyTeX scripts MIT",
+      "licenseFiles": [
+        "TeXLive-LICENSE.TL",
+        "TinyTeX-MIT.txt",
+        "GPL-2.0.txt"
+      ],
+      "homepage": "https://yihui.org/tinytex/",
+      "verifyArgs": [
+        "--version"
+      ],
+      "platforms": {
+        "mac_arm64": {
+          "version": "2026.10",
+          "package": {
+            "type": "tar-xz-dir",
+            "upstream": "tex-darwin",
+            "dir": "TinyTeX"
+          },
+          "bin": "tex/bin/universal-darwin/pdflatex",
+          "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
+          "sources": [
+            "texlive"
+          ]
+        },
+        "mac_x86_64": {
+          "version": "2026.10",
+          "package": {
+            "type": "tar-xz-dir",
+            "upstream": "tex-darwin",
+            "dir": "TinyTeX"
+          },
+          "bin": "tex/bin/universal-darwin/pdflatex",
+          "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
+          "sources": [
+            "texlive"
+          ]
+        },
+        "linux_x86_64": {
+          "version": "2026.10",
+          "package": {
+            "type": "tar-xz-dir",
+            "upstream": "tex-linux_x86_64",
+            "dir": "TinyTeX"
+          },
+          "bin": "tex/bin/x86_64-linux/pdflatex",
+          "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
+          "sources": [
+            "texlive"
+          ]
+        },
+        "linux_arm64": {
+          "version": "2026.10",
+          "package": {
+            "type": "tar-xz-dir",
+            "upstream": "tex-linux_arm64",
+            "dir": "TinyTeX"
+          },
+          "bin": "tex/bin/aarch64-linux/pdflatex",
+          "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
+          "sources": [
+            "texlive"
+          ]
+        },
+        "windows_x86_64": {
+          "version": "2026.10",
+          "package": {
+            "type": "7z-extract",
+            "upstream": "tex-windows_x86_64",
+            "dir": "TinyTeX"
+          },
+          "bin": "tex/bin/windows/pdflatex.exe",
+          "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
+          "sources": [
+            "texlive"
+          ]
+        }
+      }
+    }
+  },
+  "sources": {
+    "ffmpeg-8.1.1": {
+      "title": "FFmpeg 8.1.1 source code",
+      "url": "https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz",
+      "sha256": "b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3",
+      "attach": true,
+      "notes": "Build scripts for this binary, including the exact versions of every statically linked library: https://git.martin-riedl.de/ffmpeg/build-script"
+    },
+    "ffmpeg-7.1": {
+      "title": "FFmpeg 7.1 source code",
+      "url": "https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz",
+      "sha256": "40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6",
+      "attach": true,
+      "notes": "Build configuration for the macOS binary: https://evermeet.cx/ffmpeg/ . Build configuration and library versions for the Windows binary: https://www.gyan.dev/ffmpeg/builds/"
+    },
+    "ffmpeg-e20ee9f9ae": {
+      "title": "FFmpeg source at commit e20ee9f9aec94f8cea1bf4fd8ed3fb096fb205e5",
+      "url": "https://codeload.github.com/FFmpeg/FFmpeg/tar.gz/e20ee9f9aec94f8cea1bf4fd8ed3fb096fb205e5",
+      "filename": "ffmpeg-e20ee9f9aec94f8cea1bf4fd8ed3fb096fb205e5.tar.gz",
+      "sha256": "267a43ea6e1d671ea031c872c28eb8c8946985ec6b82348450566865803d0ac2",
+      "attach": true,
+      "notes": "Build scripts pinning every statically linked library: https://github.com/BtbN/FFmpeg-Builds (autobuild of 2025-01-24)"
+    },
+    "pandoc-3.6.2": {
+      "title": "Pandoc 3.6.2 source code",
+      "url": "https://hackage.haskell.org/package/pandoc-3.6.2/pandoc-3.6.2.tar.gz",
+      "sha256": "bcaa005395dfdfcf39b0724b43a620e4a1ee23be01c54e4cd3de86152c47f8a1",
+      "attach": true,
+      "notes": "Haskell dependencies are listed in the release's cabal.project.freeze: https://github.com/jgm/pandoc/tree/3.6.2"
+    },
+    "imagemagick-7.1.1-47": {
+      "title": "ImageMagick 7.1.1-47 source code",
+      "url": "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-47.tar.gz",
+      "attach": false,
+      "notes": "Build recipe: https://github.com/leleliu008/xcpkg"
+    },
+    "imagemagick-7.1.2-32": {
+      "title": "ImageMagick 7.1.2-32 source code",
+      "url": "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-32.tar.gz",
+      "attach": false
+    },
+    "libreoffice-26.2.6": {
+      "title": "LibreOffice 26.2.6 source code",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/",
+      "attach": false
+    },
+    "texlive": {
+      "title": "TeX Live sources",
+      "url": "https://tug.org/texlive/svn/",
+      "attach": false,
+      "notes": "TinyTeX build scripts: https://github.com/rstudio/tinytex"
+    }
+  }
+}
