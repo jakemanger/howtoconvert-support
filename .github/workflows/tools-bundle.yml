@@ -1,0 +1,76 @@
+name: Build conversion tools bundle
+
+# Runs only when started by hand from the Actions tab. It never publishes a
+# public release: with "draft" ticked it creates a *draft* release that you
+# review and publish yourself.
+on:
+  workflow_dispatch:
+    inputs:
+      draft:
+        description: Create a draft GitHub release with the assets
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  windows-libreoffice:
+    # msiexec's administrative install is the official way to unpack
+    # LibreOffice into a portable folder, and it only exists on Windows.
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build portable LibreOffice for Windows
+        run: node tools-bundle/scripts/build-bundle.mjs --out dist --platform windows_x86_64 --only libreoffice --skip-sources
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-libreoffice
+          path: dist/libreoffice-*-windows_x86_64.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
+  assemble:
+    needs: windows-libreoffice
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install archive tools
+        run: sudo apt-get update && sudo apt-get install -y p7zip-full xz-utils
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-libreoffice
+          path: dist
+      - name: Build every other archive, SOURCES.md and the manifest
+        run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse
+      - name: Sign the manifest
+        env:
+          TOOLS_MANIFEST_SIGNING_KEY: ${{ secrets.TOOLS_MANIFEST_SIGNING_KEY }}
+        run: |
+          if [ -z "$TOOLS_MANIFEST_SIGNING_KEY" ]; then
+            echo "::error::Add the TOOLS_MANIFEST_SIGNING_KEY secret (create it with tools-bundle/scripts/generate-signing-key.mjs)."
+            exit 1
+          fi
+          node tools-bundle/scripts/sign-manifest.mjs dist
+      - name: Verify the bundle as the app will
+        env:
+          TOOLS_MANIFEST_PUBLIC_KEY: ${{ vars.TOOLS_MANIFEST_PUBLIC_KEY }}
+        run: node tools-bundle/scripts/verify-bundle.mjs dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tools-bundle
+          path: dist
+          retention-days: 14
+      - name: Create draft release
+        if: ${{ inputs.draft }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          BUNDLE=$(node -p "require('./tools-bundle/bundle.config.json').bundle")
+          gh release create "$BUNDLE" dist/* --draft --title "Conversion tools bundle $BUNDLE" --notes "Command line conversion tools for macOS, Windows and Linux. Sources and licenses are in SOURCES.md."
