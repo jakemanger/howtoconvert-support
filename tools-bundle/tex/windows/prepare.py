@@ -178,7 +178,7 @@ def is_system_dll(name):
 
 
 def resource(name):
-    return name.startswith(('lib/perl5/', 'share/perl5/', 'share/ghostscript/',
+    return name == 'etc/paperspecs' or name.startswith(('lib/perl5/', 'share/perl5/', 'share/ghostscript/',
                             'share/fonts/', 'share/fontconfig/', 'etc/fonts/'))
 
 

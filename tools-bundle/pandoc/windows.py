@@ -175,6 +175,15 @@ def setup_info(toolchain):
             'msys2': {'windows64': {'version': toolchain['msys2']['version'], **entry(toolchain['msys2'])}}}
 
 
+def dependency_graph(args, env, report):
+    # MSYS2's first-login setup writes to stdout; finish it before capturing JSON.
+    base.run(args + ['setup'], env=env)
+    text = subprocess.check_output([str(x) for x in args + ['ls', 'dependencies', 'json', 'pandoc-cli']],
+                                   env=env, text=True)
+    report.write_text(text, encoding='utf-8')
+    return json.loads(text)
+
+
 def build(work, jobs, cache):
     if platform.system() != 'Windows' or platform.machine().lower() not in ('amd64', 'x86_64'):
         raise ValueError('Run the build on Windows x64; --collect-only works on other platforms')
@@ -200,10 +209,10 @@ def build(work, jobs, cache):
             raise ValueError('Unexpected compiler/build tool version')
     args = [stack, '--stack-yaml', project / 'stack.yaml', '--system-ghc', '--no-install-ghc',
             '--install-msys', '--setup-info-yaml', setup, '--lock-file', 'error-on-write', '--jobs', jobs]
-    graph = json.loads(subprocess.check_output([str(x) for x in args + ['ls', 'dependencies', 'json', 'pandoc-cli']], env=env, text=True))
-    base.verify_coverage(common, graph)
     output = work / 'output'
     output.mkdir(exist_ok=True)
+    graph = dependency_graph(args, env, output / 'dependencies.json')
+    base.verify_coverage(common, graph)
     base.run(args + ['build', 'pandoc-cli:exe:pandoc', '--no-haddock', '--no-test', '--no-bench'], env=env)
     base.run(args + ['--local-bin-path', output, 'install', 'pandoc-cli:exe:pandoc'], env=env)
     executable = output / 'pandoc.exe'

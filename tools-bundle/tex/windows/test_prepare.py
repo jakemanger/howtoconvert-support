@@ -158,6 +158,18 @@ class PreparationTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'Missing required'):
                     prepare.assemble_native([{'name': 'native', 'filename': package.name}], {package.name: package}, root / 'missing')
 
+    def test_paper_size_definitions_are_retained_with_the_library(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); package = root / 'native.tar.gz'; sizes = b'A4,210,297,mm\nLetter,8.5,11,in\n'
+            archive(package, {'ucrt64/bin/sample.exe': executable('libpaper-2.dll'),
+                              'ucrt64/bin/libpaper-2.dll': executable('KERNEL32.dll'),
+                              'ucrt64/etc/paperspecs': sizes,
+                              'ucrt64/etc/unrelated.conf': b'not a required runtime resource'})
+            with patch.object(prepare, 'ENGINES', ('sample',)), patch.object(prepare, 'WRAPPERS', ()):
+                prepare.assemble_native([{'name': 'native', 'filename': package.name}], {package.name: package}, root / 'output')
+            self.assertEqual((root / 'output/etc/paperspecs').read_bytes(), sizes)
+            self.assertFalse((root / 'output/etc/unrelated.conf').exists())
+
     def test_unknown_import_is_not_treated_as_a_system_library(self):
         self.assertFalse(prepare.is_system_dll('msys-2.0.dll'))
         self.assertFalse(prepare.is_system_dll('libgcc_s_seh-1.dll'))

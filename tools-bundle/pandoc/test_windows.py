@@ -5,6 +5,7 @@ import struct
 import tarfile
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('pandoc_windows', ROOT / 'windows.py')
@@ -33,6 +34,24 @@ def pe_fixture(dll=b'kernel32.dll', delayed=False):
 
 
 class WindowsRecipeTests(unittest.TestCase):
+    def test_toolchain_setup_finishes_before_capturing_dependency_json(self):
+        with tempfile.TemporaryDirectory() as folder:
+            report = Path(folder) / 'dependencies.json'
+            args = ['stack.exe', '--system-ghc', '--no-install-ghc']
+            environment = {'STACK_ROOT': folder}
+            graph = [{'name': 'pandoc-cli', 'version': '3.6.2'}]
+            def capture(command, **kwargs):
+                setup.assert_called_once_with(args + ['setup'], env=environment)
+                self.assertEqual(command[-4:], ['ls', 'dependencies', 'json', 'pandoc-cli'])
+                return json.dumps(graph)
+            with mock.patch.object(windows.base, 'run') as setup, mock.patch.object(windows.subprocess, 'check_output', side_effect=capture):
+                self.assertEqual(windows.dependency_graph(args, environment, report), graph)
+            self.assertEqual(json.loads(report.read_text()), graph)
+            with mock.patch.object(windows.base, 'run'), mock.patch.object(windows.subprocess, 'check_output', return_value='0\n[]'):
+                with self.assertRaises(json.JSONDecodeError):
+                    windows.dependency_graph(args, environment, report)
+            self.assertEqual(report.read_text(), '0\n[]')
+
     def test_regular_and_delayed_system_imports_are_allowed(self):
         with tempfile.TemporaryDirectory() as folder:
             exe = Path(folder) / 'test.exe'

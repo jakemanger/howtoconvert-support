@@ -95,7 +95,7 @@ jobs:
         if: ${{ inputs.input_cache_url != '' }}
         env:
           INPUT_CACHE_URL: ${{ inputs.input_cache_url }}
-        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --platform "$TARGET_PLATFORMS"
+        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --platform "$TARGET_PLATFORMS" --all-sources
       - name: Build packages, sources and manifest
         run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse --platform "$TARGET_PLATFORMS"
       - name: Sign the manifest

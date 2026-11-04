@@ -89,6 +89,40 @@ test('only the selected reviewed platforms enter a cache; other publishers stay 
   assert.throws(() => collectCacheInputs(f.config, base, { platforms: ['mac_arm64'] }), /plain/);
 });
 
+test('all-sources caches external source pins while retaining original attribution', async t => {
+  const f = await fixture(t);
+  const sourceURL = 'https://upstream.example.test/source.tar.gz';
+  f.config.sources.source.url = sourceURL;
+  f.config.sources.source.notes = 'Original project source and build instructions.';
+  assert.equal(collectCacheInputs(f.config, base).length, 1);
+  const selection = { platforms: ['mac_arm64'], allSources: true };
+  assert.equal(collectCacheInputs(f.config, base, selection).length, 2);
+  await stageInputCache(f.config, base, [f.local], f.output, selection);
+  const overlay = JSON.parse(await fs.readFile(path.join(f.output, 'bundle.config.json')));
+  assert.deepEqual(overlay.sources.source, f.config.sources.source);
+  assert.equal(overlay.upstream.binary.url, base + hash(f.binary));
+  const cacheConfig = path.join(f.directory, 'external.config.json');
+  await fs.writeFile(cacheConfig, JSON.stringify(f.config));
+  const hits = [];
+  const server = http.createServer(async (request, response) => {
+    const name = request.url.split('/').pop(); hits.push(name);
+    try { response.writeHead(200).end(await fs.readFile(path.join(f.output, 'objects', name))); }
+    catch { response.writeHead(404).end(); }
+  });
+  await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
+  t.after(() => new Promise(resolve => { server.close(resolve); server.closeAllConnections(); }));
+  const url = `http://127.0.0.1:${server.address().port}/inputs/`;
+  const work = path.join(f.directory, 'all-sources-work');
+  const result = await runNode([new URL('input-cache.mjs', import.meta.url).pathname,
+    'fetch', '--config', cacheConfig, '--url', url, '--work', work, '--platform', 'mac_arm64', '--all-sources'], f.directory);
+  assert.equal(result.code, 0, result.stderr);
+  assert.deepEqual(hits.sort(), [hash(f.binary), hash(f.source)].sort());
+  assert.equal(await sha256File(path.join(work, 'sources/source.tar.gz')), hash(f.source));
+  assert.equal(f.config.sources.source.url, sourceURL);
+  f.config.sources.source.url = 'file:///source.tar.gz';
+  assert.throws(() => collectCacheInputs(f.config, base, selection), /Invalid input URL/);
+});
+
 test('a selected-platform release builds only reviewed cache inputs while release URLs are unpublished', async t => {
   const f = await fixture(t);
   f.config.tools.ffmpeg.platforms.linux_arm64 = { package: { upstream: 'unreviewed' } };

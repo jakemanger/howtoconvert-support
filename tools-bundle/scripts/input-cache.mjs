@@ -18,7 +18,7 @@ export function cacheBase(value) {
   return url.href;
 }
 
-export function collectCacheInputs(config, base, { only = null, platforms = null } = {}) {
+export function collectCacheInputs(config, base, { only = null, platforms = null, allSources = false } = {}) {
   base = cacheBase(base);
   if (config.schema !== 1 || !config.repository || !config.bundle) throw new Error('Invalid bundle configuration');
   for (const tool of only || []) if (!TOOL_IDS.includes(tool)) throw new Error(`Unknown tool: ${tool}`);
@@ -28,10 +28,14 @@ export function collectCacheInputs(config, base, { only = null, platforms = null
   function add(kind, id, item) {
     if (!item || !checksum.test(item.sha256 || '')) throw new Error(`Invalid pinned input: ${kind}/${id}`);
     const url = new URL(item.url);
-    // Other publishers' inputs continue to download from their pinned URLs.
+    // External inputs stay upstream unless source caching is explicitly selected.
     const generated = url.href.startsWith(release) || url.href === base + item.sha256;
-    if (!generated) return;
-    if (url.username || url.password || url.search || url.hash) throw new Error(`Invalid generated input URL: ${id}`);
+    if (!generated && !(allSources && kind === 'source')) return;
+    if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash) {
+      if (!(generated && url.href.startsWith(base) && base.startsWith('http://'))) {
+        throw new Error(`Invalid input URL: ${id}`);
+      }
+    }
     const filename = item.filename || decodeURIComponent(url.pathname.split('/').pop());
     if (!isPlainAssetName(filename)) throw new Error(`Input filename must be plain: ${id}`);
     const names = [item.sha256, filename];
@@ -94,8 +98,11 @@ export async function stageInputCache(config, base, directories, output, selecti
   const overlay = structuredClone(config);
   for (const input of inputs) {
     const target = input.kind === 'upstream' ? overlay.upstream[input.id] : overlay.sources[input.id];
-    target.url = base + input.sha256;
-    target.filename = input.filename;
+    // --all-sources is a transport cache; retain upstream attribution in source records.
+    if (!(selection.allSources && input.kind === 'source')) {
+      target.url = base + input.sha256;
+      target.filename = input.filename;
+    }
   }
   await fs.mkdir(path.dirname(path.resolve(output)), { recursive: true });
   await fs.mkdir(output);
@@ -130,10 +137,12 @@ export async function importInputCache(config, base, work, selection = {}, log =
 
 async function main(argv) {
   const mode = argv.shift();
-  if (!['stage', 'fetch'].includes(mode)) throw new Error('Usage: input-cache.mjs stage|fetch --url URL [--input-dir DIR --out DIR] [--work DIR] [--config FILE] [--only TOOL] [--platform PLATFORM]');
+  if (!['stage', 'fetch'].includes(mode)) throw new Error('Usage: input-cache.mjs stage|fetch --url URL [--input-dir DIR --out DIR] [--work DIR] [--config FILE] [--only TOOL] [--platform PLATFORM] [--all-sources]');
   const options = { directories: [], work: '.bundle-work', config: path.join(here, '../bundle.config.json') };
   for (let i = 0; i < argv.length; i++) {
-    const flag = argv[i], value = argv[++i];
+    const flag = argv[i];
+    if (flag === '--all-sources') { options.allSources = true; continue; }
+    const value = argv[++i];
     if (!value || value.startsWith('--')) throw new Error(`Missing value for ${flag}`);
     if (flag === '--url') options.url = value;
     else if (flag === '--input-dir') options.directories.push(path.resolve(value));
