@@ -4,6 +4,7 @@
 /dist/
 /release/
 /.bundle-work/
+/.imagemagick-work/
 /test-results/
 
 # Private signing material
@@ -12,3 +13,7 @@
 .env
 .env.*
 !.env.example
+
+# Python build caches
+__pycache__/
+*.py[cod]

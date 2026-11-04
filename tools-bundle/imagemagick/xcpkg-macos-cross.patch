@@ -1,0 +1,10 @@
+--- a/core/xcpkg-install
++++ b/core/xcpkg-install
+@@ -1053,6 +1053,7 @@
+         cat >> "$MESON_CONFIG_FILE" <<EOF
+ [host_machine]
+ system = 'darwin'
++subsystem = 'macos'
+ endian = 'little'
+ cpu_family = '$HOST_MACHINE_CPU_FAMILY'
+ cpu = '$HOST_MACHINE_CPU_NAME'

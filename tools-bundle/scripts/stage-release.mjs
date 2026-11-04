@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { run, sha256File, sourceAssetName } from './lib.mjs';
+import { run, sha256File, sourceAssetName, sourceAttachments, sourceBundleIds, hasReviewedSourceBundle, isPlainAssetName } from './lib.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,11 +15,40 @@ export async function stageRelease(directory, destination, config, publicKey) {
   if (manifest.bundle !== config.bundle) throw new Error('Manifest and configuration bundle IDs differ');
   const files = new Set(['manifest.json', 'manifest.json.sig', 'SOURCES.md']);
   const sources = new Set();
-  for (const tool of Object.values(manifest.tools)) {
-    for (const item of Object.values(tool.platforms)) {
+  for (const [toolId, tool] of Object.entries(manifest.tools)) {
+    for (const [platform, item] of Object.entries(tool.platforms)) {
+      const configured = config.tools?.[toolId]?.platforms?.[platform];
+      if (!configured || !hasReviewedSourceBundle(configured, config)) {
+        throw new Error(`Complete corresponding source has not been reviewed: ${toolId}/${platform}`);
+      }
+      if (item.upstreamSha256 !== config.upstream[configured.package.upstream].sha256) {
+        throw new Error(`Binary input differs from reviewed source mapping: ${toolId}/${platform}`);
+      }
+      if (item.minimumOS !== configured.minimumOS) {
+        throw new Error(`Minimum OS differs from configuration: ${toolId}/${platform}`);
+      }
+      const requiredIds = sourceBundleIds(configured);
+      const actualIds = sourceBundleIds(item);
+      if (requiredIds.length !== actualIds.length || requiredIds.some(id => !actualIds.includes(id))) {
+        throw new Error(`Corresponding-source set differs from configuration: ${toolId}/${platform}`);
+      }
+      const parts = sourceAttachments(item);
+      for (const id of requiredIds) {
+        const expected = config.sources[id];
+        const name = sourceAssetName(id, expected);
+        const part = parts.find(source => source.asset === name);
+        if (!part || part.sha256 !== expected.sha256) {
+          throw new Error(`Corresponding-source attachment differs from configuration: ${id}`);
+        }
+        files.add(name);
+      }
+      const expectedSources = [...new Set([...(configured.sources || []), ...requiredIds])];
+      if (!Array.isArray(item.sources) || item.sources.length !== expectedSources.length
+        || new Set(item.sources).size !== item.sources.length || expectedSources.some(id => !item.sources.includes(id))) {
+        throw new Error(`Source list differs from configuration: ${toolId}/${platform}`);
+      }
       files.add(item.asset);
-      files.add(item.correspondingSource.asset);
-      for (const id of item.sources || []) sources.add(id);
+      for (const id of expectedSources) sources.add(id);
     }
   }
   for (const id of sources) {
@@ -34,7 +63,7 @@ export async function stageRelease(directory, destination, config, publicKey) {
   }
   const names = [...files].sort();
   for (const name of names) {
-    if (typeof name !== 'string' || !name || /[/\\]/.test(name) || name === '.' || name === '..') {
+    if (!isPlainAssetName(name)) {
       throw new Error('Release assets must be plain filenames');
     }
     if (!(await fs.lstat(path.join(input, name))).isFile()) throw new Error(`Not a regular file: ${name}`);

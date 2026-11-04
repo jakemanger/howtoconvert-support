@@ -1,0 +1,31 @@
+summary: An open-source H.265/HEVC encoder
+web-url: http://x265.org/
+src-url: https://github.com/Multicorewareinc/x265/releases/download/4.3/x265_4.3.tar.gz
+src-sha: 83c53e4c8bbb8f1e33ed59e10a7d621d1d7801ca853910c3eb41f038b8ffb121
+license: GPL-2.0-or-later
+dep-upp: nasm
+bscript: source
+
+install: |
+    # Build all encoder bit depths, following upstream build/linux/multilib.sh.
+    x265_build_root="$PACKAGE_BCACHED_DIR"
+    for bit_depth in 12 10
+    do
+        if [ "$bit_depth" = 12 ]; then main12=ON; else main12=OFF; fi
+        cmakew -B "$x265_build_root/$bit_depth" \
+            -DHIGH_BIT_DEPTH=ON -DMAIN12="$main12" \
+            -DEXPORT_C_API=OFF -DENABLE_SHARED=OFF -DENABLE_CLI=OFF \
+            -DENABLE_PIC=ON -DENABLE_ASSEMBLY=ON
+        cp "$PACKAGE_INSTALL_DIR/lib/libx265.a" "$PACKAGE_WORKING_DIR/libx265_main$bit_depth.a"
+    done
+    cmakew -B "$x265_build_root/8" \
+        -DHIGH_BIT_DEPTH=OFF -DMAIN12=OFF -DEXPORT_C_API=ON \
+        -DENABLE_CLI=OFF -DENABLE_PIC=ON -DENABLE_SHARED=ON \
+        -DENABLE_ASSEMBLY=ON -DLINKED_10BIT=ON -DLINKED_12BIT=ON \
+        "-DEXTRA_LIB='$PACKAGE_WORKING_DIR/libx265_main10.a;$PACKAGE_WORKING_DIR/libx265_main12.a'"
+    # The shared library links the two extra archives; static consumers need
+    # the same three implementations combined into the installed archive.
+    /usr/bin/libtool -static -o "$PACKAGE_INSTALL_DIR/lib/libx265-combined.a" \
+        "$PACKAGE_INSTALL_DIR/lib/libx265.a" \
+        "$PACKAGE_WORKING_DIR/libx265_main10.a" "$PACKAGE_WORKING_DIR/libx265_main12.a"
+    mv "$PACKAGE_INSTALL_DIR/lib/libx265-combined.a" "$PACKAGE_INSTALL_DIR/lib/libx265.a"

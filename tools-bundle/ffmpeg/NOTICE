@@ -1,0 +1,10 @@
+The ffmpeg.yml, libx264.yml and libvpx.yml recipes are adapted from:
+https://github.com/leleliu008/xcpkg-formula-repository-official-core
+Commit: 8d65dc3e03a9fd8e681003ea19163172c7f4c78f
+License: Apache-2.0 (APACHE-2.0.txt)
+
+Changes pin FFmpeg 8.1.1 and x264 source archives, enable the selected codecs,
+use SDL2's configure option, support cross-compiling, and avoid rebuilding
+twice during installation. The libvpx recipe selects the target macOS ABI
+explicitly so host detection cannot choose Linux linker flags. The x264
+recipe uses NASM for Intel assembly and Clang for ARM assembly.

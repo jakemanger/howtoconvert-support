@@ -1,0 +1,7 @@
+The .yml recipes are adapted from:
+https://github.com/leleliu008/xcpkg-formula-repository-official-core
+Commit: 8d65dc3e03a9fd8e681003ea19163172c7f4c78f
+License: Apache-2.0 (APACHE-2.0.txt)
+
+Changes exclude Ghostscript, retain LibRaw, isolate compiler dependencies,
+enable runtime CPU detection and fix cross-compilation of rav1e.

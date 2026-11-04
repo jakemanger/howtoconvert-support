@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "baseLock": {
+    "filename": "sources.lock.json",
+    "sha256": "af608ac1d1f179f049a4053d0bc99e0a5a43a4da39ab084da833e11d7614e426"
+  },
+  "platform": "windows_x86_64",
+  "packages": [
+    {
+      "name": "zlib-clib",
+      "version": "1.3.1",
+      "license": "Zlib",
+      "archive": {
+        "filename": "zlib-clib-1.3.1.tar.gz",
+        "url": "https://hackage.haskell.org/package/zlib-clib-1.3.1/zlib-clib-1.3.1.tar.gz",
+        "size": 341880,
+        "sha256": "76ba8fa213dd451134419e3809cbd66f64dda7f37fd979fee7c6e38d78a36a94"
+      },
+      "cabal": {
+        "filename": "zlib-clib-1.3.1.cabal",
+        "url": "https://hackage.haskell.org/package/zlib-clib-1.3.1/revision/0.cabal",
+        "size": 1712,
+        "sha256": "df08fd02b04d81e3dd8ca914acb4a6421ff9b35ebaecf109dd842cef7ab23d0c"
+      },
+      "pantryTree": {
+        "sha256": "c44db9843361909e63423ea172153553749d145b80d0b86dec3befcce72b515a",
+        "size": 1434
+      }
+    }
+  ],
+  "compilerPackages": [
+    {
+      "name": "Win32",
+      "version": "2.13.4.0",
+      "license": "BSD-3-Clause"
+    }
+  ],
+  "runtimeSources": [
+    {
+      "filename": "mingw-w64-crt-git-9.0.0.6316.acdc7adc9-1.src.tar.gz",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-crt-git-9.0.0.6316.acdc7adc9-1.src.tar.gz",
+      "sha256": "ef1154f5a13648cf40463916e6cac1e693fb1b52d27c8b717f7229b98cb959b1",
+      "size": 37971133
+    },
+    {
+      "filename": "mingw-w64-headers-git-9.0.0.6316.acdc7adc9-1.src.tar.gz",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-headers-git-9.0.0.6316.acdc7adc9-1.src.tar.gz",
+      "sha256": "79a5b119080156604f88a4e0b3cf4e420d3292c673a24c4751d3c05bd529b5fe",
+      "size": 38414891
+    },
+    {
+      "filename": "mingw-w64-windows-default-manifest-6.4-4.src.tar.gz",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-windows-default-manifest-6.4-4.src.tar.gz",
+      "sha256": "c608729d05c85968580a5cd8442d06aad5d649b8375b3ccc2943f337b77ee322",
+      "size": 145389
+    },
+    {
+      "filename": "mingw-w64-zlib-1.2.13-1.src.tar.zst",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-zlib-1.2.13-1.src.tar.zst",
+      "sha256": "08239b04cd06897121834f2db2f5aedf6ecfcb8f683f998f04e3e3904014ae1f",
+      "size": 1503460
+    },
+    {
+      "filename": "mingw-w64-zstd-1.5.2-2.src.tar.gz",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-zstd-1.5.2-2.src.tar.gz",
+      "sha256": "ba798dc83195a1e60fe7ce0bdda37d6625c8fcaadf06ce196e0ebc86dcd5bd23",
+      "size": 1937134
+    },
+    {
+      "filename": "mingw-w64-clang-14.0.6-1.src.tar.zst",
+      "url": "https://downloads.haskell.org/ghc/mingw/0.8/sources/mingw-w64-clang-14.0.6-1.src.tar.zst",
+      "sha256": "8e92cf4c08501aae98cd1b0eaa3584f4f957088658ab07936dca7f7faa099d7f",
+      "size": 74866917
+    }
+  ],
+  "runtimeSourceVersion": "0.8",
+  "toolchain": {
+    "stack": {
+      "filename": "stack-3.11.1-windows-x86_64.tar.gz",
+      "url": "https://github.com/commercialhaskell/stack/releases/download/v3.11.1/stack-3.11.1-windows-x86_64.tar.gz",
+      "size": 22966789,
+      "sha256": "333526925874611fbb9df68825e2980b9623bf1f0cfafa7334f210239b9c4834"
+    },
+    "ghc": {
+      "filename": "ghc-9.8.4-x86_64-unknown-mingw32.tar.xz",
+      "url": "https://downloads.haskell.org/~ghc/9.8.4/ghc-9.8.4-x86_64-unknown-mingw32.tar.xz",
+      "sha256": "184c9184d6439f1da8bca0214011ef6074fb5946eaa5840dc0c3e884515d7c52",
+      "size": 338448384
+    },
+    "msys2": {
+      "filename": "msys2-20240727-x86_64.tar.xz",
+      "url": "https://github.com/commercialhaskell/stackage-content/releases/download/msys2-20240727/msys2-20240727-x86_64.tar.xz",
+      "size": 71943628,
+      "sha256": "175323d3e33cb70b6c5cf1fd17f0a8e666c0a303fb68cd519fda6372f54e829e",
+      "version": "20240727"
+    },
+    "sevenzexe": {
+      "filename": "7z.exe",
+      "url": "https://github.com/commercialhaskell/stackage-content/releases/download/7z-22.01/7z.exe",
+      "size": 545280,
+      "sha256": "254cf6411d38903b2440819f7e0a847f0cfee7f8096cfad9e90fea62f42b0c23"
+    },
+    "sevenzdll": {
+      "filename": "7z.dll",
+      "url": "https://github.com/commercialhaskell/stackage-content/releases/download/7z-22.01/7z.dll",
+      "size": 1814016,
+      "sha256": "73578f14d50f747efa82527a503f1ad542f9db170e2901eddb54d6bce93fc00e"
+    }
+  }
+}

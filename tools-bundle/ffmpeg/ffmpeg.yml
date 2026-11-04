@@ -1,0 +1,94 @@
+# Adapted from xcpkg official-core under Apache-2.0; see NOTICE.
+summary: A complete, cross-platform solution to record, convert and stream audio and video
+git-url: https://github.com/FFmpeg/FFmpeg
+src-url: https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz
+src-sha: b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3
+license: GPL-3.0-or-later
+dep-pkg: libaom libass libopenh264 libopenjpeg svt-av1 libmp3lame libsamplerate libtheora libvorbis libspeex librav1e libdav1d libx264 libx265 libopus libxvid libsoxr libvpx libwebp libtiff libpng libjpeg-turbo libgif libsrt libzimg libzmq libxml2 libarchive libsdl2
+dep-upp: nasm
+bsystem: gmake
+
+install: |
+    CLANG_VERSION_MAJOR="$("$CC" -E -dM - < /dev/null | grep __clang_major__ | cut -d ' ' -f3)"
+
+    # https://github.com/spack/spack/issues/40159
+    if [ "$CLANG_VERSION_MAJOR" -eq 15 ] ; then
+        export LDFLAGS="$LDFLAGS -Wl,-ld_classic"
+    fi
+
+    unset CONFIGURE_EXTRA_ARGS
+
+    case $TARGET_PLATFORM_ARCH in
+        aarch64) CONFIGURE_EXTRA_ARGS='--enable-neon' ;;
+        arm64)   CONFIGURE_EXTRA_ARGS='--enable-neon' ;;
+        armv7a)  CONFIGURE_EXTRA_ARGS='--enable-neon' ;;
+        i686)    CONFIGURE_EXTRA_ARGS='--disable-asm' ;;
+    esac
+    if [ "$TARGET_PLATFORM_ARCH" != "$(uname -m)" ]; then
+        CONFIGURE_EXTRA_ARGS="$CONFIGURE_EXTRA_ARGS --enable-cross-compile"
+    fi
+
+    gsed -i -e 's|-lxvidcore|-lxvidcore -lm|' -e 's|-lmp3lame|-lmp3lame -lmpg123|' -e "/SDL2_CONFIG=/c SDL2_CONFIG='$libsdl2_INSTALL_DIR/bin/sdl2-config'" configure
+
+    if run ./configure \
+        --prefix="$PACKAGE_INSTALL_DIR" \
+        --sysroot="$SYSROOT" \
+        --ar="$AR" \
+        --as="$CC" \
+        --ld="$CC" \
+        --cc="$CC" \
+        --cxx="$CXX" \
+        --nm="$NM" \
+        --ranlib="$RANLIB" \
+        --strip="$STRIP" \
+        --pkg-config="$PKG_CONFIG" \
+        --pkg-config-flags=--static \
+        --extra-libs=-lc++ \
+        --arch="$TARGET_PLATFORM_ARCH" \
+        --target-os=darwin \
+        --enable-pic \
+        --enable-static \
+        --disable-shared \
+        --enable-ffplay \
+        --enable-ffprobe \
+        --enable-videotoolbox \
+        --enable-audiotoolbox \
+        --enable-libaom \
+        --enable-libass \
+        --enable-libopenh264 \
+        --enable-libopenjpeg \
+        --enable-libsvtav1 \
+        --enable-libmp3lame \
+        --enable-libtheora \
+        --enable-libvorbis \
+        --enable-libspeex \
+        --enable-librav1e \
+        --enable-libdav1d \
+        --enable-libopus \
+        --enable-libwebp \
+        --enable-libzimg \
+        --enable-libx264 \
+        --enable-libx265 \
+        --enable-libxvid \
+        --enable-libsoxr \
+        --enable-libvpx \
+        --enable-libsrt \
+        --enable-libxml2 \
+        --enable-lzma \
+        --enable-sdl2 \
+        --enable-gpl \
+        --enable-version3 \
+        --disable-jni \
+        --disable-doc \
+        --disable-debug \
+        --disable-vulkan \
+        --disable-mediacodec \
+        --disable-libfdk-aac \
+        $CONFIGURE_EXTRA_ARGS ; then
+        gmakew
+        gmakew install V=1
+        run cp ffbuild/config.log .
+    else
+        cat ffbuild/config.log
+        return 1
+    fi

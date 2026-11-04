@@ -1,0 +1,1508 @@
+{
+  "schema": 1,
+  "engines": [
+    {
+      "revision": "svn77897",
+      "commit": "3a7f8be99c03b66afdb9ba47f77514e82c745695",
+      "filename": "texlive-source-svn77897-3a7f8be99c03b66afdb9ba47f77514e82c745695.tar.gz",
+      "url": "https://codeload.github.com/TeX-Live/texlive-source/tar.gz/3a7f8be99c03b66afdb9ba47f77514e82c745695",
+      "sha256": "13021f912fe3be110c1467de9a2d81299749a19717946c4d37d48264b31522c7",
+      "size": 162159270
+    },
+    {
+      "revision": "svn77965",
+      "commit": "373835aa6a17ec2ed6d0e4ffe853c5efbef8fc06",
+      "filename": "texlive-source-svn77965-373835aa6a17ec2ed6d0e4ffe853c5efbef8fc06.tar.gz",
+      "url": "https://codeload.github.com/TeX-Live/texlive-source/tar.gz/373835aa6a17ec2ed6d0e4ffe853c5efbef8fc06",
+      "sha256": "3e645ac90cb2e0c8c2d1e3bebdb3117924d7c1ab9352fc3a6c5c1d1c2ccd3b86",
+      "size": 162172796
+    },
+    {
+      "revision": "svn78021",
+      "commit": "2e6706827fe0ebcebbe30e9123596e3df8d2a8c9",
+      "filename": "texlive-source-svn78021-2e6706827fe0ebcebbe30e9123596e3df8d2a8c9.tar.gz",
+      "url": "https://codeload.github.com/TeX-Live/texlive-source/tar.gz/2e6706827fe0ebcebbe30e9123596e3df8d2a8c9",
+      "sha256": "b595c542d43c41c75e821d7a68ce51b759e69357f29cb9116e1d4677776a88ce",
+      "size": 162180381
+    },
+    {
+      "revision": "svn78081",
+      "commit": "dc8efcd41054ec4bf7f96c022cd2d91fe346f6e1",
+      "filename": "texlive-source-svn78081-dc8efcd41054ec4bf7f96c022cd2d91fe346f6e1.tar.gz",
+      "url": "https://codeload.github.com/TeX-Live/texlive-source/tar.gz/dc8efcd41054ec4bf7f96c022cd2d91fe346f6e1",
+      "sha256": "4e2b69832ddcb882b83a90441b50df3b62e0f4fcbbb88307fd9030d2ee59d6f1",
+      "size": 162708079
+    },
+    {
+      "revision": "svn78399",
+      "commit": "fb6158926661cb7a7246b3a94a0cb170a9624d5a",
+      "filename": "texlive-source-svn78399-fb6158926661cb7a7246b3a94a0cb170a9624d5a.tar.gz",
+      "url": "https://codeload.github.com/TeX-Live/texlive-source/tar.gz/fb6158926661cb7a7246b3a94a0cb170a9624d5a",
+      "sha256": "792ff562b3ce379390b78115ad8588ca103527572eb87d1acdceed847117bd5c",
+      "size": 149480543
+    }
+  ],
+  "packages": [
+    {
+      "filename": "amscls.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amscls.source.tar.xz",
+      "size": 365984,
+      "sha512": "cce18b4529df7b39d72bf41a99a0dda9688933c4af1454d74f1165d5f69e8917da5de982d1a3ff3ca3577211083a870a3d2de0e8f41f2d2c8f9b3b3e36a9a10b",
+      "package": "amscls",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "amsfonts.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsfonts.source.tar.xz",
+      "size": 49152,
+      "sha512": "6e0c10317625b82374e3dc22ee9ba9fcfef5bebf7b51005907f96ae6ce80a631db0d88909f8251942bb1286100c9dc02f618608795bf7259930514f623b7a103",
+      "package": "amsfonts",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "amsmath.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsmath.source.tar.xz",
+      "size": 67424,
+      "sha512": "26b09000b9e073b0dad7fd4936bf2bc98613420e3ec40484eaa8bfc65dbeaf3e5d351cd6d060ceb4991e40b9e12f20a6decdf78bfc421d4e7b4bce2c1d05c266",
+      "package": "amsmath",
+      "revision": 79234,
+      "kind": "package-source"
+    },
+    {
+      "filename": "atbegshi.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atbegshi.source.tar.xz",
+      "size": 13352,
+      "sha512": "804e82f181e5d4404696c72c1600815dca7c4f85e157f44b2779a291c365593e71df07c058aabc35d215a9285452f012d192143b046d68fc14a0e90dcd7b2ec9",
+      "package": "atbegshi",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "atveryend.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atveryend.source.tar.xz",
+      "size": 4272,
+      "sha512": "7855f420d5a99caf4add9e8c7f48b9a576774e160572e3a15b05170d75552a78bdd4fa1368beea8369ec0d8b57254364026f365308cf9efd04df3aead5773628",
+      "package": "atveryend",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "auxhook.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/auxhook.source.tar.xz",
+      "size": 5244,
+      "sha512": "1d17f29a91ccbd016dd5ab59e1a92be403cc78f9a9ff5e9daf9630a154dc0fe1bda1f95f0ad355f9158902c72e328cf0b24744339aa12d06a0130bd2281f9899",
+      "package": "auxhook",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "babel.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/babel.source.tar.xz",
+      "size": 996940,
+      "sha512": "316a5dc679ae4827bb47c3fab209af901a28206f94e7446ae4790b4d8a8a5d946c2870e3a69191571baeec5dd4fd53e83a3b1bf16a3ed59748432e6cadde5194",
+      "package": "babel",
+      "revision": 80401,
+      "kind": "package-source"
+    },
+    {
+      "filename": "bigintcalc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bigintcalc.source.tar.xz",
+      "size": 14244,
+      "sha512": "27368745ba5bd2db04f61c237390e8bdda68dcde82c1c0a2700212193cb78a39f75854270f812ea842e7ab8cca163c1e5370b3d7c10ad7393425c1416a825534",
+      "package": "bigintcalc",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "bitset.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bitset.source.tar.xz",
+      "size": 14628,
+      "sha512": "f5937c31e52d5ee3b0fffd8ea86fb2673a021cf1765a08308170bc3cb2f48dc4418ae5a6e6a75fd82b3d0d3dada64a3907471f2d6e3220f7e5bfea0a4d98040e",
+      "package": "bitset",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "bookmark.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bookmark.source.tar.xz",
+      "size": 19772,
+      "sha512": "d81be62585d97ff75ebb0729016e843fe1168ed71773280105f242941bcfc0067ef0c51dbaddcd592d52cee6d96489c0f424e74f456fc37026490b65f6567d90",
+      "package": "bookmark",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "booktabs.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/booktabs.source.tar.xz",
+      "size": 14648,
+      "sha512": "6a1d3530671a7f173bd724a19d01f510f1472af0d3bc5b0b5f0d0680707f588502fa1214dbc00a78cade6a18b35fe7063f42a8e7e1fcff3a7685975dafedfc1e",
+      "package": "booktabs",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "epstopdf-pkg.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf-pkg.source.tar.xz",
+      "size": 11996,
+      "sha512": "91fdc0d2df43685496e39d946113aeda19f43ed52c4f0c9290e676e63eb98a1e3e695d6299d65611b6d336739777cf1d9aed6468f558ef8cef6081357d537f47",
+      "package": "epstopdf-pkg",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "etexcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etexcmds.source.tar.xz",
+      "size": 5444,
+      "sha512": "d91524c80d154a1d8c1c4d9859f0b8c5cf436153e316a53173ced8a3ef370431e25265c69fc46c8f212e57298ec5f52dcdc195c985a1da4077301347373fe5fe",
+      "package": "etexcmds",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "euenc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/euenc.source.tar.xz",
+      "size": 6872,
+      "sha512": "4037c8f9961be1f4cd6a41d0cced28f4bcb54e5b7c4f9681b702f1d90e425ab0c772561b662fded93a0c469cfa1c43967fdfb3eb8c9e0e8c86d8340930565910",
+      "package": "euenc",
+      "revision": 19795,
+      "kind": "package-source"
+    },
+    {
+      "filename": "filehook.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/filehook.source.tar.xz",
+      "size": 14340,
+      "sha512": "779893abb0a2ab43af9b4918bef707dac7ceda68a9d2a1b06cb1132370be89712cbd168087cf054531995dd53834c1200619dd0ed9deeea2242f1cb87721ed42",
+      "package": "filehook",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "firstaid.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/firstaid.source.tar.xz",
+      "size": 11400,
+      "sha512": "fcaf5d6c5d8e24aa28621a8f905fd9e69996087c3baadcc1d4d3b274c9c26eb754d5eb6a001cf8ee81bc3ec6158f4b0ed093eac4bfeb9106296fbd4d1f35b36f",
+      "package": "firstaid",
+      "revision": 79234,
+      "kind": "package-source"
+    },
+    {
+      "filename": "float.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/float.source.tar.xz",
+      "size": 12572,
+      "sha512": "7493ef00b1357c54d2912f5ed2b638a6e1fb408fd8d50dd18e6d95db1e8eac8f5ae5b72d5623b13d8b26a20fceb94af49a5cbea964d23d53c1f9dd72f7ce2136",
+      "package": "float",
+      "revision": 79618,
+      "kind": "package-source"
+    },
+    {
+      "filename": "fontspec.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fontspec.source.tar.xz",
+      "size": 87696,
+      "sha512": "38feb72f04fc669c9d4a915e405828229123a8843eade188267145c7bcbbcf2495cbf2e8da9a8a65379c358ca81644d16b06bdac329e34821047fbf7f49eee5d",
+      "package": "fontspec",
+      "revision": 79934,
+      "kind": "package-source"
+    },
+    {
+      "filename": "geometry.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/geometry.source.tar.xz",
+      "size": 47924,
+      "sha512": "d13e71c192730a761983c31e6f9c7dce395b7b666bd26ab0f527b9bf2785f486b13e097cde7b3a460dfc6ba83ba74d13d184537bc5934568785795ea3d48df24",
+      "package": "geometry",
+      "revision": 78315,
+      "kind": "package-source"
+    },
+    {
+      "filename": "gettitlestring.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/gettitlestring.source.tar.xz",
+      "size": 6428,
+      "sha512": "e9e870850188b4685abce4534f3508b2f5233211deb8f9f8094581fbc9ef6f76c9d651842cda6ab9d68780a5854cd2feeb5e9b202e467a5a7d0b35d688e2a6d6",
+      "package": "gettitlestring",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "graphics.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics.source.tar.xz",
+      "size": 57596,
+      "sha512": "97ac67859c9bb8e5f2b12f0b9acff095596df455ecc20a194fc3df8f504cdf9868dabb0677a444c21e3af3637ca4d75e6cc7f620e88c139a768df810992b0c51",
+      "package": "graphics",
+      "revision": 79234,
+      "kind": "package-source"
+    },
+    {
+      "filename": "hycolor.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hycolor.source.tar.xz",
+      "size": 9680,
+      "sha512": "af1b3c0c85a9972db2610d968cbe8086cb9fa2f0f21de0a7f57ed3d0eb0db5d3476f5e81a1bca4f9046b8717bd7897e7d448d8f57b2e9158ddc8237710bb9216",
+      "package": "hycolor",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "hyperref.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyperref.source.tar.xz",
+      "size": 418584,
+      "sha512": "43fd25622440e4dec466625d18a37e9773c4e19bf5ee5aac94643b470d8c7b6f00dd6801485f330f09057355a199eb1833837df354a5399b1e02fe0b3efb2b14",
+      "package": "hyperref",
+      "revision": 80357,
+      "kind": "package-source"
+    },
+    {
+      "filename": "hyph-utf8.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyph-utf8.source.tar.xz",
+      "size": 36044,
+      "sha512": "9eb97662bbed75da83f79ffa078d51d9e7a79f82d734bb4bed88a55ae4e77d288134f12057f71fc8e7887d7d03312265186cc63dfe47018d1d696ea9ed9d059b",
+      "package": "hyph-utf8",
+      "revision": 79618,
+      "kind": "package-source"
+    },
+    {
+      "filename": "infwarerr.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/infwarerr.source.tar.xz",
+      "size": 5716,
+      "sha512": "275179f6a7c380555be0f1f71b65749c18090d11eb16958544bd3baf3471fdd80305642973a68afb4d0cc3083433a5b00d3bdf647abffc356c77c39412a67eaf",
+      "package": "infwarerr",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "intcalc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/intcalc.source.tar.xz",
+      "size": 12576,
+      "sha512": "0b397bf5705f3e5069ef309797d18a4740b498fb1bc1c38f00d7d850b1ec5960b705e2c17ce45c1191f764335cf5447c08a6b360b663c0dbd057388659e45f3b",
+      "package": "intcalc",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvdefinekeys.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvdefinekeys.source.tar.xz",
+      "size": 5116,
+      "sha512": "66b40f046474ebd7ecf07a90aed786b1cca756bce5c67fa3296158f352a243fc6998f547ccf276ea79708336292e199e0eb7743c3ae33d6fe08758638f31308f",
+      "package": "kvdefinekeys",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvoptions.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvoptions.source.tar.xz",
+      "size": 21144,
+      "sha512": "45287bed8460453fd8d8d7a0435ed06c32c9d343553c6182d4ce7231a13610f89219fcb5d7723226d5db2a0436fd0b9c0eb0ef3f4b626bd697cdd94092b2bf20",
+      "package": "kvoptions",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvsetkeys.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvsetkeys.source.tar.xz",
+      "size": 10608,
+      "sha512": "3a734a79b2176ed72fbec82f77fac12cb09bd95db738e956b1af1d065b85dcd06711c87c31afe6c71a59f14c889dc200a5fb10cb166b1765654e21044f902c1e",
+      "package": "kvsetkeys",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "l3kernel.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3kernel.source.tar.xz",
+      "size": 688704,
+      "sha512": "f8e7799ddb51661f0f30f711b43705fb369a8e6e752f2eee999501b9f18b069f0207ea9f520b171ed2afd7ad2ef1c839cd362589b095cb5245801cad26f0b91f",
+      "package": "l3kernel",
+      "revision": 80334,
+      "kind": "package-source"
+    },
+    {
+      "filename": "l3packages.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3packages.source.tar.xz",
+      "size": 27400,
+      "sha512": "799558793930588481129fe455a73006d3629f5710a3bcf0c54c2178e61983fcaeaf5e7f9912766a9a305586906b6208c31815d5aa18ff7717d29a9dd9540a8c",
+      "package": "l3packages",
+      "revision": 76637,
+      "kind": "package-source"
+    },
+    {
+      "filename": "latex.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex.source.tar.xz",
+      "size": 841876,
+      "sha512": "cde635a3602c5de04292e053c0f375074992ca51cb2e82efd534be6f975f7788599d5cd45091049181ca448a1369d59d5adbc2b8a919f8af690fc630f32efcd2",
+      "package": "latex",
+      "revision": 79618,
+      "kind": "package-source"
+    },
+    {
+      "filename": "letltxmacro.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/letltxmacro.source.tar.xz",
+      "size": 5916,
+      "sha512": "4c2e01216f2b86c180f82828cc89d4d9834b8236295520638de38916f11d8d4f10091c0063e5e9029105119df648a432be2c6923929b743b698dbcde83aed0ea",
+      "package": "letltxmacro",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "ltxcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ltxcmds.source.tar.xz",
+      "size": 12948,
+      "sha512": "f10d9233a71a98df9913809a82e26a77dcba90e6599e02efb9a7456ddd6176eb9dc049bd73e2899f1f9468b43aca912f57d51e070ec72727c6a9f1366e5aa6d0",
+      "package": "ltxcmds",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "lualatex-math.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualatex-math.source.tar.xz",
+      "size": 9532,
+      "sha512": "fb689100713e17a7a6ab7b1f1c28d6a0bd9e3cdafe0dbe7a472143ebb2f5a5793e6826dc5e30d299a161e05bef4b73cf71dcb929659af8f2ce4d653f7878cfee",
+      "package": "lualatex-math",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "lualibs.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualibs.source.tar.xz",
+      "size": 8616,
+      "sha512": "4c423a4a6d43d8c03c966d6c6388b0a15564a5f23ecc2ee05e99cc39b331abfe726b8283887a7d49a277c3dc2e82712bde7c65971e19eed6a9d7e693de64e589",
+      "package": "lualibs",
+      "revision": 78415,
+      "kind": "package-source"
+    },
+    {
+      "filename": "luaotfload.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luaotfload.source.tar.xz",
+      "size": 7296,
+      "sha512": "f6c1527aa32a519295c8f458526797bee0333915ec043dc64dd9811128b44c234863f7d8d67445b4792752a8657417fa391e13d8edacec56c805643fc7857429",
+      "package": "luaotfload",
+      "revision": 74324,
+      "kind": "package-source"
+    },
+    {
+      "filename": "mdwtools.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mdwtools.source.tar.xz",
+      "size": 104804,
+      "sha512": "b3e6ba09116dd83187a55f205527c318d9afb4742404bc21b12e0be3b754140ecba82642154d92947cbc0706f0f9d3e6d876bc27108f13373d3c9d6ede4d7f5c",
+      "package": "mdwtools",
+      "revision": 15878,
+      "kind": "package-source"
+    },
+    {
+      "filename": "natbib.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/natbib.source.tar.xz",
+      "size": 64140,
+      "sha512": "2acf3ed26155273ed668a633e2ab61695de2ea7258d0c95553035373129206e342899ad829c65a956b27a1a5949fa1db33affc3ba998db988308f1bd20601a61",
+      "package": "natbib",
+      "revision": 79618,
+      "kind": "package-source"
+    },
+    {
+      "filename": "pdfescape.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdfescape.source.tar.xz",
+      "size": 8308,
+      "sha512": "6bb5b3aa1ade105f317a75267e41d1075579e37c63936c15e6802daa07986b189e7f0ce7bcdefb4f75df70a3c8ac610febc12cc5d94eebd63dcc91d0b17b298d",
+      "package": "pdfescape",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "pdftexcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftexcmds.source.tar.xz",
+      "size": 14048,
+      "sha512": "aec11ec0c7ea8922793ff121660a8bc412c673c57e355d4243979a826abb5d8131d4509bc338fdfc40fcebc7098bc364f91ad2b5b99411a8458c8542aaec6a8c",
+      "package": "pdftexcmds",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "psnfss.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/psnfss.source.tar.xz",
+      "size": 8180,
+      "sha512": "85984424cd972ab88b181ccaf34bba735d274e0c2dbcb30270de28c035a07a0e5924388015b8022f3169dcae2202df646b7e7e96b7e4266b7f407c687367dc9a",
+      "package": "psnfss",
+      "revision": 79618,
+      "kind": "package-source"
+    },
+    {
+      "filename": "refcount.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/refcount.source.tar.xz",
+      "size": 7468,
+      "sha512": "246d639f414ef2032dc5d82374f680b9d943a92d6a17197c175f510e8a03769945a211780f779ba4044b292f5dff06c9a4e29fea6c5b64a207bd23ee6f25c27b",
+      "package": "refcount",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "rerunfilecheck.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/rerunfilecheck.source.tar.xz",
+      "size": 7248,
+      "sha512": "a84357f22babc5aee5e8aed883fd5dd7851173d2e15b8f4d67d787fed3f517ec65fdd8cd213bacc6e3be685da41c878495add0e80626b08fe4012726141eddb3",
+      "package": "rerunfilecheck",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "stringenc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/stringenc.source.tar.xz",
+      "size": 30632,
+      "sha512": "7fbd68204d876adf100fb8d600b5d2eb554a52348c0ffa8069afbf3623d6a0e6444439344f7c23771762d0daa4f634d56e91a4b291b08c4f5779cf9989f796d7",
+      "package": "stringenc",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "tools.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tools.source.tar.xz",
+      "size": 248108,
+      "sha512": "801c0fec8dc1bcdcaa37b08071bcfa86aaa30935180523d628746c4bd64200afbf3cda016ed9297dffb1bcb098d9630a9c67e2db8f2eaac940e9dbb0f07f1e12",
+      "package": "tools",
+      "revision": 79234,
+      "kind": "package-source"
+    },
+    {
+      "filename": "unicode-math.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-math.source.tar.xz",
+      "size": 36928,
+      "sha512": "559c0da4dcfc592118d1e2ec81218a7b6d8428f561cb5e8dd5b2051a7b2f84ce21d8adef43156a7bbe95803edc1f0ce480a4f13504a0d75a4a51a96cac12fab1",
+      "package": "unicode-math",
+      "revision": 78251,
+      "kind": "package-source"
+    },
+    {
+      "filename": "uniquecounter.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/uniquecounter.source.tar.xz",
+      "size": 5324,
+      "sha512": "e1e345bf31fd5b5c751adadbf9a6990753db2ee62341c48cc95a650222cb00b23b2aa6fb58798464ff3b1315e7fc8196c6508f4fc6d8d7c5ba85e53a81c40118",
+      "package": "uniquecounter",
+      "revision": 79461,
+      "kind": "package-source"
+    },
+    {
+      "filename": "xcolor.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xcolor.source.tar.xz",
+      "size": 77232,
+      "sha512": "fabf3014ede7786ddbd3588ad4fa2859fa9c1d451e4e12c01137be342440ffc4d8fea2b90cea48917a1b460c5c2c02dd3f7b89e849b9e8db2b8b3f92c2ecccf5",
+      "package": "xcolor",
+      "revision": 77682,
+      "kind": "package-source"
+    },
+    {
+      "filename": "xkeyval.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xkeyval.source.tar.xz",
+      "size": 47724,
+      "sha512": "792a0d18513907b7ec1d0bd191cfc58957164963d35aac52529b0977722d056c2691ac79d0565f6c900b2f1b2499b0fb0052395907c63408541186c91d5d28fb",
+      "package": "xkeyval",
+      "revision": 77682,
+      "kind": "package-source"
+    }
+  ],
+  "documentation": [
+    {
+      "filename": "amscls.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amscls.doc.tar.xz",
+      "size": 1072480,
+      "sha512": "5ff54709e3d2071ab7e6121de366334dc942cea2f32a70a81f9c55c3720d990aa9f77b91975cdbc29918523c646efcd472d568fcb4fcafef7064e0d6cad6d7b6",
+      "package": "amscls",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "amsfonts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsfonts.doc.tar.xz",
+      "size": 1162540,
+      "sha512": "d92f76ffd3049776bd0f8e80ce9cf7d46a55a5988eaccb9c8982f63b80490af1983a5600724501f6431f401b22a9a34d8f9dca20c6f2b8ccf85ddef0a65a063b",
+      "package": "amsfonts",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "amsmath.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsmath.doc.tar.xz",
+      "size": 2389656,
+      "sha512": "99e5f424bb7c657f08df7e512dc720143005c05a23c75dbce009fa75c8c235791afd8b799b1277e434bf5a22e30282ac5b75e11fdb61ba94f1381970cee433c2",
+      "package": "amsmath",
+      "revision": 79234,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "atbegshi.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atbegshi.doc.tar.xz",
+      "size": 400456,
+      "sha512": "5ffa79a26cf09b2ee5655fc296566d9d3064e0be1b8b668a475d6b0b002823d2a73d38e90ee3e73e390f1961ad80c83b6e45fcb185f8aa62f2af405cfffa26dd",
+      "package": "atbegshi",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "atveryend.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atveryend.doc.tar.xz",
+      "size": 281800,
+      "sha512": "3bb1c18c9f8154f171d9a75fdb323c8051d7608e55ddb12ffc092e4cf872982be1491ed106a828e0e69ff48d28b9cc1edf0acb4d9f93fafcf8b0973ae2f2c486",
+      "package": "atveryend",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "auxhook.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/auxhook.doc.tar.xz",
+      "size": 285640,
+      "sha512": "f39be8eaaae14ba92d47a13ec3031ad9af5d4e584a0861941fb71a80171fd995f0e77ee0281cb591a9580131cda37d46a0730f86d6cd2e82d572d82113e8fdfd",
+      "package": "auxhook",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "babel.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/babel.doc.tar.xz",
+      "size": 1489200,
+      "sha512": "d043f57c7549000e22c7ff7d7f6434785bf28d76a83cf144facad221f91196bf578e47f938f6f264cd6863dce991e4c5ccf25e015393e0a6184f3183aca267db",
+      "package": "babel",
+      "revision": 80401,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bibtex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bibtex.doc.tar.xz",
+      "size": 401248,
+      "sha512": "693b76cbe44e383d61e9ebc4f56af8225af243f6590fa3b2ad128efd9a6055c5908b97048a418fc1691e020a396510c1218754164df468307396a0df72cc2695",
+      "package": "bibtex",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bigintcalc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bigintcalc.doc.tar.xz",
+      "size": 456956,
+      "sha512": "33075f396249a59b56226cde6fab76ebf68b204eb7570b92365de6461141a664ed318692f978fbf72188e3acbe0b7e7efdea0f0489ac818e0786a9a09d90ff82",
+      "package": "bigintcalc",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bitset.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bitset.doc.tar.xz",
+      "size": 616520,
+      "sha512": "9be10d230bf477b054833e7b6a672f88ef6e383a9b439592e7b2d16364597d7654901ef21b096e16fcc51c8e09a1db7b601a30e58ff88b3b0f7be23e79ad14f3",
+      "package": "bitset",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bookmark.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bookmark.doc.tar.xz",
+      "size": 624916,
+      "sha512": "5fee7684170ca44b47667daabe1367cf4fe3da0f842a6f1891cf98ccb08b7e73825feed0f4f9c998234afc205a1d197da6e5a3e8c6d26e3b003882dfa3e7e3b8",
+      "package": "bookmark",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "booktabs.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/booktabs.doc.tar.xz",
+      "size": 295880,
+      "sha512": "4497220e0f7c0bdd3bd7da794eb1b1c86d2bca371d7a703dbbe73cb9024e51bc36716a06c9d8f7abc62d9f9647dff7b2734e104257ff44445fdc052ac7ef6493",
+      "package": "booktabs",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "cm.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/cm.doc.tar.xz",
+      "size": 2500,
+      "sha512": "39ccdee82d86f01e11aaeb53844639b4f976677c0baef7675817fafe4263e8e44cfec144f6fce265c9c80d9a9373a2f46ac8a55b7f20923c680eaddd0222a045",
+      "package": "cm",
+      "revision": 57963,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "dvipdfmx.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/dvipdfmx.doc.tar.xz",
+      "size": 3098940,
+      "sha512": "681c30512cd62f52d2cf60797881a445d18f9cd57677961074fa7a867cb27feb111c01548521f3bd41242fea6062907232075516d6c20d64388410476a02e3c9",
+      "package": "dvipdfmx",
+      "revision": 78409,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "dvips.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/dvips.doc.tar.xz",
+      "size": 530896,
+      "sha512": "8f28739505a1be85af41f727a882c1eafed17a6b3f7d1e0c2f1c919c2ca63a5e1b24246ac39b642347e7846bbddd7c2326382700d99fe2c135fa2f39db42004a",
+      "package": "dvips",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "ec.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ec.doc.tar.xz",
+      "size": 22856,
+      "sha512": "bcf6617cf66af91312aea98f6c4a034f3af4ada14687414e7c3572e319fa4bd957dd25ebf557078297950d8ba8fd02229c5ad53464077feda462263b52536f29",
+      "package": "ec",
+      "revision": 25033,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "epstopdf.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf.doc.tar.xz",
+      "size": 29252,
+      "sha512": "bfc6808dbc8860eb426916e55231bb91a63051520454595ed4929f297f3ac5dd4a20e88b6b9eaf4993b057621053c2cc0e7190e01049b767ac8a3b3f0f99885c",
+      "package": "epstopdf",
+      "revision": 71782,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "epstopdf-pkg.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf-pkg.doc.tar.xz",
+      "size": 354368,
+      "sha512": "887777ca338f0379608242da90e4dd4cbf9f5d34be5a12529a0fafb3d14a8f0894fe2ce8e24bd7b8041408a83c6640a5964767e92f8836e0ad1c70bc7a697df8",
+      "package": "epstopdf-pkg",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etex.doc.tar.xz",
+      "size": 327356,
+      "sha512": "2a7a3ff52a4cfb9fa0eb317a22341dfd8719ec85ea0dbf7a62224c6dc9aa4374faad6e178947a1f832bf6618b22775adbd2adbd16dbda621698c9027596fbd38",
+      "package": "etex",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etexcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etexcmds.doc.tar.xz",
+      "size": 300584,
+      "sha512": "b2c9435bc8f85daca0a8c1bb071ffa473de142101cf2ca65caefb0ecd54a9c7014ca5c6593b27e4baf2b836b3197c1ab6e65e4bcc103542483346273f5dca16b",
+      "package": "etexcmds",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etoolbox.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etoolbox.doc.tar.xz",
+      "size": 235536,
+      "sha512": "e651ce2ca135318712626a4dec1a4b1e039835fa37a59e3ab2817e48d37ff77db041c069aeb48fef7ea1d1a70ac08d1f2783e4209078e00c0116b5b489a2b146",
+      "package": "etoolbox",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "euenc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/euenc.doc.tar.xz",
+      "size": 145784,
+      "sha512": "ac8d4e83ab23bf692d609a617bf8aacd8b33949e0bff1070301b8cad4e91f2a651555ffb44ad70be99791e64020984fe07afbb25976b73963abc79660eab96dd",
+      "package": "euenc",
+      "revision": 19795,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "extractbb.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/extractbb.doc.tar.xz",
+      "size": 24376,
+      "sha512": "272dff5ecfc1769097bbb4b455f456fb4865be8eb9df4c5a4bc8b194652032ff1582a8ee8aa246824bd31e47a712f55795959f1c32784dd46648468a9b59cbf9",
+      "package": "extractbb",
+      "revision": 77855,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "fancyvrb.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fancyvrb.doc.tar.xz",
+      "size": 180064,
+      "sha512": "b49fe413d46d615c68f9d8d6232e3b432b6d43a22d22612a2d93758afa4bf010ca9e90371d733cb66b4bf132d83461a06f78e7b4f4310708bebe53d811489a27",
+      "package": "fancyvrb",
+      "revision": 79962,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "filehook.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/filehook.doc.tar.xz",
+      "size": 308664,
+      "sha512": "3de85cfeaab4e415689ca87deae3b031c9f3fb1a3d85c91a10c567b21e9b943363977fcdef6e825abbbcc5b012cfdc62f6959dd336d432e36555a2ae6c013d36",
+      "package": "filehook",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "firstaid.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/firstaid.doc.tar.xz",
+      "size": 288040,
+      "sha512": "6bbcde5f3575e388f51237aee91e280a562f41fb7f7b030b4e5512280db0316184f58bace5a5fb9ad5059009aef82c7ddd189114aaebc5f50b8dfe3980c05ac1",
+      "package": "firstaid",
+      "revision": 79234,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "float.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/float.doc.tar.xz",
+      "size": 112620,
+      "sha512": "6cd9f0e27a2e6868cb4069f3864e9aef74769b25816f470440b7c989b83556691258a2da97e5d479ac4ed08db01912eec3c370da15abcad4d55e8701fd243521",
+      "package": "float",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "fontspec.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fontspec.doc.tar.xz",
+      "size": 1199940,
+      "sha512": "dc971795db283e473e4e264cbd8aae72e18bd0168f4d41723eadabaa481fb170a2e9b03295537eef38f46327c6382d8329d8529807ed3d573a0df91e42590244",
+      "package": "fontspec",
+      "revision": 79934,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "framed.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/framed.doc.tar.xz",
+      "size": 239020,
+      "sha512": "d0f1e253980116d1de34f3c4357b8e068213cbed8bded90cadf8f3821e952c2d53d5d17087394d9fa0356ffbea7b7eb5206306190e816fe7a4b60c99dba70aec",
+      "package": "framed",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "geometry.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/geometry.doc.tar.xz",
+      "size": 871240,
+      "sha512": "54a32f1b7850715b56b0c8f11a8bdd094bf3013bb6b11dd8067c16aff3327de603d89eee801849b6774297dff5d7b20439a746068ec775ce0ff236907c0d6827",
+      "package": "geometry",
+      "revision": 78315,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "gettitlestring.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/gettitlestring.doc.tar.xz",
+      "size": 317828,
+      "sha512": "c4d0d0a438af8a3bc499976d0c0b27f8e4eac506877685bd6aa2c173d934c469dbcb771d8c13951178de1c6ec8a9c3cebbb6b342c75ae5eed1105107d3af7c0c",
+      "package": "gettitlestring",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics.doc.tar.xz",
+      "size": 2446748,
+      "sha512": "8af396b51d073c000ef2b53d38d2b23b610297b2608c9d0a432b1a72abbe7684f45b10af8dbdb036e0162d27d51bfeaac3518ca8e8515b680e0db68224336f8c",
+      "package": "graphics",
+      "revision": 79234,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics-cfg.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics-cfg.doc.tar.xz",
+      "size": 876,
+      "sha512": "dbcfdf635c2816f305205915119e1f6acba816c17b683622a8a32c361d75338376426b258c1fa3271abc1d7ad2a520ac85092a7b3bfbac6463106449bc906ae4",
+      "package": "graphics-cfg",
+      "revision": 41448,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics-def.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics-def.doc.tar.xz",
+      "size": 604,
+      "sha512": "3d63e17a5899452abda47a1dbf19630100384eacec9f7bbda564f10c49e3a93fe3fa59b6256df96704cbddcb7361c1a2887706c26e1167abacfe30c5e8ea6bf3",
+      "package": "graphics-def",
+      "revision": 76719,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hycolor.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hycolor.doc.tar.xz",
+      "size": 375200,
+      "sha512": "f3b33618849d07d11071c545936f5ba02740203d9db519e90228a722e8f1dae811ca1d9abd2e39e2a02ef65993633d570970f65e0dffaee71ef0a21a3ab4c3a6",
+      "package": "hycolor",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hyperref.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyperref.doc.tar.xz",
+      "size": 3584520,
+      "sha512": "26a6ce34482a983a9f9e591a1a6acf6ce3ec0c55bf598667a614f19050af1c4db85a369725b44eec2d05bc536fb51000afdd147af18a9e52156995d60a442e96",
+      "package": "hyperref",
+      "revision": 80357,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hyph-utf8.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyph-utf8.doc.tar.xz",
+      "size": 268452,
+      "sha512": "97fb658eba1a7ec0aaeb2bda9505e400cf2310fd361cad78b78c26b058b28e4a870577574cdf96baac72480af1189a67d31eae6e75598943f0046d70630d9dcb",
+      "package": "hyph-utf8",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "iftex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/iftex.doc.tar.xz",
+      "size": 229364,
+      "sha512": "e3a4d5ef49f75ed4901c09b24741ff1bbfb59b81bbe260a09438c0c52b8b82d3a6fff11abdc003e2d7d5f56e773829cbc5aeccd4f07361bf28c1f67557ffdc22",
+      "package": "iftex",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "inconsolata.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/inconsolata.doc.tar.xz",
+      "size": 179192,
+      "sha512": "bcbe0ee8f5d4733e61befab8576c062df6613ff13bdef29ab534895266dc9341c7eb29f6ef9b3a79e5438fecc94cfef11ca26c58618b043989ea2c404a1922fc",
+      "package": "inconsolata",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "infwarerr.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/infwarerr.doc.tar.xz",
+      "size": 284916,
+      "sha512": "e925acc13f4f6777be08b8a20fc24c00cb599a3cbb52352b7b3923196f5791bf05e9e54225153c1992277a8a0a01f54864907950c21d3a27487772cf5acd3d5d",
+      "package": "infwarerr",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "intcalc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/intcalc.doc.tar.xz",
+      "size": 423200,
+      "sha512": "e100f58fad144069c22d488c515d5f0181978e494487bed283bcf6d0028d8109e40387e796b599db0db65756958fd1cf7365f076e30912bd030ae9409bfdc9c6",
+      "package": "intcalc",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kpathsea.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kpathsea.doc.tar.xz",
+      "size": 1287828,
+      "sha512": "f63e3f8ba380f43c0605df39bfbcde7f62082d235dc8dd135a96a858922c57a2829e4082941c278d4e6ead6842da5477817d7937a1ee37fd7afd527727416c84",
+      "package": "kpathsea",
+      "revision": 79498,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvdefinekeys.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvdefinekeys.doc.tar.xz",
+      "size": 296812,
+      "sha512": "89d25a033ec08cc2920acc82ef35ace633c31bfdac3fb15e12eec183ffcf76cfaa845ac88b3a16c26e207a722062126c2d3ca449bc6b628e1d0a3d42f33459df",
+      "package": "kvdefinekeys",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvoptions.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvoptions.doc.tar.xz",
+      "size": 485348,
+      "sha512": "feaa9ddf224b64676d5ae8d8d5a8a4698ad7f8e2a8a389a7c9752e04922a06e703af38f4dfd0ac52bc88ecb918ecd6977220a215b83c4c17383ee227f48ae54e",
+      "package": "kvoptions",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvsetkeys.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvsetkeys.doc.tar.xz",
+      "size": 390776,
+      "sha512": "4f0995e87a518ba5f867604d14d300e7dd3d708e260fe210ce8d0d79cf8782df337eb5cb2d09c38f12e34c234223b67a97a5697231c1395bb2edd9b37bc9126b",
+      "package": "kvsetkeys",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "l3kernel.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3kernel.doc.tar.xz",
+      "size": 12233824,
+      "sha512": "cbf063f1f821761f44c2262d829b284965f680a1b36382e7b44da64d79476570507dd1a68f89961eb1ec2d0c85052f051ee186a8b7b8e22a3d4cb875b43a5456",
+      "package": "l3kernel",
+      "revision": 80334,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "l3packages.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3packages.doc.tar.xz",
+      "size": 1417396,
+      "sha512": "26b1ea0535f5073033e652c8765ce81814101ea4813bca1e910d6ecc27b24b6953c060f5ea717b87e7b9b789fd3b8761de5eb8b1735b4cd5897614be303a629f",
+      "package": "l3packages",
+      "revision": 76637,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex.doc.tar.xz",
+      "size": 39805068,
+      "sha512": "22d9659d0c69649a93b2b5386f9502e5b4cfedd71042f0b312e04f4757b3849630b3bc92c787a0ca3a0853ea4ca90a1983e9001484ae85ab7e691777eab993f1",
+      "package": "latex",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex-bin.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex-bin.doc.tar.xz",
+      "size": 49440,
+      "sha512": "b1ecb2c94c51ecd6e461d4dd555306ee107e7c1592ef3616f87ed145a0431989362aef2e059b041c036e7a41dd8299e45d9eab364e0c95bd0928b09305b04965",
+      "package": "latex-bin",
+      "revision": 80015,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex-fonts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex-fonts.doc.tar.xz",
+      "size": 1128,
+      "sha512": "71d9af041af1de0d5907d8bf92a2c611d68a5c7d96b6463f9d4c4c16e92ba42e5978d65f0c59bf323e3adedbb790e4824cc996f9725114a74976d9d2b9c3d785",
+      "package": "latex-fonts",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latexmk.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latexmk.doc.tar.xz",
+      "size": 575908,
+      "sha512": "2e87c86f3e7b1d2553cf8b3ebd6cdd32a0b8bf38c90e3d79ec8c35e02e0e52081b849dc807327b9fd2bf3b4f7ec081152a53a06a652322f95314b001d9c6c868",
+      "package": "latexmk",
+      "revision": 78335,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "letltxmacro.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/letltxmacro.doc.tar.xz",
+      "size": 290940,
+      "sha512": "6901171271cc1ec28aee34383de53abf7782a435d7573260041e2e8f40eb74967ae87591610fb8169b1c7c07d95a9d08b7bd9bd445344422f970eb09580d60d6",
+      "package": "letltxmacro",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lm.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lm.doc.tar.xz",
+      "size": 2511620,
+      "sha512": "45fac0159b7e8a29df305902af04835fc339556ee3b791ddc69bab2ba742371be1cd08bd425fdc73d065bce8cb1cff91809b2fa0ce4723e2d30a1c7f8f697782",
+      "package": "lm",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lm-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lm-math.doc.tar.xz",
+      "size": 94656,
+      "sha512": "fb1800349628229dd522d4dffa182ffd2bc9411803f5b349c88f4046d81117d050a3b681e3021a514a6ada5bc49b648b8dda8b553f9294f6d4fc317db0cd5990",
+      "package": "lm-math",
+      "revision": 67718,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "ltxcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ltxcmds.doc.tar.xz",
+      "size": 405948,
+      "sha512": "ef30a95dc33c20dcc9803b4dddd55bbcb0f952d8aef2b852948b43f08c69ef2b4528af0ba1f95474c711cf3e8d24a86e6d78936d6506b2ec30847c1accd4a6ad",
+      "package": "ltxcmds",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lua-alt-getopt.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lua-alt-getopt.doc.tar.xz",
+      "size": 3320,
+      "sha512": "58fa5c8d9cae0b2177e634e92644ffbe8219fb0a676a9bc1492a3c296b3d70560ad42ab2e90056fde0368ade64408b212bbe2288591d6bfe81323b24d309f9c5",
+      "package": "lua-alt-getopt",
+      "revision": 78415,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lua-uni-algos.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lua-uni-algos.doc.tar.xz",
+      "size": 77452,
+      "sha512": "02a2c56cf312ead2e97ecd5b561a7a4ee326f42915d89b03d6f7450143d9682e01e5dfb5f1cb1b8739ed9beca053c760546f94c47ddd1d612c7f3a00789a1da3",
+      "package": "lua-uni-algos",
+      "revision": 76195,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luahbtex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luahbtex.doc.tar.xz",
+      "size": 26276,
+      "sha512": "45aef71876ddbd35ff60ff189527f60c08361be0ffb6c093462ab1f5e4f2578e65b15c8a266b948b48994eee67bf76e9c441f21b3b7002cc002df4e8c0facc60",
+      "package": "luahbtex",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lualatex-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualatex-math.doc.tar.xz",
+      "size": 201248,
+      "sha512": "585bfea74421522fd22643165cdf4a14b675d6ea44e5e1ae4410a49c8718dff7d945cf1b21834e9b59341dcf497669a840231e3e465cb4403c4064d27d22387e",
+      "package": "lualatex-math",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lualibs.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualibs.doc.tar.xz",
+      "size": 88740,
+      "sha512": "5a9f6939e10e6abef7b0fe5e12bb217ba92ddd70b5a83ffb4cd17c69b3622c7c81aa4131e5e03b3b5895b3bc8cd0eeed8a3e3b721be132eacb13aa90b8971751",
+      "package": "lualibs",
+      "revision": 78415,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luaotfload.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luaotfload.doc.tar.xz",
+      "size": 641648,
+      "sha512": "3cde1c8ef191cb1f03e52aea5468a5091e4ecdba07e0dacabc1fc05dd3808362ad8cca850aa9397f8f1ca709e1a53b3867434f3655456f57307febb6c1080680",
+      "package": "luaotfload",
+      "revision": 74324,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luatex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luatex.doc.tar.xz",
+      "size": 2053460,
+      "sha512": "b8d69a2a8aa55ed315c063f0f17afb90de19289c5035dd7fe1bca486c0590740505244c863fa585f9e7f2772b45c9f8e4593f1c63fe2624715308334143acd4e",
+      "package": "luatex",
+      "revision": 78218,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "mdwtools.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mdwtools.doc.tar.xz",
+      "size": 1605404,
+      "sha512": "06c8619d8bcce2c5cf9f5fce65318521bbb0c2ce53acd6b1793d0fe19a8f7a32c36ff68f355b6809491cec365d09f5f14b0589ddcbea6c5b48900d11fda4867f",
+      "package": "mdwtools",
+      "revision": 15878,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "metafont.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/metafont.doc.tar.xz",
+      "size": 41984,
+      "sha512": "3ba7ddd93626046aac59e7758a72aa219263e5e0f96289a58b08b23730d9eaa101e38815c738c5d66e3910aa7ddbfe6c83228b0c57a307ebe54244b07ff752bd",
+      "package": "metafont",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "mfware.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mfware.doc.tar.xz",
+      "size": 112436,
+      "sha512": "9c164dcbd1deefcfcfbac6aa89f3493d194b8436b5edb013991bfe75642a3c4836df642180984f6f9768c319a1db9d0eab06c8b96ad1b53dc26cce4896856438",
+      "package": "mfware",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "modes.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/modes.doc.tar.xz",
+      "size": 265132,
+      "sha512": "cd639b246b25876061d90538dc7b70f4057b1cb222c98654e54093ed97d4643ffb0fc0929cfd6b8fc71a86ffcc76cc78eb84c38b3838aa6ae993ff501263a375",
+      "package": "modes",
+      "revision": 77365,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "natbib.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/natbib.doc.tar.xz",
+      "size": 423672,
+      "sha512": "a51145ad4c45a7ff70cd1938d1bfb20532a89c7b05386f8804c902f6f246ac65b78da57869e3f87fe9c2a4ceff23c380ea4f49f3f4e354cd7b16b5a061a12ccf",
+      "package": "natbib",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdfescape.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdfescape.doc.tar.xz",
+      "size": 342648,
+      "sha512": "f80eda7f75ce5883cbba38896a9ec5f06b4f17be5668c81a27e8c16adc05f86eb68e2109cda4fbde5f0efe6f4d9f18b0c3d64168ffba209f0ede968e2ee4dd20",
+      "package": "pdfescape",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdftex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftex.doc.tar.xz",
+      "size": 3406880,
+      "sha512": "a8240fe4eba4e5b23d1cafc51f501099c7d451712b21f678eb2e3bceb194d0405c755888e0a005aa3a99f7e67fcdfc5afb6d993ff89b5cddf677c50d22e1b394",
+      "package": "pdftex",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdftexcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftexcmds.doc.tar.xz",
+      "size": 379848,
+      "sha512": "7005fa376b10ac4146ea1b42504e51abbf01845dcf4371b71bcc9a583558b27d6e0fc67a92eb8d6ba5704585b4866498fc43863070814d16ae7fc1fd4724de18",
+      "package": "pdftexcmds",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "psnfss.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/psnfss.doc.tar.xz",
+      "size": 260864,
+      "sha512": "f9a8b2a79310863a0aa66ae68e84d1e3a07232226af1a45d3d262d87c4219d5c07e60fb98d90e3b92146a05583b93b720b3e533271230091bdb14bf00b5a007f",
+      "package": "psnfss",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "refcount.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/refcount.doc.tar.xz",
+      "size": 325412,
+      "sha512": "19d5dd6af8605839c7eaa87b06a9aab73cc7b75f1089d3527009415d0f37bc537500ab14afdde8e644dd5fc9622291567afdb6bee83f34269252489872ce7fbe",
+      "package": "refcount",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "rerunfilecheck.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/rerunfilecheck.doc.tar.xz",
+      "size": 330220,
+      "sha512": "01716193d622a4569e08610b41358bb4337e3c423f3f03378b979513259d4f8d5866632eacff936aa87315be784d6c26a4575fd8af8ede4fba37ead33e726fc1",
+      "package": "rerunfilecheck",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "stringenc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/stringenc.doc.tar.xz",
+      "size": 664772,
+      "sha512": "3d791e47ffeebedd90339f3f6de94cac093e12c4904ab4fafb2865113efca22d59865403079463b03312e8035ef8b7ded70d1e7fd5e68bcb6b4a23ab95b20a92",
+      "package": "stringenc",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tex.doc.tar.xz",
+      "size": 54924,
+      "sha512": "33edd8316593336ec067c6f000a6976dfe4c8a50d2b79004a3202a19bc73486c902eb69995303416ae1074a664a4b9dd9074cb8edbb3df7b17e6790b520bc77c",
+      "package": "tex",
+      "revision": 77830,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tex-ini-files.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tex-ini-files.doc.tar.xz",
+      "size": 1472,
+      "sha512": "e82eca90c5c9ac70d928a2c67682714b9a3ede07ca0c32dae2d0f05066b287f41c18fce279a188238efaf5dd2671d0efe49a2349c060300730324807a5e3ac04",
+      "package": "tex-ini-files",
+      "revision": 78524,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive-scripts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/09/30/tlnet/archive/texlive-scripts.doc.tar.xz",
+      "size": 471868,
+      "sha512": "956d55c71fb0f0f31094df0fe71adc58037e6d4fe498199df607eda63eb93317957bf458cff694fd6e026e6c6ec616f5334d69ea93fbedf52b2624c2db1d4fca",
+      "package": "texlive-scripts",
+      "revision": 80452,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive-scripts-extra.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/texlive-scripts-extra.doc.tar.xz",
+      "size": 197200,
+      "sha512": "8567a324889e4a4935f8d3a1beeac8aef840dc530a29cfac4cba31082d2eddd43c0845ab38f0edd1cc61b6d2da2beaa80f2415e5ad5de3d75324f92228c59110",
+      "package": "texlive-scripts-extra",
+      "revision": 78162,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive.infra.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/texlive.infra.doc.tar.xz",
+      "size": 210524,
+      "sha512": "0e3620dad323c444ab4b36172c86ccb8f339aedad7d9ad1fc02177cd5b7b3750694686c8b6bd79b374f8ce547a4cc8d90a12f4a8f15e1317cd5a6b2a52609287",
+      "package": "texlive.infra",
+      "revision": 79982,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tipa.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tipa.doc.tar.xz",
+      "size": 2343456,
+      "sha512": "2824396ce6c2a3a86f9f5fde538a6018682724fedcbcc55ff421e4b10a6885a210946bb2978788bf7ec9305648548808c08f244aca026de11c0f0739415418f9",
+      "package": "tipa",
+      "revision": 79618,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tools.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tools.doc.tar.xz",
+      "size": 6418344,
+      "sha512": "147ee9fde90c207f07089c959e7ae3703f18029e719ec1037911b1e7cc9257d1f5e90f9cefdbe4684f0a86f1ca8e667f4b92bd691538fd3b23cbe98a9f6a2855",
+      "package": "tools",
+      "revision": 79234,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "unicode-data.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-data.doc.tar.xz",
+      "size": 3952,
+      "sha512": "29afc19251703be285d156a1b6335475cb15ff8551e6f1e1d4d02d389ae30e9be7df6ce596b16b9eebb16c843b0558f22497c285216c23430c6376e3109e88ca",
+      "package": "unicode-data",
+      "revision": 80380,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "unicode-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-math.doc.tar.xz",
+      "size": 3336280,
+      "sha512": "bfd14a1161c68e7e794c11b366788994b8e0f8030333815a4094201f54d5c7dadc8d023e07f037c7f8c1367bd7f97c759faa15f1f858dbed9155350ba28fca97",
+      "package": "unicode-math",
+      "revision": 78251,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "uniquecounter.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/uniquecounter.doc.tar.xz",
+      "size": 291272,
+      "sha512": "7388faa91681ea7119b739a2f90e062f7c9c5f636a2403be2450e90e347d0e2ff32d1aed1a7cca4336bfe0f37d89f12819809387616e5022cfe9cf4e88be0ca2",
+      "package": "uniquecounter",
+      "revision": 79461,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "url.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/url.doc.tar.xz",
+      "size": 266856,
+      "sha512": "56ea7a79181156a61ec34ecd75d7fc420b3e31a475a5d39448edfab0a73bc0cade5d6480cd65cda69af0db5bfb3cb5013b686153e63101e817745ad3e0389ab1",
+      "package": "url",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xcolor.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xcolor.doc.tar.xz",
+      "size": 935036,
+      "sha512": "300988b2d84b97365c95063552c1bf1c8eb2a4b2e5be1819c1f1e81026ff775855fed33b67f8bb8d1f6e837dde95e2dd95e78159674134c143917c6c54cd148b",
+      "package": "xcolor",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xetex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xetex.doc.tar.xz",
+      "size": 641400,
+      "sha512": "a2a6db0c0a907103f4c48b362115da750f5faed969a2f4af9ab050a6ca772be9fc147fb5f845d9e4ccd0b1a210e29c3b8746a6d4a6c45e5d594d2d106c352fb2",
+      "package": "xetex",
+      "revision": 80015,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xkeyval.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xkeyval.doc.tar.xz",
+      "size": 573640,
+      "sha512": "f206ddba63537bd6bbb1ccd1a86ccb2f4c476f8a928060f5ca21b0cb97c6b7342c434cdf5b075a8636b9f1309321f6e01690c913ceeb6653bb954f6cb0667a8f",
+      "package": "xkeyval",
+      "revision": 77682,
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xunicode.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xunicode.doc.tar.xz",
+      "size": 584,
+      "sha512": "645cbbc8b2635357e2f8b30be54c7731029abf6119ea6f4715499f27943803611b6338508c50c04cf957e724fb0c347aa7783aced3d0c7e5c611fb1ad3e69b8c",
+      "package": "xunicode",
+      "revision": 77682,
+      "kind": "package-documentation"
+    }
+  ],
+  "buildDocumentation": {
+    "filename": "mactexdoc-2026.zip",
+    "url": "https://git.texlive.info/texlive/plain/Master/source/mactexdoc-2026.zip?id=8a861ef04d7d102e931ce06556260f338c7f95b0",
+    "sha256": "c37963d45c9519500dce234a956c0d37feeaa6fc19d142fa5cc55cd88e6aba6e",
+    "size": 6730814,
+    "members": [
+      "MacTeX-2026-Doc/READ-ME-FIRST/MacTeXOverview.tex",
+      "MacTeX-2026-Doc/Binary/liporebuild.sh",
+      "MacTeX-2026-Doc/Binary/lipocreateuniversaldarwin.sh",
+      "MacTeX-2026-Doc/Binary/Entitlements/luahbtex.entitlements",
+      "MacTeX-2026-Doc/Binary/Entitlements/gs-X11.entitlements"
+    ]
+  },
+  "macBinaries": [
+    {
+      "name": "afm2tfm",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/afm2tfm?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 338928,
+      "sha256": "41820d5093050fb70a8d3fc8b940e212fead0415bbd508234b98fe017e8e56f9",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "bibtex",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/bibtex?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 594368,
+      "sha256": "90a989e7fb16a2ba300024f607494ae487bd653e0e0c8167e16de9f4274deb7f",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "dvips",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/dvips?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 724256,
+      "sha256": "44dcbe681fbd496450ac698b54ad505bcedb59a02ffae8d9be921da7f8cfbc85",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "gftodvi",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/gftodvi?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 374336,
+      "sha256": "0e166322fa71a0ab463b4dc78f5531b18a8a296239393d77a6a2e484fd0617ef",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "gftopk",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/gftopk?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 322416,
+      "sha256": "acfc2b54568e1761ce3267b8bf226604f746022c6f8f235486e3e4d10392e260",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "gftype",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/gftype?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 322448,
+      "sha256": "aa612fc938566dd6a4b634cec1ce20999697493918845dce310b2d77c23f0acb",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "kpseaccess",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/kpseaccess?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 166848,
+      "sha256": "0fcbb5ea3f70d6333dd1716d9abe67a24974338360e4d5ea8a22fb52e9c8f996",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "kpsereadlink",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/kpsereadlink?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 166976,
+      "sha256": "57cb29c0c7e80de93616d61c472e77d8f513004b67898277de986f4fab6a8580",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "kpsestat",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/kpsestat?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 166880,
+      "sha256": "e06fc63d734e622936baa90a7452df81448d3df16894be794fc255a61de02030",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "kpsewhich",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/kpsewhich?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 305392,
+      "sha256": "821139b9acb4eed143a3d7a8ddcae415ddb06f17f055546a01ef71068478d2e2",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "luahbtex",
+      "commit": "6ef8a8b98ad5edabcabfa6a6a7695e305cb737ac",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/luahbtex?id=6ef8a8b98ad5edabcabfa6a6a7695e305cb737ac",
+      "size": 17664384,
+      "sha256": "0abc5faeb56c8439d3d20d732b25681a0574d51280c26488b46e080f8b47508e",
+      "sourceRevision": "svn78021"
+    },
+    {
+      "name": "luatex",
+      "commit": "6ef8a8b98ad5edabcabfa6a6a7695e305cb737ac",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/luatex?id=6ef8a8b98ad5edabcabfa6a6a7695e305cb737ac",
+      "size": 12958464,
+      "sha256": "572480e4ffb2ebe4630be7514cb7fa6a758d10fb6099e448d8b07d3c99789c96",
+      "sourceRevision": "svn78021"
+    },
+    {
+      "name": "mf",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/mf?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 1191888,
+      "sha256": "8d4f9e17c7b1cc40dbcaaeb187f70d53d8047cf3ad1a035c5d1d6efb6d18cf9b",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "mf-nowin",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/mf-nowin?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 1190240,
+      "sha256": "8116c0e6e73abc23072d68d510c0bcc16cfb62048db7078d5330b6da9705ea5b",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "mft",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/mft?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 339296,
+      "sha256": "7f05854a9ee533125f85b532ffd00a89574df81e6cfc219f0edc116ee8fc8847",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "pdftex",
+      "commit": "8a861ef04d7d102e931ce06556260f338c7f95b0",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/pdftex?id=8a861ef04d7d102e931ce06556260f338c7f95b0",
+      "size": 5384336,
+      "sha256": "3ead7baeffb81c638fe75599602278566370e6319c0469f6ab00ff62bff4b0eb",
+      "sourceRevision": "svn78081"
+    },
+    {
+      "name": "pktogf",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/pktogf?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 306384,
+      "sha256": "43eb0ed741c72dbded455972ad1ce3037a67b361ed78ab7927d7088d0dc561f4",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "pktype",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/pktype?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 305840,
+      "sha256": "cec309a636a52fb554109ee48c76ab0445b0fbfdf48c2dbf09ee8ff30f9c461f",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "teckit_compile",
+      "commit": "225eac4a9bc7f13e32f1ebe810697019c071f5b9",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/teckit_compile?id=225eac4a9bc7f13e32f1ebe810697019c071f5b9",
+      "size": 3910000,
+      "sha256": "c3f607e47b8fd6eeffc0405d93cdd9ccb7ca1b8b52f72996ec3b7b3a77f8350e",
+      "sourceRevision": "svn77965"
+    },
+    {
+      "name": "tex",
+      "commit": "149f92c83cd6581862ead33139aacd4d494759c1",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/tex?id=149f92c83cd6581862ead33139aacd4d494759c1",
+      "size": 1390000,
+      "sha256": "733f1fb5045ff1fd8e82278e111b9fbbaeac0e6921e7caa19a54af68ce8da76e",
+      "sourceRevision": "svn77897"
+    },
+    {
+      "name": "xdvipdfmx",
+      "commit": "c752532c5c945a2e4b07730cd6b99aa368ff9859",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/xdvipdfmx?id=c752532c5c945a2e4b07730cd6b99aa368ff9859",
+      "size": 2200800,
+      "sha256": "f0d7d9f5bb71c468837922ac4e95dee6f6c19b86ae4f528738a1b6398c47479c",
+      "sourceRevision": "svn78399"
+    },
+    {
+      "name": "xetex",
+      "commit": "225eac4a9bc7f13e32f1ebe810697019c071f5b9",
+      "url": "https://git.texlive.info/texlive/plain/Master/bin/universal-darwin/xetex?id=225eac4a9bc7f13e32f1ebe810697019c071f5b9",
+      "size": 54256576,
+      "sha256": "593df4b2c196aa1cdeabcb6b4fafd20af3b182e05a3cee030418f14707597f0e",
+      "sourceRevision": "svn77965"
+    }
+  ],
+  "runtime": {
+    "filename": "TinyTeX-1-darwin-v2026.10.tar.xz",
+    "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-darwin-v2026.10.tar.xz",
+    "sha256": "e40c294efae81026d8cc8d12c09d2dd456d268efe7fe092410478bc1973fd40f",
+    "size": 67189208,
+    "root": "TinyTeX"
+  },
+  "fontDistributions": [
+    {
+      "filename": "urw-base35-2005.zip",
+      "url": "https://tug.ctan.org/fonts/urw/base35.zip",
+      "sha256": "07abaf13d6dbff68b884a877c91c9692283562273adc2d52a4bf9bfdd90668fd",
+      "size": 1968003,
+      "kind": "font-source",
+      "package": "urw-base35"
+    }
+  ]
+}

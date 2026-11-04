@@ -1,13 +1,13 @@
 #!/usr/bin/env node
-// Checks a built bundle exactly as the app will: the manifest signature, the
-// manifest shape, and the SHA-256 and size of every archive that is present.
+// Checks the manifest signature, shape, and the SHA-256 and size of every
+// declared binary and corresponding-source archive.
 //
 //   node tools-bundle/scripts/verify-bundle.mjs dist <base64 public key>
 import { createPublicKey, verify } from 'node:crypto';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
-import { PLATFORMS, TOOL_IDS, exists, sha256File } from './lib.mjs';
+import { PLATFORMS, TOOL_IDS, isPlainAssetName, sha256File, sourceAttachments, sourceBundleIds } from './lib.mjs';
 
 const [directory = 'dist', publicKeyBase64 = process.env.TOOLS_MANIFEST_PUBLIC_KEY] = process.argv.slice(2);
 const problems = [];
@@ -28,27 +28,51 @@ if (publicKeyBase64) {
 
 if (manifest.schema !== 1) problems.push(`unsupported schema ${manifest.schema}`);
 if (!/^tools-\d{4}\.\d{2}\.\d+$/.test(manifest.bundle)) problems.push(`bundle id ${manifest.bundle} is not tools-YYYY.MM.N`);
-for (const [tool, entry] of Object.entries(manifest.tools || {})) {
+const isRecord = value => value !== null && typeof value === 'object' && !Array.isArray(value);
+async function checkFile(item, label) {
+  if (!isRecord(item) || !isPlainAssetName(item.asset) || !/^[a-f0-9]{64}$/.test(item.sha256 || '')
+    || !Number.isSafeInteger(item.size) || item.size <= 0) {
+    problems.push(`invalid ${label}`);
+    return;
+  }
+  const file = path.join(directory, item.asset);
+  const stat = await fs.lstat(file).catch(error => {
+    if (error.code !== 'ENOENT') throw error;
+    return null;
+  });
+  if (!stat) problems.push(`missing ${label}: ${item.asset}`);
+  else if (!stat.isFile()) problems.push(`not a regular file: ${item.asset}`);
+  else if (stat.size !== item.size || await sha256File(file) !== item.sha256) problems.push(`${item.asset}: ${label} checksum mismatch`);
+}
+if (!isRecord(manifest.tools) || !Object.keys(manifest.tools).length) problems.push('tools must be a nonempty object');
+for (const [tool, entry] of Object.entries(isRecord(manifest.tools) ? manifest.tools : {})) {
   if (!TOOL_IDS.includes(tool)) problems.push(`unknown tool ${tool}`);
-  for (const [platform, item] of Object.entries(entry.platforms || {})) {
+  if (!isRecord(entry?.platforms) || !Object.keys(entry.platforms).length) {
+    problems.push(`${tool}: platforms must be a nonempty object`);
+    continue;
+  }
+  for (const [platform, item] of Object.entries(entry.platforms)) {
+    const label = `${tool}/${platform}`;
     if (!PLATFORMS.includes(platform)) problems.push(`${tool}: unknown platform ${platform}`);
-    for (const field of ['version', 'asset', 'sha256', 'size', 'format', 'bin']) {
-      if (item[field] === undefined || item[field] === '') problems.push(`${tool}/${platform}: missing ${field}`);
+    if (!isRecord(item)) { problems.push(`${label}: invalid platform entry`); continue; }
+    if (item.minimumOS !== undefined && (!platform.startsWith('mac_') || typeof item.minimumOS !== 'string'
+      || !/^[1-9]\d*\.\d+(?:\.\d+)?$/.test(item.minimumOS))) problems.push(`${label}: invalid minimum macOS version`);
+    if (!/^[a-f0-9]{64}$/.test(item.upstreamSha256 || '')) problems.push(`${label}: missing upstream checksum`);
+    if (typeof item.version !== 'string' || !item.version) problems.push(`${label}: missing version`);
+    if (!['tar.gz', 'zip', 'dmg'].includes(item.format)) problems.push(`${label}: unsupported archive format`);
+    if (typeof item.bin !== 'string' || !item.bin || item.bin.includes('..') || /[\\:]/.test(item.bin) || path.isAbsolute(item.bin)) {
+      problems.push(`${label}: unsafe bin path`);
     }
-    if (item.bin.includes('..') || path.isAbsolute(item.bin)) problems.push(`${tool}/${platform}: unsafe bin path ${item.bin}`);
-    const source = item.correspondingSource;
-    if (!source || !source.asset || path.basename(source.asset) !== source.asset || !/^[a-f0-9]{64}$/.test(source.sha256 || '') || !Number.isSafeInteger(source.size) || source.size <= 0) {
-      problems.push(`${tool}/${platform}: missing verified corresponding-source attachment`);
-    } else {
-      const sourceFile = path.join(directory, source.asset);
-      if (!await exists(sourceFile)) problems.push(`missing corresponding source: ${source.asset}`);
-      else if ((await fs.stat(sourceFile)).size !== source.size || await sha256File(sourceFile) !== source.sha256) problems.push(`${source.asset}: corresponding-source checksum mismatch`);
+    const ids = sourceBundleIds(item);
+    const parts = sourceAttachments(item);
+    if (!ids.length || ids.some(id => typeof id !== 'string' || !id) || new Set(ids).size !== ids.length) {
+      problems.push(`${label}: invalid corresponding-source set`);
     }
-    const file = path.join(directory, item.asset);
-    if (!await exists(file)) { problems.push(`missing archive: ${item.asset}`); continue; }
-    const stat = await fs.stat(file);
-    if (stat.size !== item.size) problems.push(`${item.asset}: size ${stat.size} != ${item.size}`);
-    if (await sha256File(file) !== item.sha256) problems.push(`${item.asset}: sha256 mismatch`);
+    if (!parts.length || parts.length !== ids.length || new Set(parts.map(part => part?.asset)).size !== parts.length) {
+      problems.push(`${label}: incomplete or duplicate corresponding-source attachments`);
+    }
+    for (const source of parts) await checkFile(source, 'corresponding source');
+    await checkFile(item, 'archive');
   }
 }
 

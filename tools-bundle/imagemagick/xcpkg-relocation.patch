@@ -1,0 +1,34 @@
+diff --git a/core/xcpkg-install b/core/xcpkg-install
+--- a/core/xcpkg-install
++++ b/core/xcpkg-install
+@@ -1545,7 +1545,7 @@
+     do
+         [ -f "$FILEPATH" ] || continue
+ 
+-        FILEHEAD="$(hexdump -n 16 -v -e '1/1 "%02X" ""' "$FILEPATH")"
++        FILEHEAD="$(/usr/bin/hexdump -n 16 -v -e '1/1 "%02X" ""' "$FILEPATH")"
+ 
+         # 0 unknown
+         # 1 executable
+@@ -1615,6 +1615,7 @@
+ 
+         #######################################################################
+ 
++        set --
+         for RPATH in $RUNPATHs
+         do
+             case $RPATH in
+@@ -1630,9 +1631,12 @@
+                     ;;
+                 /System/Library/Frameworks/*)
+                     ;;
+-                /*) run install_name_tool -delete_rpath "$RPATH" "$FILEPATH"
++                /*) set -- "$@" -delete_rpath "$RPATH"
+             esac
+         done
++        if [ "$#" -gt 0 ]; then
++            install_name_tool "$@" "$FILEPATH" || return "$?"
++        fi
+ 
+         #######################################################################
+ 

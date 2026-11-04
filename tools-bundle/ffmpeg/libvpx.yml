@@ -1,0 +1,27 @@
+summary: VP8/VP9 video codec
+web-url: https://chromium.googlesource.com/webm/libvpx
+src-url: https://github.com/webmproject/libvpx/archive/refs/tags/v1.17.0.tar.gz
+src-sha: 1020f184046187baa2985dbde38e0691f49c44088bca7a1842b0236c6081dc0a
+license: BSD-3-Clause
+dep-upp: nasm
+bsystem: gmake
+
+install: |
+    case $TARGET_PLATFORM_ARCH in
+        i686)    export AS=nasm ;;
+        x86_64)  export AS=nasm ;;
+    esac
+
+    run ./configure \
+        --prefix=$PACKAGE_INSTALL_DIR \
+        --target=$TARGET_PLATFORM_ARCH-darwin23-gcc \
+        --disable-examples \
+        --disable-unit-tests \
+        --disable-realtime-only \
+        --enable-pic \
+        --enable-shared \
+        --enable-static \
+        --enable-runtime-cpu-detect \
+        --enable-vp9-highbitdepth
+    gmakew
+    gmakew install

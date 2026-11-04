@@ -6,10 +6,19 @@ name: Build conversion tools bundle
 on:
   workflow_dispatch:
     inputs:
+      platforms:
+        description: Comma-separated platforms, or all
+        type: string
+        required: true
+        default: mac_arm64,windows_x86_64
       draft:
         description: Create a draft GitHub release with the assets
         type: boolean
         default: false
+      input_cache_url:
+        description: Optional HTTPS base URL for checksum-addressed build inputs
+        type: string
+        default: ""
 
 permissions:
   contents: write
@@ -17,18 +26,31 @@ permissions:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    outputs:
+      platforms: ${{ steps.selection.outputs.platforms }}
+      windows: ${{ steps.selection.outputs.windows }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Validate platform selection
+        id: selection
+        env:
+          INPUT_PLATFORMS: ${{ inputs.platforms }}
+        run: node tools-bundle/scripts/select-platforms.mjs
       - name: Test packaging and release checks
         run: node --test tools-bundle/scripts/*.test.mjs
+      - name: Test TeX source reconstruction
+        run: python3 tools-bundle/tex/test-sources.py
       - name: Check required source mappings before building
-        run: node tools-bundle/scripts/build-bundle.mjs --check
+        env:
+          TARGET_PLATFORMS: ${{ steps.selection.outputs.platforms }}
+        run: node tools-bundle/scripts/build-bundle.mjs --check --platform "$TARGET_PLATFORMS"
 
   windows-libreoffice:
     needs: validate
+    if: ${{ needs.validate.outputs.windows == 'true' }}
     # Extract with the Windows administrative installer.
     runs-on: windows-latest
     steps:
@@ -36,6 +58,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Fetch prepared Windows inputs
+        if: ${{ inputs.input_cache_url != '' }}
+        shell: bash
+        env:
+          INPUT_CACHE_URL: ${{ inputs.input_cache_url }}
+        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --only libreoffice --platform windows_x86_64
       - name: Build portable LibreOffice for Windows
         run: node tools-bundle/scripts/build-bundle.mjs --out dist --platform windows_x86_64 --only libreoffice
       - uses: actions/upload-artifact@v4
@@ -46,7 +74,10 @@ jobs:
           retention-days: 7
 
   assemble:
-    needs: windows-libreoffice
+    needs: [validate, windows-libreoffice]
+    if: ${{ !cancelled() && needs.validate.result == 'success' && (needs.windows-libreoffice.result == 'success' || needs.windows-libreoffice.result == 'skipped') }}
+    env:
+      TARGET_PLATFORMS: ${{ needs.validate.outputs.platforms }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -56,11 +87,17 @@ jobs:
       - name: Install archive tools
         run: sudo apt-get update && sudo apt-get install -y p7zip-full xz-utils
       - uses: actions/download-artifact@v4
+        if: ${{ needs.validate.outputs.windows == 'true' }}
         with:
           name: windows-libreoffice
           path: dist
+      - name: Fetch prepared build inputs
+        if: ${{ inputs.input_cache_url != '' }}
+        env:
+          INPUT_CACHE_URL: ${{ inputs.input_cache_url }}
+        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --platform "$TARGET_PLATFORMS"
       - name: Build packages, sources and manifest
-        run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse
+        run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse --platform "$TARGET_PLATFORMS"
       - name: Sign the manifest
         env:
           TOOLS_MANIFEST_SIGNING_KEY: ${{ secrets.TOOLS_MANIFEST_SIGNING_KEY }}
@@ -85,4 +122,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           BUNDLE=$(node -p "require('./tools-bundle/bundle.config.json').bundle")
-          gh release create "$BUNDLE" release/* --target "$GITHUB_SHA" --draft --title "Conversion tools bundle $BUNDLE" --notes "Prebuilt command-line conversion tools for macOS, Windows and Linux, including Apple Silicon, save you from finding or compiling each tool yourself. Sources and licenses are in SOURCES.md."
+          gh release create "$BUNDLE" release/* --target "$GITHUB_SHA" --draft --title "Conversion tools bundle $BUNDLE" --notes "Prebuilt command-line conversion tools for the selected platforms save you from finding or compiling each tool yourself. Sources and licenses are in SOURCES.md."

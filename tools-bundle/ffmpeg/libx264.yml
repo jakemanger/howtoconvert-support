@@ -1,0 +1,21 @@
+# Adapted from xcpkg official-core under Apache-2.0; see NOTICE.
+summary: A free library for encoding video streams into the H.264/MPEG-4 AVC compression format
+web-url: https://www.videolan.org/developers/x264.html
+git-url: https://code.videolan.org/videolan/x264
+src-url: https://code.videolan.org/videolan/x264/-/archive/b35605ace3ddf7c1a5d67a2eb553f034aef41d55/x264-b35605ace3ddf7c1a5d67a2eb553f034aef41d55.tar.gz
+src-sha: cd71a7515b0e9a012e1ac9b1f8415bebcaf6fc97d4db32286642ac4c0fbe24f9
+version: 3222
+license: GPL-2.0-or-later
+dep-upp: nasm
+
+install: |
+    case $TARGET_PLATFORM_ARCH in
+        x86_64|i686) export AS=nasm ;;
+        *) export AS="$CC" ;;
+    esac
+    configure \
+        --disable-cli \
+        --enable-pic \
+        --enable-lto \
+        --enable-asm \
+        --enable-strip

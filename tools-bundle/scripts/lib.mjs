@@ -120,7 +120,57 @@ export function assetName(tool, version, platform, format) {
   return `${tool}-${safeVersion}-${platform}.${format}`;
 }
 
+export function isPlainAssetName(value) {
+  return typeof value === 'string' && value.length > 0 && !/[/\\\x00-\x1f\x7f]/.test(value)
+    && value !== '.' && value !== '..';
+}
+
 export function sourceAssetName(id, source) {
   const filename = source.filename || decodeURIComponent(new URL(source.url).pathname.split('/').pop());
+  if (!isPlainAssetName(id) || !isPlainAssetName(filename)) throw new Error('Source assets must be plain filenames');
   return `source-${filename.startsWith(id) ? filename : `${id}-${filename}`}`;
+}
+
+// Local collectors can supply first-release sources before their public URLs exist.
+// Only the expected plain filename is read, and it must match the published pin.
+export async function resolveSourceArchive(id, source, cacheDirectory, sourceDirectories = []) {
+  const asset = sourceAssetName(id, source);
+  const filename = source.filename || decodeURIComponent(new URL(source.url).pathname.split('/').pop());
+  if (!/^[a-f0-9]{64}$/.test(source.sha256 || '')) throw new Error(`Invalid source checksum for ${id}`);
+  for (const directory of sourceDirectories) {
+    for (const name of new Set([asset, filename])) {
+      const candidate = path.join(directory, name);
+      let stat;
+      try { stat = await fs.lstat(candidate); } catch (error) {
+        if (error.code === 'ENOENT') continue;
+        throw error;
+      }
+      if (!stat.isFile()) throw new Error(`Local source must be a regular file: ${name}`);
+      if (await sha256File(candidate) !== source.sha256) throw new Error(`Checksum mismatch for local source ${name}`);
+      return candidate;
+    }
+  }
+  return fetchPinned(source, cacheDirectory);
+}
+
+// A corresponding-source set may be split into separately downloadable archives.
+export function sourceBundleIds(entry) {
+  const value = entry?.sourceBundle;
+  return Array.isArray(value) ? value : value ? [value] : [];
+}
+
+export function sourceAttachments(entry) {
+  const value = entry?.correspondingSource;
+  return Array.isArray(value) ? value : value ? [value] : [];
+}
+
+export function hasReviewedSourceBundle(entry, config) {
+  const ids = sourceBundleIds(entry);
+  const binaryHash = config.upstream?.[entry?.package?.upstream]?.sha256;
+  return /^[a-f0-9]{64}$/.test(binaryHash || '') && ids.length > 0 && new Set(ids).size === ids.length
+    && ids.every(id => typeof id === 'string' && id.length > 0 && config.sources?.[id]?.attach === true
+      && /^[a-f0-9]{64}$/.test(config.sources[id].sha256 || '')
+      && Array.isArray(config.sources[id].binaryArchives)
+      && config.sources[id].binaryArchives.includes(binaryHash))
+    && ids.some(id => config.sources[id].includesBuildInstructions === true);
 }

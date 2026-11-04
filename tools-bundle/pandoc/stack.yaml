@@ -1,0 +1,27 @@
+flags:
+  pandoc:
+    embed_data_files: true
+  QuickCheck:
+    old-random: false
+packages:
+- '.'
+- 'pandoc-cli'
+- 'pandoc-lua-engine'
+- 'pandoc-server'
+extra-deps:
+- tls-2.1.6
+- citeproc-0.8.1.2
+- skylighting-core-0.14.6
+- skylighting-0.14.6
+- skylighting-format-typst-0.1
+- texmath-0.12.8.13
+ghc-options:
+   "$locals": -fhide-source-paths -Wno-missing-home-modules
+resolver:
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/23/0.yaml
+  sha256: 9444fadfa30b67a93080254d53872478c087592ad64443e47c546cdcd13149ae
+  size: 678857
+nix:
+  packages:
+  - pkg-config
+  - zlib

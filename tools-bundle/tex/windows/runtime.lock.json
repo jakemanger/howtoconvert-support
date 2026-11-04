@@ -1,0 +1,2013 @@
+{
+  "schema": 1,
+  "bundle": "2026.10",
+  "texData": {
+    "filename": "TinyTeX-1-windows-v2026.10.exe",
+    "url": "https://github.com/rstudio/tinytex-releases/releases/download/v2026.10/TinyTeX-1-windows-v2026.10.exe",
+    "sha256": "36c329c644683d981a668419d13c8804696e2816ae4d287ad755788fee231a31",
+    "size": 73701889
+  },
+  "packages": [
+    {
+      "name": "mingw-w64-ucrt-x86_64-texlive-bin",
+      "version": "2026.20260301-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-texlive-bin-2026.20260301-1-any.pkg.tar.zst",
+      "sha256": "d8c2b6f0371aeb8bdbd57a8371f2feab55ad04c7f1093f5db25972b018d65344",
+      "size": 24325341,
+      "sourceFile": "mingw-w64-texlive-bin-2026.20260301-1.src.tar.zst",
+      "pkgbuildSha256": "cf13c6e6e65263a1eb346c35ee0f0b5cf48cb364f917520c5b55159c379772f9",
+      "license": [
+        "spdx:GPL-2.0-or-later AND GPL-3.0-or-later AND LGPL-2.1-or-later AND LGPL-2.0-or-later AND LPPL-1.3c"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-texlive-bin-2026.20260301-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-fontconfig",
+      "version": "2.17.1-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-fontconfig-2.17.1-1-any.pkg.tar.zst",
+      "sha256": "30736a975db44d62f7e2c49df545a6d2582e4ff731732e347737aac4b95387f9",
+      "size": 278801,
+      "sourceFile": "mingw-w64-fontconfig-2.17.1-1.src.tar.zst",
+      "pkgbuildSha256": "ee49c1c5b4c143ec6410db5af10787bbde70a5affa011908eeeacb8fe6a4d4f0",
+      "license": [
+        "custom"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-fontconfig-2.17.1-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-freetype",
+      "version": "2.14.2-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-freetype-2.14.2-1-any.pkg.tar.zst",
+      "sha256": "46cd88c07ce82a90a1f2fa16d6e3ff692cce438b9a38e0b01d898196d32461f1",
+      "size": 630005,
+      "sourceFile": "mingw-w64-freetype-2.14.2-1.src.tar.zst",
+      "pkgbuildSha256": "c28784d7dfe3bde3e55635347b1fd400d9a95718c4da0a1b0964cf8d4a786f17",
+      "license": [
+        "spdx:GPL-2.0-or-later OR FTL"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-freetype-2.14.2-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-gcc-libs",
+      "version": "15.2.0-13",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-gcc-libs-15.2.0-13-any.pkg.tar.zst",
+      "sha256": "2529e62407a945761e00749d3f5ea601e68b926f82fc2dad7ba968cebd65d1d7",
+      "size": 1074648,
+      "sourceFile": "mingw-w64-gcc-15.2.0-13.src.tar.zst",
+      "pkgbuildSha256": "4ff4602d67ea0e62ac59d9aef7b25bd324a638a49411f199865a4e4dc202846c",
+      "license": [
+        "spdx:GPL-3.0-or-later WITH GCC-exception-3.1 AND LGPL-2.1-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-gcc-libs-15.2.0-13-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-ghostscript",
+      "version": "10.06.0-3",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-ghostscript-10.06.0-3-any.pkg.tar.zst",
+      "sha256": "ba04dcfce906951d65944d524b16ab698e9f4570dbe5d2d818eb05eeb5b1a9b2",
+      "size": 26572155,
+      "sourceFile": "mingw-w64-ghostscript-10.06.0-3.src.tar.zst",
+      "pkgbuildSha256": "528c82b13b5fe674c87a46882ee43d1960ce7efac3f515d9887365997b5b1c15",
+      "license": [
+        "AGPL",
+        "custom"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-ghostscript-10.06.0-3-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-graphite2",
+      "version": "1.3.14-3",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-graphite2-1.3.14-3-any.pkg.tar.zst",
+      "sha256": "ca588a4635c06bd8caba7b56c3a0df5cd5da874d193aa64766394c3e0e447c95",
+      "size": 144837,
+      "sourceFile": "mingw-w64-graphite2-1.3.14-3.src.tar.zst",
+      "pkgbuildSha256": "da8768256a9003d163a1b543ce1fd4ed40a48ae2a97967554e1d2265a2fea5b1",
+      "license": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-graphite2-1.3.14-3-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-harfbuzz",
+      "version": "13.0.1-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-harfbuzz-13.0.1-1-any.pkg.tar.zst",
+      "sha256": "d46e6b65e522a1caf90944ad66c3120cd0dac59b7f847c2370170d4c234cc9fc",
+      "size": 2214150,
+      "sourceFile": "mingw-w64-harfbuzz-13.0.1-1.src.tar.zst",
+      "pkgbuildSha256": "8f5e39c2b54f0c1055bd05f0bd91b991d02de4c156b632de942e58f395dd4eb5",
+      "license": [
+        "spdx:MIT"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-harfbuzz-13.0.1-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-icu",
+      "version": "78.2-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-icu-78.2-1-any.pkg.tar.zst",
+      "sha256": "da0490b042f9193f7b4723be2684220c767e84366d069c9ef1ce126cf1b3baad",
+      "size": 23969529,
+      "sourceFile": "mingw-w64-icu-78.2-1.src.tar.zst",
+      "pkgbuildSha256": "44130ad1f06fd94d3d54ad87c0afc6589513ef3c1cd3463a359e6539da1879d8",
+      "license": [
+        "spdx:ICU"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-icu-78.2-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libpaper",
+      "version": "2.2.7-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libpaper-2.2.7-1-any.pkg.tar.zst",
+      "sha256": "e37f588eb1adb3500f5b33a7895fc124ffbb6974408cd410bda7594109fed996",
+      "size": 77876,
+      "sourceFile": "mingw-w64-libpaper-2.2.7-1.src.tar.zst",
+      "pkgbuildSha256": "5417c45497c381ae3eb1284d7427e42ec38c6ea70b7a6614d359b239e7f46799",
+      "license": [
+        "spdx:LGPL-2.1-or-later AND GPL-3.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libpaper-2.2.7-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libpng",
+      "version": "1.6.55-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libpng-1.6.55-1-any.pkg.tar.zst",
+      "sha256": "266559b07f7d9c2d516a847f98ffccbc36834adf87b6be59c6af7769a3638a34",
+      "size": 404459,
+      "sourceFile": "mingw-w64-libpng-1.6.55-1.src.tar.zst",
+      "pkgbuildSha256": "c5a87c3fd6d9647968c70b7834daf28364276538cec424668fe0006f5f96f4f1",
+      "license": [
+        "custom"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libpng-1.6.55-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-file-which",
+      "version": "1.27-3",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-file-which-1.27-3-any.pkg.tar.zst",
+      "sha256": "d08f243f53530284d8bfcdfd7bf8cbdf761ecfcea26c534a20fbde07ea279224",
+      "size": 7336,
+      "sourceFile": "mingw-w64-perl-file-which-1.27-3.src.tar.zst",
+      "pkgbuildSha256": "97f820aa384127380a0c74b878ec525b88661a63d6b95aa230847ec69a26aec4",
+      "license": [
+        "perl_5"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-file-which-1.27-3-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-io-string",
+      "version": "1.08-6",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-io-string-1.08-6-any.pkg.tar.zst",
+      "sha256": "31e9ea181d68ad80884e60d19f7056ea6ab305ee727c75dbbde2d1ce35f09efb",
+      "size": 6255,
+      "sourceFile": "mingw-w64-perl-io-string-1.08-6.src.tar.zst",
+      "pkgbuildSha256": "4023a20af342d87531e36769cc27222a8c0bd93fd68f12c80e0afea2684ad92c",
+      "license": [
+        "unknown"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-io-string-1.08-6-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-io-string/IO-String-1.08.tar.gz/IO-String-1.08/README",
+          "sha256": "87631b42722690d18795679a07d0bad821a484cfff8d83a205da62e5d550fa7e"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32-api",
+      "version": "0.84-8",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32-api-0.84-8-any.pkg.tar.zst",
+      "sha256": "9880fb1d5995bcaf9b9021bb1a45de65161d679aec0da4a93e2e55a4b1a8e20c",
+      "size": 63652,
+      "sourceFile": "mingw-w64-perl-win32-api-0.84-8.src.tar.zst",
+      "pkgbuildSha256": "fa774ae759c5947a0ec32f42ab994c99a134e7e7c46315931783b7abcb92cf84",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32-api-0.84-8-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-win32-api/Win32-API-0.84.tar.gz/Win32-API-0.84/API.pm",
+          "sha256": "133ef34b20bebc593a4245b6138af3a8539e05be229142594f0119281496c979"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32-console",
+      "version": "0.10-7",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32-console-0.10-7-any.pkg.tar.zst",
+      "sha256": "6b78bfb0154d88d240f138dc6faab11fa9dbba84173da80a7f06d9443b3022bf",
+      "size": 35687,
+      "sourceFile": "mingw-w64-perl-win32-console-0.10-7.src.tar.zst",
+      "pkgbuildSha256": "829b05166cacae5ab3c408c180190986777b9e1a0ad3747a7695e30e443f1c65",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32-console-0.10-7-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32-shortcut",
+      "version": "0.08-7",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32-shortcut-0.08-7-any.pkg.tar.zst",
+      "sha256": "6f45c20f9589e42a1d42d60f11c0a5649d468bb9da284c251f5ac5f7d307e141",
+      "size": 54656,
+      "sourceFile": "mingw-w64-perl-win32-shortcut-0.08-7.src.tar.zst",
+      "pkgbuildSha256": "bcc75e28288311f2f9fc58c07a3180a0b866aa493fc5c7d3d3f6eb9a00ff8496",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32-shortcut-0.08-7-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32-tieregistry",
+      "version": "0.30-6",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32-tieregistry-0.30-6-any.pkg.tar.zst",
+      "sha256": "6bcd7b459bcb9304f8cf6e0509be8454d4b2d5a919ca56cf0a5aa649724264c8",
+      "size": 33746,
+      "sourceFile": "mingw-w64-perl-win32-tieregistry-0.30-6.src.tar.zst",
+      "pkgbuildSha256": "2a9cc9bfc37b625245b02e646b357c18c0ac72135cff9d9819cbed73e60b719e",
+      "license": [
+        "perl_5"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32-tieregistry-0.30-6-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-win32-tieregistry/Win32-TieRegistry-0.30.tar.gz/Win32-TieRegistry-0.30/lib/Tie/Registry.pm",
+          "sha256": "0bec57679c7d186a65081798a63ba11dee12e8fb67f4ceae9490b2faf86ad6e7"
+        },
+        {
+          "member": "mingw-w64-perl-win32-tieregistry/Win32-TieRegistry-0.30.tar.gz/Win32-TieRegistry-0.30/lib/Win32/TieRegistry.pm",
+          "sha256": "80f88596dc8cf705a397f4d743fb04918f1ba4cc4eff36f3ae75dd852056eb3a"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32-winerror",
+      "version": "0.04-7",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32-winerror-0.04-7-any.pkg.tar.zst",
+      "sha256": "7a94986ab07a990a26bdaf2850b9673ca4c78304ca1d7c01a11ace2b87ea2f2f",
+      "size": 26685,
+      "sourceFile": "mingw-w64-perl-win32-winerror-0.04-7.src.tar.zst",
+      "pkgbuildSha256": "11f35ea052a20277f4c28871445761959398f724c0bbefacf584c8055f3ff1f6",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32-winerror-0.04-7-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-win32-winerror/Win32-WinError-0.04.tar.gz/Win32-WinError-0.04/META.yml",
+          "sha256": "7ea66c4a829a249133f3a95f7890d0aae1c4931a90dfa3b8a7aae2b603b11129"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-win32api-registry",
+      "version": "0.33-7",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-win32api-registry-0.33-7-any.pkg.tar.zst",
+      "sha256": "bfe98cf7199e34b4ebe036138a48a988b6b7fd1d9186a96c770aa0d71d21df52",
+      "size": 42750,
+      "sourceFile": "mingw-w64-perl-win32api-registry-0.33-7.src.tar.zst",
+      "pkgbuildSha256": "2c001a627152b35612c5f7e18b8be0761905be54945201bef6587a065778aa3a",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-win32api-registry-0.33-7-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-win32api-registry/Win32API-Registry-0.33.tar.gz/Win32API-Registry-0.33/ppport.h",
+          "sha256": "afdb763237a02688db83dae53e485e74d58e1a8d3901f3ec897022d0be791d4f"
+        },
+        {
+          "member": "mingw-w64-perl-win32api-registry/Win32API-Registry-0.33.tar.gz/Win32API-Registry-0.33/Registry.pm",
+          "sha256": "f973c484882f869010a353fbf4841f77b56db6b3f415721c3df3317a005eb3a1"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-zlib",
+      "version": "1.3.2-2",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-zlib-1.3.2-2-any.pkg.tar.zst",
+      "sha256": "841401182976d2f9e17e5c0ebaac51f2a8014140ea53d67625e91c8fb3c85ea0",
+      "size": 111475,
+      "sourceFile": "mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "pkgbuildSha256": "8a4a54a964eab7efa313e2faa8267052bc237ef61f8adf82a55cc93f4028db8a",
+      "license": [
+        "spdx:Zlib"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-zlib-1.3.2-2-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-brotli",
+      "version": "1.2.0-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-brotli-1.2.0-1-any.pkg.tar.zst",
+      "sha256": "9cc89665496ea504751476eafba15c71c554aaf3004babc2004f7c07ffd60514",
+      "size": 453708,
+      "sourceFile": "mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "pkgbuildSha256": "894120dac11e7fffd72224148e22d424075fabf23a8cafbf4f2c5390c73755c9",
+      "license": [
+        "spdx:MIT"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-brotli-1.2.0-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-bzip2",
+      "version": "1.0.8-3",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-bzip2-1.0.8-3-any.pkg.tar.zst",
+      "sha256": "932da2c63b23e6a4448757eb36fb198a9e51121874408270afe2c91bada513c7",
+      "size": 78369,
+      "sourceFile": "mingw-w64-bzip2-1.0.8-3.src.tar.zst",
+      "pkgbuildSha256": "ee9b625471832b48f743171ee263cfd3d7a856dcc6859b6914ad437d7bbaf2d3",
+      "license": [
+        "custom"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-bzip2-1.0.8-3-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-expat",
+      "version": "2.7.4-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-expat-2.7.4-1-any.pkg.tar.zst",
+      "sha256": "45e9ab30bdfc209da90bdc1ab1ef81a4b3e34afddcc8496d9d1e3cc24b74f15d",
+      "size": 176172,
+      "sourceFile": "mingw-w64-expat-2.7.4-1.src.tar.zst",
+      "pkgbuildSha256": "e8911e779a571987656a51412a00dba9ae7c72f79b82b80d557630cb73eddcb6",
+      "license": [
+        "spdx:MIT"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-expat-2.7.4-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-gettext-runtime",
+      "version": "1.0-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst",
+      "sha256": "ba693dda4ac375af76ce481ff3a6e7481286546cc7dc6d56c7021dae34084157",
+      "size": 417977,
+      "sourceFile": "mingw-w64-gettext-1.0-1.src.tar.zst",
+      "pkgbuildSha256": "853ef80a50588f29355722a4513f24cf1a5f8de06e0b5ee326580464db539741",
+      "license": [
+        "spdx:GPL-3.0-or-later AND LGPL-2.1-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-gettext-runtime-1.0-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-glib2",
+      "version": "2.86.4-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-glib2-2.86.4-1-any.pkg.tar.zst",
+      "sha256": "a28eb5efb9ed87b20d2fd5a2e053df048127c6a04e999858be80cb6c8a21fddd",
+      "size": 5359054,
+      "sourceFile": "mingw-w64-glib2-2.86.4-1.src.tar.zst",
+      "pkgbuildSha256": "094edceec2901d3060b2a98dd2f9e37c317f0e18fafbf9145ea07cc3cfcd44dd",
+      "license": [
+        "spdx:LGPL-2.1-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-glib2-2.86.4-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-jbig2dec",
+      "version": "0.20-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-jbig2dec-0.20-1-any.pkg.tar.zst",
+      "sha256": "df57282cc76e53557fcc36a812d4a07e437f1c3f36f2477d871ff416518522b3",
+      "size": 132727,
+      "sourceFile": "mingw-w64-jbig2dec-0.20-1.src.tar.zst",
+      "pkgbuildSha256": "e3ebef6318a97fc13374270550563029d1d9197dbce975ac0b215313275d677c",
+      "license": [
+        "spdx:AGPL-3.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-jbig2dec-0.20-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libiconv",
+      "version": "1.18-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libiconv-1.18-1-any.pkg.tar.zst",
+      "sha256": "6b875c9ea05969cd4d802c1fc68edd158c269447e8dbf1baee02dec28603e74c",
+      "size": 742765,
+      "sourceFile": "mingw-w64-libiconv-1.18-1.src.tar.zst",
+      "pkgbuildSha256": "4d9f62cdcd26dc0e2c1abe9c558239a273dc9668a00948cf3585fae86f3389d2",
+      "license": [
+        "spdx:LGPL-2.1-or-later",
+        "documentation:spdx:GPL-3.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libiconv-1.18-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libidn",
+      "version": "1.43-2",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libidn-1.43-2-any.pkg.tar.zst",
+      "sha256": "45ba3f2bef910888e9c304d58e6e784ccf418a1431b6be453b04800b989619d4",
+      "size": 288998,
+      "sourceFile": "mingw-w64-libidn-1.43-2.src.tar.zst",
+      "pkgbuildSha256": "35e1ea3191367267c158c48d8a1fc5e833e45190fac8b9f6b2d2dec0e6ebe1e7",
+      "license": [
+        "spdx:GPL-3.0-or-later AND LGPL-3.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libidn-1.43-2-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libjpeg-turbo",
+      "version": "3.1.3-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libjpeg-turbo-3.1.3-1-any.pkg.tar.zst",
+      "sha256": "3138854f57e094df6ea34b4522d1325f8ce61760022bde1b2c6b6d9175cb41f2",
+      "size": 659158,
+      "sourceFile": "mingw-w64-libjpeg-turbo-3.1.3-1.src.tar.zst",
+      "pkgbuildSha256": "7a8251943afc43a96dd11dc1df5949f3bfd87218f57c439ac2edc585fb547829",
+      "license": [
+        "custom:BSD-like"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libjpeg-turbo-3.1.3-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libtiff",
+      "version": "4.7.1-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libtiff-4.7.1-1-any.pkg.tar.zst",
+      "sha256": "cc30a72b957e9caba1141d26324923dd62f371607deb846c98d8a52ea0fe95e5",
+      "size": 693829,
+      "sourceFile": "mingw-w64-libtiff-4.7.1-1.src.tar.zst",
+      "pkgbuildSha256": "959fb51bf1062276f8660cc72dfbaa7ce03012cb9a54f4aaa9ae203590de69c5",
+      "license": [
+        "spdx:MIT"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libtiff-4.7.1-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libwebp",
+      "version": "1.6.0-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libwebp-1.6.0-1-any.pkg.tar.zst",
+      "sha256": "34ff8396c403d484c8777ad49ad0fc06dfb94fadf6f14bcf84d50c45bc6fd17e",
+      "size": 623411,
+      "sourceFile": "mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "pkgbuildSha256": "d15596f0825cbace1453462ab406b1d1ec6ac12be21d1d5655a17c22656318e1",
+      "license": [
+        "spdx:BSD-3-Clause"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libwebp-1.6.0-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libwinpthread",
+      "version": "13.0.0.r560.g3197fc7d6-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libwinpthread-13.0.0.r560.g3197fc7d6-1-any.pkg.tar.zst",
+      "sha256": "c1a84fa9f0f3f1dc26c5e9ccc0aae184806985b06dde0984b0521d89e387fe2b",
+      "size": 30269,
+      "sourceFile": "mingw-w64-winpthreads-13.0.0.r560.g3197fc7d6-1.src.tar.zst",
+      "pkgbuildSha256": "b18c521a8c6e6739c038a7dd601369d68bd04060bc73c92cf6591f856299290e",
+      "license": [
+        "spdx:MIT AND BSD-3-Clause-Clear"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libwinpthread-13.0.0.r560.g3197fc7d6-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-openjpeg2",
+      "version": "2.5.4-2",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-openjpeg2-2.5.4-2-any.pkg.tar.zst",
+      "sha256": "2a4c148052b6f8e47abe5e98b29fd8942e2e3c17722ff00f172b1630897a10b9",
+      "size": 454223,
+      "sourceFile": "mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "pkgbuildSha256": "8901865f116d6eaa71bb2ff14dcaaa9a301185fd5cf62408d73dcfd2901c8334",
+      "license": [
+        "spdx:BSD-2-Clause"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-openjpeg2-2.5.4-2-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl",
+      "version": "5.38.5-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-5.38.5-1-any.pkg.tar.zst",
+      "sha256": "ef941460963cb51e505e8ed67d18d9df32e86217129c754b94e80154734572b3",
+      "size": 6789655,
+      "sourceFile": "mingw-w64-perl-5.38.5-1.src.tar.zst",
+      "pkgbuildSha256": "02582683612be4fdb075dff93da12ab52de76295f8829a9daa96d8b6cbad1d2e",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-5.38.5-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-encode-compat",
+      "version": "0.07-6",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-encode-compat-0.07-6-any.pkg.tar.zst",
+      "sha256": "d3589c35d1ba1a6e6776b8f8e061b0cfcc6d892f9b123687659f62497d9bb19d",
+      "size": 8442,
+      "sourceFile": "mingw-w64-perl-encode-compat-0.07-6.src.tar.zst",
+      "pkgbuildSha256": "5a4d9c949d363ca259b1657c70b8f6354329913588d3b56d40fe3e93380ffee4",
+      "license": [
+        "GPL",
+        "PerlArtistic"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-encode-compat-0.07-6-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl",
+      "additionalNotices": [
+        {
+          "member": "mingw-w64-perl-encode-compat/Encode-compat-0.07.tar.gz/Encode-compat-0.07/README",
+          "sha256": "eecaacae7f55e6395ee884554ee78f6ed51f8a35b73c9783ee880e0876e80c61"
+        }
+      ]
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-perl-math-int64",
+      "version": "0.57-3",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-perl-math-int64-0.57-3-any.pkg.tar.zst",
+      "sha256": "46e1a1a1ab6c51bf934447e412588ebfad8540f7ff1f76cd8ac1d32969114e85",
+      "size": 24440,
+      "sourceFile": "mingw-w64-perl-math-int64-0.57-3.src.tar.zst",
+      "pkgbuildSha256": "4a9a14cdc031707d10f5214919f1307d4291c955d59bb7e45289321fb4d3769d",
+      "license": [
+        "spdx:Artistic-1.0-Perl OR GPL-1.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-perl-math-int64-0.57-3-any.pkg.tar.zst",
+      "licenseTextsFrom": "perl"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-jbigkit",
+      "version": "2.1-5",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-jbigkit-2.1-5-any.pkg.tar.zst",
+      "sha256": "334e156affd0052de8ae549ec7044d3b2cdb1f0c72569659619fb8e820e5d878",
+      "size": 74962,
+      "sourceFile": "mingw-w64-jbigkit-2.1-5.src.tar.zst",
+      "pkgbuildSha256": "95e0df2be8fb755c7e9a0ccbba56412fed191d34e13c6a9d55c3469c029425a8",
+      "license": [
+        "spdx:GPL-2.0"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-jbigkit-2.1-5-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-lerc",
+      "version": "4.0.0-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-lerc-4.0.0-1-any.pkg.tar.zst",
+      "sha256": "e0c074028f5221faf128b70422b75b473090f273dbf1d53c068d5ac49ab3bb8f",
+      "size": 291430,
+      "sourceFile": "mingw-w64-lerc-4.0.0-1.src.tar.zst",
+      "pkgbuildSha256": "bacc823d6a4fb7d22f60c4da38f465be630b2d6cdc7e780477d45bb42e8efd6a",
+      "license": [
+        "spdx:Apache-2.0"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-lerc-4.0.0-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-libdeflate",
+      "version": "1.25-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-libdeflate-1.25-1-any.pkg.tar.zst",
+      "sha256": "47115edd02f6139a0b62ebb6a73aec9d893664905f72b98e87af5befdb7dc69d",
+      "size": 93623,
+      "sourceFile": "mingw-w64-libdeflate-1.25-1.src.tar.zst",
+      "pkgbuildSha256": "60ea1ffd84f5b4671f202937836f9cd15a5909f65794c36bcf724b5ac8adf8c4",
+      "license": [
+        "spdx:MIT"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-libdeflate-1.25-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-pcre2",
+      "version": "10.47-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-pcre2-10.47-1-any.pkg.tar.zst",
+      "sha256": "839bc4642f94c44e94e331c9092c6d186b1edc54dfdf6a81cb2062f638417023",
+      "size": 1435291,
+      "sourceFile": "mingw-w64-pcre2-10.47-1.src.tar.zst",
+      "pkgbuildSha256": "38ef9a81fd7bccdd6f76d6064a4ea72e9fedcade411eb32c135afc81859cb4b1",
+      "license": [
+        "spdx:BSD-3-Clause"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-pcre2-10.47-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-xz",
+      "version": "5.8.2-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-xz-5.8.2-1-any.pkg.tar.zst",
+      "sha256": "4ab1f8fd48b0d17986c93700f399a963c13391bc1bfc46943948eb275fc917c2",
+      "size": 916687,
+      "sourceFile": "mingw-w64-xz-5.8.2-1.src.tar.zst",
+      "pkgbuildSha256": "9b99544886d0efc1fb5a708eb12d26a20d310802dc7d96fceee043e0ffca2816",
+      "license": [
+        "spdx:0BSD AND LGPL-2.1-or-later AND GPL-2.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-xz-5.8.2-1-any.pkg.tar.zst"
+    },
+    {
+      "name": "mingw-w64-ucrt-x86_64-zstd",
+      "version": "1.5.7-1",
+      "url": "https://repo.msys2.org/mingw/ucrt64/mingw-w64-ucrt-x86_64-zstd-1.5.7-1-any.pkg.tar.zst",
+      "sha256": "a05acb75b5f31d1dc27727662c6b60e6cd822fbb1b74261610ff3011de6fadc8",
+      "size": 657742,
+      "sourceFile": "mingw-w64-zstd-1.5.7-1.src.tar.zst",
+      "pkgbuildSha256": "4b5f3215f1389e21fe91246a8b7729ce95f42d35f9a21ce46bf08c06908c2c5e",
+      "license": [
+        "spdx:BSD-3-Clause OR GPL-2.0-or-later"
+      ],
+      "filename": "mingw-w64-ucrt-x86_64-zstd-1.5.7-1-any.pkg.tar.zst"
+    }
+  ],
+  "sources": [
+    {
+      "filename": "mingw-w64-texlive-bin-2026.20260301-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-texlive-bin-2026.20260301-1.src.tar.zst",
+      "sha256": "c95e1d785695725513cae8a6afd8b81b9edffd4067b0fe1b609e89cd507988fa",
+      "size": 99370251,
+      "pkgbuildSha256": "cf13c6e6e65263a1eb346c35ee0f0b5cf48cb364f917520c5b55159c379772f9"
+    },
+    {
+      "filename": "mingw-w64-fontconfig-2.17.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-fontconfig-2.17.1-1.src.tar.zst",
+      "sha256": "72413dc5a2f1d286bbd67e53b61a36cf929ba2b88b9f011516b3856b7e818cd5",
+      "size": 614150,
+      "pkgbuildSha256": "ee49c1c5b4c143ec6410db5af10787bbde70a5affa011908eeeacb8fe6a4d4f0"
+    },
+    {
+      "filename": "mingw-w64-freetype-2.14.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-freetype-2.14.2-1.src.tar.zst",
+      "sha256": "3d46d0691a4c97875a6ffa3a7cf96494d1393be431fed76f4c5074e2706ebf8c",
+      "size": 2670473,
+      "pkgbuildSha256": "c28784d7dfe3bde3e55635347b1fd400d9a95718c4da0a1b0964cf8d4a786f17"
+    },
+    {
+      "filename": "mingw-w64-gcc-15.2.0-13.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-gcc-15.2.0-13.src.tar.zst",
+      "sha256": "a676171fe0f41ad46e6b0db2c218f3870199ac7ba01940dea7b540355878b06e",
+      "size": 101091010,
+      "pkgbuildSha256": "4ff4602d67ea0e62ac59d9aef7b25bd324a638a49411f199865a4e4dc202846c"
+    },
+    {
+      "filename": "mingw-w64-ghostscript-10.06.0-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-ghostscript-10.06.0-3.src.tar.zst",
+      "sha256": "53c0b2e91cf87b88b31d19fb431e1366aa6171e762da3c72fe2e4b656d51133f",
+      "size": 68836747,
+      "pkgbuildSha256": "528c82b13b5fe674c87a46882ee43d1960ce7efac3f515d9887365997b5b1c15"
+    },
+    {
+      "filename": "mingw-w64-graphite2-1.3.14-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-graphite2-1.3.14-3.src.tar.zst",
+      "sha256": "68e0325574ee5bfcb49b3b6bb09e318356740e909b7a6f8ff936638f6af0bbc3",
+      "size": 6248488,
+      "pkgbuildSha256": "da8768256a9003d163a1b543ce1fd4ed40a48ae2a97967554e1d2265a2fea5b1"
+    },
+    {
+      "filename": "mingw-w64-harfbuzz-13.0.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-harfbuzz-13.0.1-1.src.tar.zst",
+      "sha256": "4af9a7018315a938e02fe56e88c382c68b52bb44db78ab133f3f9091655404ed",
+      "size": 19430583,
+      "pkgbuildSha256": "8f5e39c2b54f0c1055bd05f0bd91b991d02de4c156b632de942e58f395dd4eb5"
+    },
+    {
+      "filename": "mingw-w64-icu-78.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-icu-78.2-1.src.tar.zst",
+      "sha256": "c0827de5ae0bdf38e36ca6365b50e5061a0bbac2b7c5e3a5a4453a6e4ed8766f",
+      "size": 26064165,
+      "pkgbuildSha256": "44130ad1f06fd94d3d54ad87c0afc6589513ef3c1cd3463a359e6539da1879d8"
+    },
+    {
+      "filename": "mingw-w64-libpaper-2.2.7-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libpaper-2.2.7-1.src.tar.zst",
+      "sha256": "8e4df142227b52d650ac6ec5f75ee5e093575e745ebb306245132961bd524a4c",
+      "size": 1340145,
+      "pkgbuildSha256": "5417c45497c381ae3eb1284d7427e42ec38c6ea70b7a6614d359b239e7f46799"
+    },
+    {
+      "filename": "mingw-w64-libpng-1.6.55-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libpng-1.6.55-1.src.tar.zst",
+      "sha256": "6c645439426a854c2ea76f86f1ed7c26d931765b00a6c831ba0dabfab7945831",
+      "size": 1075966,
+      "pkgbuildSha256": "c5a87c3fd6d9647968c70b7834daf28364276538cec424668fe0006f5f96f4f1"
+    },
+    {
+      "filename": "mingw-w64-perl-file-which-1.27-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-file-which-1.27-3.src.tar.zst",
+      "sha256": "f1f441d0cdde139aafb7d5e218eae24abc960e7f4ea53039b320a0a9fed5c5f6",
+      "size": 26822,
+      "pkgbuildSha256": "97f820aa384127380a0c74b878ec525b88661a63d6b95aa230847ec69a26aec4"
+    },
+    {
+      "filename": "mingw-w64-perl-io-string-1.08-6.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-io-string-1.08-6.src.tar.zst",
+      "sha256": "7a6f4cf019cf5532f6265e396c23811f6c04401e3b363286919c14ab2dc56771",
+      "size": 9110,
+      "pkgbuildSha256": "4023a20af342d87531e36769cc27222a8c0bd93fd68f12c80e0afea2684ad92c"
+    },
+    {
+      "filename": "mingw-w64-perl-win32-api-0.84-8.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32-api-0.84-8.src.tar.zst",
+      "sha256": "ddbbbd73c33a35dd0cc115dc1ae8d5e42c3e20d2fb732fe75da45e01444b78e2",
+      "size": 247394,
+      "pkgbuildSha256": "fa774ae759c5947a0ec32f42ab994c99a134e7e7c46315931783b7abcb92cf84"
+    },
+    {
+      "filename": "mingw-w64-perl-win32-console-0.10-7.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32-console-0.10-7.src.tar.zst",
+      "sha256": "e4270dea84877bdef39333b64b026785f7b3ae8d30b419c1c3fffbca0af20fea",
+      "size": 30789,
+      "pkgbuildSha256": "829b05166cacae5ab3c408c180190986777b9e1a0ad3747a7695e30e443f1c65"
+    },
+    {
+      "filename": "mingw-w64-perl-win32-shortcut-0.08-7.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32-shortcut-0.08-7.src.tar.zst",
+      "sha256": "9286c208111961f8cb259fe1db9c7000151ec3d2dff73e681fdb418d90fa7cb9",
+      "size": 20522,
+      "pkgbuildSha256": "bcc75e28288311f2f9fc58c07a3180a0b866aa493fc5c7d3d3f6eb9a00ff8496"
+    },
+    {
+      "filename": "mingw-w64-perl-win32-tieregistry-0.30-6.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32-tieregistry-0.30-6.src.tar.zst",
+      "sha256": "02d2c6a8f62dad88dd32cb19245784b8de697a61dda2ffb964812903743adedb",
+      "size": 40218,
+      "pkgbuildSha256": "2a9cc9bfc37b625245b02e646b357c18c0ac72135cff9d9819cbed73e60b719e"
+    },
+    {
+      "filename": "mingw-w64-perl-win32-winerror-0.04-7.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32-winerror-0.04-7.src.tar.zst",
+      "sha256": "7629ca5c5fd45bd5f8f466d865afd6a7c75ad27144f2840b2979a9356a417788",
+      "size": 23367,
+      "pkgbuildSha256": "11f35ea052a20277f4c28871445761959398f724c0bbefacf584c8055f3ff1f6"
+    },
+    {
+      "filename": "mingw-w64-perl-win32api-registry-0.33-7.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-win32api-registry-0.33-7.src.tar.zst",
+      "sha256": "d4eed4b235226a8669141295c685caff7a9828d34cdb5a750b202a821f73ca1e",
+      "size": 48269,
+      "pkgbuildSha256": "2c001a627152b35612c5f7e18b8be0761905be54945201bef6587a065778aa3a"
+    },
+    {
+      "filename": "mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-zlib-1.3.2-2.src.tar.zst",
+      "sha256": "eef69dea52357e01b272d6fd6dc4d7c0773f71260cb7bcde6047c8c383518db3",
+      "size": 1326375,
+      "pkgbuildSha256": "8a4a54a964eab7efa313e2faa8267052bc237ef61f8adf82a55cc93f4028db8a"
+    },
+    {
+      "filename": "mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-brotli-1.2.0-1.src.tar.zst",
+      "sha256": "2f0f93875aac21990d20f1eaf0ad8b970eb6f186c663c77ae47aaaf9e5711fcf",
+      "size": 644113,
+      "pkgbuildSha256": "894120dac11e7fffd72224148e22d424075fabf23a8cafbf4f2c5390c73755c9"
+    },
+    {
+      "filename": "mingw-w64-bzip2-1.0.8-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-bzip2-1.0.8-3.src.tar.zst",
+      "sha256": "b818b3d164cd409b1fd883e3ecc056c5bc4d6cad408e871f2781bc11faf5a413",
+      "size": 818786,
+      "pkgbuildSha256": "ee9b625471832b48f743171ee263cfd3d7a856dcc6859b6914ad437d7bbaf2d3"
+    },
+    {
+      "filename": "mingw-w64-expat-2.7.4-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-expat-2.7.4-1.src.tar.zst",
+      "sha256": "bfafe5d0751a705941510e4f0ebfd52d38ea4a20d6c132c66f3953a12f17f633",
+      "size": 509725,
+      "pkgbuildSha256": "e8911e779a571987656a51412a00dba9ae7c72f79b82b80d557630cb73eddcb6"
+    },
+    {
+      "filename": "mingw-w64-gettext-1.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-gettext-1.0-1.src.tar.zst",
+      "sha256": "cca0d0c8f60353faccc5ad40405240014e4a7ccc8b1c6ca9f4626aef3097d26e",
+      "size": 10267655,
+      "pkgbuildSha256": "853ef80a50588f29355722a4513f24cf1a5f8de06e0b5ee326580464db539741"
+    },
+    {
+      "filename": "mingw-w64-glib2-2.86.4-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-glib2-2.86.4-1.src.tar.zst",
+      "sha256": "dc1d2901147f834fe7a6164307f33907806b701c5fdc1445f098c3c16288cd8f",
+      "size": 5697229,
+      "pkgbuildSha256": "094edceec2901d3060b2a98dd2f9e37c317f0e18fafbf9145ea07cc3cfcd44dd"
+    },
+    {
+      "filename": "mingw-w64-jbig2dec-0.20-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-jbig2dec-0.20-1.src.tar.zst",
+      "sha256": "0c51877e97804edca9c6cb9002c4535f5ccd2583cdb5ac94f34f620d33c313c2",
+      "size": 152285,
+      "pkgbuildSha256": "e3ebef6318a97fc13374270550563029d1d9197dbce975ac0b215313275d677c"
+    },
+    {
+      "filename": "mingw-w64-libiconv-1.18-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libiconv-1.18-1.src.tar.zst",
+      "sha256": "d40dc594479c0fba9aa492c5cbf63dd81a7cc4b91cc1d93619bb43c622d04709",
+      "size": 5032448,
+      "pkgbuildSha256": "4d9f62cdcd26dc0e2c1abe9c558239a273dc9668a00948cf3585fae86f3389d2"
+    },
+    {
+      "filename": "mingw-w64-libidn-1.43-2.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libidn-1.43-2.src.tar.zst",
+      "sha256": "f1330907a1210a56e6cc8a2672693e1a36b49b5eb2b5f133c97716a6cab110b0",
+      "size": 2300106,
+      "pkgbuildSha256": "35e1ea3191367267c158c48d8a1fc5e833e45190fac8b9f6b2d2dec0e6ebe1e7"
+    },
+    {
+      "filename": "mingw-w64-libjpeg-turbo-3.1.3-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libjpeg-turbo-3.1.3-1.src.tar.zst",
+      "sha256": "7ee7a8847822952f2e8d304943fc7b766cd5a0bcc3490fab2e345f5766e21048",
+      "size": 2514965,
+      "pkgbuildSha256": "7a8251943afc43a96dd11dc1df5949f3bfd87218f57c439ac2edc585fb547829"
+    },
+    {
+      "filename": "mingw-w64-libtiff-4.7.1-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libtiff-4.7.1-1.src.tar.zst",
+      "sha256": "7ca1f075da946a3cc4bd6b8d3446ddeb2aff93c5709f7a17896b0a008338f567",
+      "size": 3994514,
+      "pkgbuildSha256": "959fb51bf1062276f8660cc72dfbaa7ce03012cb9a54f4aaa9ae203590de69c5"
+    },
+    {
+      "filename": "mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libwebp-1.6.0-1.src.tar.zst",
+      "sha256": "c8c63f98e018a7595d22e8a3e65b7caf83345fed666866a6e67d153b16f48141",
+      "size": 2589761,
+      "pkgbuildSha256": "d15596f0825cbace1453462ab406b1d1ec6ac12be21d1d5655a17c22656318e1"
+    },
+    {
+      "filename": "mingw-w64-winpthreads-13.0.0.r560.g3197fc7d6-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-winpthreads-13.0.0.r560.g3197fc7d6-1.src.tar.zst",
+      "sha256": "7cb3d654d8969013231c51417640c3558f9c7a4b039a4fa1ea11c660445422c7",
+      "size": 51364241,
+      "pkgbuildSha256": "b18c521a8c6e6739c038a7dd601369d68bd04060bc73c92cf6591f856299290e"
+    },
+    {
+      "filename": "mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-openjpeg2-2.5.4-2.src.tar.zst",
+      "sha256": "88be024421b79a557ea9cc94932806f5daddcae5d917895d81ac974df7f38b24",
+      "size": 2156125,
+      "pkgbuildSha256": "8901865f116d6eaa71bb2ff14dcaaa9a301185fd5cf62408d73dcfd2901c8334"
+    },
+    {
+      "filename": "mingw-w64-perl-5.38.5-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-5.38.5-1.src.tar.zst",
+      "sha256": "7bb99fe0ad0b95eb5a8e42d71b0541dc4abba0349380910476dac13b94dc2ea9",
+      "size": 13740461,
+      "pkgbuildSha256": "02582683612be4fdb075dff93da12ab52de76295f8829a9daa96d8b6cbad1d2e"
+    },
+    {
+      "filename": "mingw-w64-perl-encode-compat-0.07-6.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-encode-compat-0.07-6.src.tar.zst",
+      "sha256": "595e639083109fdb90163cbd2567a38e5ab5b0211c72bc5ceddbad762bc28721",
+      "size": 10734,
+      "pkgbuildSha256": "5a4d9c949d363ca259b1657c70b8f6354329913588d3b56d40fe3e93380ffee4"
+    },
+    {
+      "filename": "mingw-w64-perl-math-int64-0.57-3.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-perl-math-int64-0.57-3.src.tar.zst",
+      "sha256": "3776ff72a41dddf2dbfdeb0c8c1472b85d4e33dc02f748ffaa58a207ac55cc79",
+      "size": 109529,
+      "pkgbuildSha256": "4a9a14cdc031707d10f5214919f1307d4291c955d59bb7e45289321fb4d3769d"
+    },
+    {
+      "filename": "mingw-w64-jbigkit-2.1-5.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-jbigkit-2.1-5.src.tar.zst",
+      "sha256": "402e264e13ffd10424d3217e83076d9e1e3ab0db16303a33d42a4bd4cda4088b",
+      "size": 443510,
+      "pkgbuildSha256": "95e0df2be8fb755c7e9a0ccbba56412fed191d34e13c6a9d55c3469c029425a8"
+    },
+    {
+      "filename": "mingw-w64-lerc-4.0.0-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-lerc-4.0.0-1.src.tar.zst",
+      "sha256": "47563a652062b8e9052a6e05591a08d45e5cb48865bbab237b1cc5b1942fc3d0",
+      "size": 4708118,
+      "pkgbuildSha256": "bacc823d6a4fb7d22f60c4da38f465be630b2d6cdc7e780477d45bb42e8efd6a"
+    },
+    {
+      "filename": "mingw-w64-libdeflate-1.25-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-libdeflate-1.25-1.src.tar.zst",
+      "sha256": "53b756599ad6e44975bfe3224475a395e6b1c1c22783ae1216c5553fbfb8d746",
+      "size": 199257,
+      "pkgbuildSha256": "60ea1ffd84f5b4671f202937836f9cd15a5909f65794c36bcf724b5ac8adf8c4"
+    },
+    {
+      "filename": "mingw-w64-pcre2-10.47-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-pcre2-10.47-1.src.tar.zst",
+      "sha256": "d1af57f4346ec9542f1d191c94c470340f6268bfa732718f6db1b89d75fd6502",
+      "size": 2144801,
+      "pkgbuildSha256": "38ef9a81fd7bccdd6f76d6064a4ea72e9fedcade411eb32c135afc81859cb4b1"
+    },
+    {
+      "filename": "mingw-w64-xz-5.8.2-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-xz-5.8.2-1.src.tar.zst",
+      "sha256": "9fc80545a204c27261ab9aadb84d2e934f3ddc0ebc1ba42a9b7664649c4491ff",
+      "size": 1513436,
+      "pkgbuildSha256": "9b99544886d0efc1fb5a708eb12d26a20d310802dc7d96fceee043e0ffca2816"
+    },
+    {
+      "filename": "mingw-w64-zstd-1.5.7-1.src.tar.zst",
+      "url": "https://repo.msys2.org/mingw/sources/mingw-w64-zstd-1.5.7-1.src.tar.zst",
+      "sha256": "0e369f559046468bb605c8f4c8d93c7a4e7e88e8dc412226ebbad92ac1d5bd28",
+      "size": 2401857,
+      "pkgbuildSha256": "4b5f3215f1389e21fe91246a8b7729ce95f42d35f9a21ce46bf08c06908c2c5e"
+    }
+  ],
+  "texSources": [
+    {
+      "filename": "amscls.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amscls.source.tar.xz",
+      "sha256": "4754426c0afde1a3bc3ffc8b2c1e968296cbd6207fe99007c168fc39f18ce86b",
+      "size": 365984,
+      "package": "amscls",
+      "kind": "package-source"
+    },
+    {
+      "filename": "amsfonts.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsfonts.source.tar.xz",
+      "sha256": "119ef22dd62c6441452d9da7748cb512a11eceb48f52b2bc1a64b9d516734c81",
+      "size": 49152,
+      "package": "amsfonts",
+      "kind": "package-source"
+    },
+    {
+      "filename": "amsmath.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsmath.source.tar.xz",
+      "sha256": "04f483709c71bdfb4fb9e8701a7fe1764397612338681dff205de379e283201c",
+      "size": 67424,
+      "package": "amsmath",
+      "kind": "package-source"
+    },
+    {
+      "filename": "atbegshi.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atbegshi.source.tar.xz",
+      "sha256": "7f1a02b3bd281dc315a13de9477acd9b656b2f67974ef0d1f806386c2d9ba49b",
+      "size": 13352,
+      "package": "atbegshi",
+      "kind": "package-source"
+    },
+    {
+      "filename": "atveryend.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atveryend.source.tar.xz",
+      "sha256": "7493cac8fdb8ae646e0a050ec8fc917cfa279162b43a687beafe43b5a60031b1",
+      "size": 4272,
+      "package": "atveryend",
+      "kind": "package-source"
+    },
+    {
+      "filename": "auxhook.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/auxhook.source.tar.xz",
+      "sha256": "a6c89b0bfebf1a0e2f8ed131fe1707d02e270b94d2553d619b44e63752977d66",
+      "size": 5244,
+      "package": "auxhook",
+      "kind": "package-source"
+    },
+    {
+      "filename": "babel.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/babel.source.tar.xz",
+      "sha256": "a13bb2c2e2ab466ab2c58de491fe4021253e671239e2edd3df9b20758e760ebe",
+      "size": 996940,
+      "package": "babel",
+      "kind": "package-source"
+    },
+    {
+      "filename": "bigintcalc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bigintcalc.source.tar.xz",
+      "sha256": "99d6b44e3248a49e358fc6c08f9489d2763baaf12b9f7fcff7dfb2d861664d55",
+      "size": 14244,
+      "package": "bigintcalc",
+      "kind": "package-source"
+    },
+    {
+      "filename": "bitset.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bitset.source.tar.xz",
+      "sha256": "c6adbc33449f905d812bc6a17749b48a4dc1dc3193cf811212475c8d3dae621a",
+      "size": 14628,
+      "package": "bitset",
+      "kind": "package-source"
+    },
+    {
+      "filename": "bookmark.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bookmark.source.tar.xz",
+      "sha256": "7d0606335ca7b4ff59d62ab33fa6361a294c7a13e2ddad4dfc5f66926772c72f",
+      "size": 19772,
+      "package": "bookmark",
+      "kind": "package-source"
+    },
+    {
+      "filename": "booktabs.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/booktabs.source.tar.xz",
+      "sha256": "40427422a8ffe8b52393a8ab6116c446ae6aca2702860fbcef769c47ee2ef728",
+      "size": 14648,
+      "package": "booktabs",
+      "kind": "package-source"
+    },
+    {
+      "filename": "epstopdf-pkg.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf-pkg.source.tar.xz",
+      "sha256": "0b2ce78773dfb6dfcaf8b3e063da9a2db20bc227324095ae95391b4a886f125e",
+      "size": 11996,
+      "package": "epstopdf-pkg",
+      "kind": "package-source"
+    },
+    {
+      "filename": "etexcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etexcmds.source.tar.xz",
+      "sha256": "802a6b5aab4bb31889af254d92931db08efd33f77376e4fb14de9ecb41dd62b6",
+      "size": 5444,
+      "package": "etexcmds",
+      "kind": "package-source"
+    },
+    {
+      "filename": "euenc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/euenc.source.tar.xz",
+      "sha256": "0509e1083ad77719e10bd074ab85a12ea20f38c3b17b4eb6b30e72c2e3a5a31c",
+      "size": 6872,
+      "package": "euenc",
+      "kind": "package-source"
+    },
+    {
+      "filename": "filehook.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/filehook.source.tar.xz",
+      "sha256": "43c80a9696f79b948e4979af4fd5c4d35a72c779ecc91dc91d76980f7b69ec08",
+      "size": 14340,
+      "package": "filehook",
+      "kind": "package-source"
+    },
+    {
+      "filename": "firstaid.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/firstaid.source.tar.xz",
+      "sha256": "b81c604ebef79b7993fe513d48c56960bbe449e23b55fb3218d853b0bdbd360a",
+      "size": 11400,
+      "package": "firstaid",
+      "kind": "package-source"
+    },
+    {
+      "filename": "float.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/float.source.tar.xz",
+      "sha256": "5e2bcf8c27a7cf7185ea4911b0ba2aa43ba56177c583d5bad02152dc9530a2ab",
+      "size": 12572,
+      "package": "float",
+      "kind": "package-source"
+    },
+    {
+      "filename": "fontspec.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fontspec.source.tar.xz",
+      "sha256": "07a587084c24849d09a814d97d418366882320baf29154ede9e2189d3eb389f4",
+      "size": 87696,
+      "package": "fontspec",
+      "kind": "package-source"
+    },
+    {
+      "filename": "geometry.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/geometry.source.tar.xz",
+      "sha256": "5a1b1136be0b5f085a075cd6c778939facfab3de4d183463fb2201726575bfd7",
+      "size": 47924,
+      "package": "geometry",
+      "kind": "package-source"
+    },
+    {
+      "filename": "gettitlestring.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/gettitlestring.source.tar.xz",
+      "sha256": "3732c607ee6499eb475c074d619cc2c875737f1e8ed983cea1066f331c610e77",
+      "size": 6428,
+      "package": "gettitlestring",
+      "kind": "package-source"
+    },
+    {
+      "filename": "graphics.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics.source.tar.xz",
+      "sha256": "4e3a8691e912994fe071745b4d457011e94c6b3bad817729d2728b4e8e2efb92",
+      "size": 57596,
+      "package": "graphics",
+      "kind": "package-source"
+    },
+    {
+      "filename": "hycolor.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hycolor.source.tar.xz",
+      "sha256": "e5fd875331dfbef3a10c12580f42923128b7ff98df52e9b262b9f273b14012eb",
+      "size": 9680,
+      "package": "hycolor",
+      "kind": "package-source"
+    },
+    {
+      "filename": "hyperref.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyperref.source.tar.xz",
+      "sha256": "7effbc3aad83fffb5c080dc71f4d00473781f2c6754cd9e1ff54e41ad7961d30",
+      "size": 418584,
+      "package": "hyperref",
+      "kind": "package-source"
+    },
+    {
+      "filename": "hyph-utf8.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyph-utf8.source.tar.xz",
+      "sha256": "5ab1a0375270b69dca2c1e095e8e0631713a2b80ac9c5736475a9b3c36d51753",
+      "size": 36044,
+      "package": "hyph-utf8",
+      "kind": "package-source"
+    },
+    {
+      "filename": "infwarerr.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/infwarerr.source.tar.xz",
+      "sha256": "dc3823e0f1aea2849dcd3e440b1df92cafba3a7aca7d828ac18900ad4d78c779",
+      "size": 5716,
+      "package": "infwarerr",
+      "kind": "package-source"
+    },
+    {
+      "filename": "intcalc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/intcalc.source.tar.xz",
+      "sha256": "dd699837e94eb3ee2a67bda4b0a4448b1d0086f96be18584579dbfed8b86bc87",
+      "size": 12576,
+      "package": "intcalc",
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvdefinekeys.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvdefinekeys.source.tar.xz",
+      "sha256": "e36edb06b66b68d24d1e4a44250fb77d14c4f6da3ff56793f516201a681728a9",
+      "size": 5116,
+      "package": "kvdefinekeys",
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvoptions.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvoptions.source.tar.xz",
+      "sha256": "a38dbe8ea14cb5fee2901fc05d93b3ea36782168e9958dbb348d3b26801e2b8b",
+      "size": 21144,
+      "package": "kvoptions",
+      "kind": "package-source"
+    },
+    {
+      "filename": "kvsetkeys.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvsetkeys.source.tar.xz",
+      "sha256": "c8513f1a1a61bd27fb64ff26ab0d256337e1045901e5ea5fc49932cc818fde05",
+      "size": 10608,
+      "package": "kvsetkeys",
+      "kind": "package-source"
+    },
+    {
+      "filename": "l3kernel.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3kernel.source.tar.xz",
+      "sha256": "4bb8eb3ef0f875b4032f07324f692546b3284282284194c7e1bcf97c974fe5d6",
+      "size": 688704,
+      "package": "l3kernel",
+      "kind": "package-source"
+    },
+    {
+      "filename": "l3packages.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3packages.source.tar.xz",
+      "sha256": "ec260927b40178d04df5056b95f4655cdd596d4d76f631f26f6a81fdf0ae3135",
+      "size": 27400,
+      "package": "l3packages",
+      "kind": "package-source"
+    },
+    {
+      "filename": "latex.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex.source.tar.xz",
+      "sha256": "f05c345aa1c344df730e5cc90dc79dec81c2713680ef81cb288710d113f93bd7",
+      "size": 841876,
+      "package": "latex",
+      "kind": "package-source"
+    },
+    {
+      "filename": "letltxmacro.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/letltxmacro.source.tar.xz",
+      "sha256": "71bf644c72609805d4936649ec8e2d1fbd9d7c155a8fbe0983a93b72e73e8d2f",
+      "size": 5916,
+      "package": "letltxmacro",
+      "kind": "package-source"
+    },
+    {
+      "filename": "ltxcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ltxcmds.source.tar.xz",
+      "sha256": "a3cbb1482d677f7bcb05737e1389e5067de055f1c9503a378d183a02d2356cb4",
+      "size": 12948,
+      "package": "ltxcmds",
+      "kind": "package-source"
+    },
+    {
+      "filename": "lualatex-math.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualatex-math.source.tar.xz",
+      "sha256": "7a3af6f83bcca2c80e954a8d6899c7de9277a84ede6e436f22c3b950dc603af1",
+      "size": 9532,
+      "package": "lualatex-math",
+      "kind": "package-source"
+    },
+    {
+      "filename": "lualibs.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualibs.source.tar.xz",
+      "sha256": "490fae889e8714ce2cb5f0500ed346fea84e215eed5d8b18f55a7ed09aac02af",
+      "size": 8616,
+      "package": "lualibs",
+      "kind": "package-source"
+    },
+    {
+      "filename": "luaotfload.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luaotfload.source.tar.xz",
+      "sha256": "2b8c1e0cfe8cd7558331572bb69f00a84cf2eb02d8adcde8b628f23508d22506",
+      "size": 7296,
+      "package": "luaotfload",
+      "kind": "package-source"
+    },
+    {
+      "filename": "mdwtools.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mdwtools.source.tar.xz",
+      "sha256": "c452fffeb1f6f6fc13f0e22bc4f722ec0055308fa984c31b2a9dcd1e6383dce9",
+      "size": 104804,
+      "package": "mdwtools",
+      "kind": "package-source"
+    },
+    {
+      "filename": "natbib.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/natbib.source.tar.xz",
+      "sha256": "445e7f8d8b038de32439a4a3dbb2a787014c17399cdf42a052236a349aa80bfa",
+      "size": 64140,
+      "package": "natbib",
+      "kind": "package-source"
+    },
+    {
+      "filename": "pdfescape.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdfescape.source.tar.xz",
+      "sha256": "02bf5e256f1c0cae06dc80c09088ead94b9a2c6e31a1376931d09ff8a7361963",
+      "size": 8308,
+      "package": "pdfescape",
+      "kind": "package-source"
+    },
+    {
+      "filename": "pdftexcmds.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftexcmds.source.tar.xz",
+      "sha256": "48bc1e3fcc5ac6241272e38c0ebb40c47debc3ff4c48b4a12b7ba5ec7f927c4f",
+      "size": 14048,
+      "package": "pdftexcmds",
+      "kind": "package-source"
+    },
+    {
+      "filename": "psnfss.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/psnfss.source.tar.xz",
+      "sha256": "7d779f66c6da6ed2f633187b385426a8c8fff59ed118f67ffdfb8155014a45ac",
+      "size": 8180,
+      "package": "psnfss",
+      "kind": "package-source"
+    },
+    {
+      "filename": "refcount.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/refcount.source.tar.xz",
+      "sha256": "13d39f8f94709db4092369b21beeb9efaa234b5aea8dcdd8a67c24cbe1f1195e",
+      "size": 7468,
+      "package": "refcount",
+      "kind": "package-source"
+    },
+    {
+      "filename": "rerunfilecheck.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/rerunfilecheck.source.tar.xz",
+      "sha256": "e3742a06f910ee1897169492a00c2c10922f0e89958af87e965361be3ac7ea73",
+      "size": 7248,
+      "package": "rerunfilecheck",
+      "kind": "package-source"
+    },
+    {
+      "filename": "stringenc.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/stringenc.source.tar.xz",
+      "sha256": "6dbe5ab6b15be55823e0e5dc1b407d9e61f4a791148a2bd2cea404ef9c4c9dde",
+      "size": 30632,
+      "package": "stringenc",
+      "kind": "package-source"
+    },
+    {
+      "filename": "tools.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tools.source.tar.xz",
+      "sha256": "173d7b1d4d24c805f0d2d5d9d5831f1e8ba49a6d7920147e5b9e4a55b7cca381",
+      "size": 248108,
+      "package": "tools",
+      "kind": "package-source"
+    },
+    {
+      "filename": "unicode-math.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-math.source.tar.xz",
+      "sha256": "8871f18f642f72d091d7e940cc981c1ec1690a0b4e37e219e7dac91af2676524",
+      "size": 36928,
+      "package": "unicode-math",
+      "kind": "package-source"
+    },
+    {
+      "filename": "uniquecounter.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/uniquecounter.source.tar.xz",
+      "sha256": "95defce3e98bc6638441781cea431d6aeb7f9c65e7293bb15ff28f85751972ff",
+      "size": 5324,
+      "package": "uniquecounter",
+      "kind": "package-source"
+    },
+    {
+      "filename": "xcolor.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xcolor.source.tar.xz",
+      "sha256": "559e6d8699beeb2f4bfe1c8fb39018bff2892654b0ce0683970724c24bc9f7ad",
+      "size": 77232,
+      "package": "xcolor",
+      "kind": "package-source"
+    },
+    {
+      "filename": "xkeyval.source.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xkeyval.source.tar.xz",
+      "sha256": "50ac6ddfb3387337060476dc8562ee9fb686a281475f7ecf3530520eeed5d2b2",
+      "size": 47724,
+      "package": "xkeyval",
+      "kind": "package-source"
+    },
+    {
+      "filename": "amscls.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amscls.doc.tar.xz",
+      "sha256": "58568b86cd0d4f82a316a3663d32bd5fc0a8f0e0371048361a67cf87f9fa75e7",
+      "size": 1072480,
+      "package": "amscls",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "amsfonts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsfonts.doc.tar.xz",
+      "sha256": "951d028c383fc255043727ff2571410959642dbefbc3fa4a61c42bd2af604cea",
+      "size": 1162540,
+      "package": "amsfonts",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "amsmath.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/amsmath.doc.tar.xz",
+      "sha256": "9d165ea0d3ad44cb1aa10b45f93e435375b48458ed2b000b9ead9f272bd3ffdd",
+      "size": 2389656,
+      "package": "amsmath",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "atbegshi.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atbegshi.doc.tar.xz",
+      "sha256": "85d37283c3d7bf2757aa68133917a33d60a2f2f53b22b4fe7c33d37d620634fc",
+      "size": 400456,
+      "package": "atbegshi",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "atveryend.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/atveryend.doc.tar.xz",
+      "sha256": "388f93e31db90ba4edd484f0b9b991424dfe2de0666aefb53152b70012295a7c",
+      "size": 281800,
+      "package": "atveryend",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "auxhook.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/auxhook.doc.tar.xz",
+      "sha256": "6136ddac4404d08bc34dead9baaac8ddc89b211c72e735ebdfb3208792c90ca6",
+      "size": 285640,
+      "package": "auxhook",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "babel.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/babel.doc.tar.xz",
+      "sha256": "3f5a8d2b11a5ba2ef22e5f61ebe2c82c4f9d6350de6260df28fab0b5008d5601",
+      "size": 1489200,
+      "package": "babel",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bibtex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bibtex.doc.tar.xz",
+      "sha256": "af57ef3e104c68b477276b01047fdd8ec6ad0c8850a4a5b11a3c137df0d95e4d",
+      "size": 401248,
+      "package": "bibtex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bigintcalc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bigintcalc.doc.tar.xz",
+      "sha256": "79e1545a8f9a7c2b845fadf2367ecd6c9562c765ac4cff2b24c57522f9aed88c",
+      "size": 456956,
+      "package": "bigintcalc",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bitset.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bitset.doc.tar.xz",
+      "sha256": "99b388523cbab8e9ed6b6d120b6121b50106ed96bec5e35da8fb0fbc1359d3a9",
+      "size": 616520,
+      "package": "bitset",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "bookmark.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/bookmark.doc.tar.xz",
+      "sha256": "aa73b98233425e7be963aec444bc12504bbf317e61a75541b9e401ccbfb317c9",
+      "size": 624916,
+      "package": "bookmark",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "booktabs.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/booktabs.doc.tar.xz",
+      "sha256": "fe9a26bb83c3d9e14a767192bc8fafe0f05b5841a9e959d4499f0ab8688a3612",
+      "size": 295880,
+      "package": "booktabs",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "cm.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/cm.doc.tar.xz",
+      "sha256": "ada5920f0d16ea3fb6b523decb0447564c4537b2b770a9bdbb837b3ec68a3992",
+      "size": 2500,
+      "package": "cm",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "dvipdfmx.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/dvipdfmx.doc.tar.xz",
+      "sha256": "4e4ef62679db9d31411c096ee432ed97bfa2c218a24a315c2b3b2fc56490787d",
+      "size": 3098940,
+      "package": "dvipdfmx",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "dvips.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/dvips.doc.tar.xz",
+      "sha256": "4c478130504218f86fdfe022745c8a3200d1d25ddd27fa5b2ce3c0ca4688f3b0",
+      "size": 530896,
+      "package": "dvips",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "ec.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ec.doc.tar.xz",
+      "sha256": "84f0d011f0cb75aae92ff40c4d004738477d59a8dfa33abbb3441f64e6878edc",
+      "size": 22856,
+      "package": "ec",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "epstopdf.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf.doc.tar.xz",
+      "sha256": "ed3901547abb723f8b4797e026c63dfaf1820f414469c8fa31f698edb6ec1634",
+      "size": 29252,
+      "package": "epstopdf",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "epstopdf-pkg.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/epstopdf-pkg.doc.tar.xz",
+      "sha256": "f59f883e71b748943194b75ba844233899f2113934ffb0ef5d97b18423d3ad86",
+      "size": 354368,
+      "package": "epstopdf-pkg",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etex.doc.tar.xz",
+      "sha256": "1cfc94bf7b3fac9aecd1032f052be8d818b680541df3f5138cddb66615522103",
+      "size": 327356,
+      "package": "etex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etexcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etexcmds.doc.tar.xz",
+      "sha256": "cc50549184bc7eb9245b94cabf230475f229d11155ca858755744a1c49cb72a0",
+      "size": 300584,
+      "package": "etexcmds",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "etoolbox.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/etoolbox.doc.tar.xz",
+      "sha256": "872868e5c096fef325ecca0794e188cb6590949000bab9f66ab1f43ce96e723d",
+      "size": 235536,
+      "package": "etoolbox",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "euenc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/euenc.doc.tar.xz",
+      "sha256": "4fdab26ecbfaee3bc14d8fba1412d09a44e2b80a3d275a8cc248d03019128a4f",
+      "size": 145784,
+      "package": "euenc",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "extractbb.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/extractbb.doc.tar.xz",
+      "sha256": "08992b8a05eb96738c10955b55e0538469adbda40d3672e7c35d45026041b041",
+      "size": 24376,
+      "package": "extractbb",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "fancyvrb.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fancyvrb.doc.tar.xz",
+      "sha256": "5b3d93e68a5f3aae3a27374bea77bb7626cef53757b92823d1a7712f92876e08",
+      "size": 180064,
+      "package": "fancyvrb",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "filehook.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/filehook.doc.tar.xz",
+      "sha256": "a37da6a65a235c6e1d7b9ded26a69e209373c76f32829e7a2b9e4ab70767bd8d",
+      "size": 308664,
+      "package": "filehook",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "firstaid.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/firstaid.doc.tar.xz",
+      "sha256": "7857486edcc62a8f39e7958e16f59473ebb5dee196a308edc5666043c87e5a44",
+      "size": 288040,
+      "package": "firstaid",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "float.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/float.doc.tar.xz",
+      "sha256": "a0c895b14266c8cbf9b5c7021cee6f37d4267b943596172dd4faba1fc5d930af",
+      "size": 112620,
+      "package": "float",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "fontspec.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/fontspec.doc.tar.xz",
+      "sha256": "03f2d761e45951d9a0fc9da1d84ef8c613569a450f18169d45572a6e6f24c028",
+      "size": 1199940,
+      "package": "fontspec",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "framed.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/framed.doc.tar.xz",
+      "sha256": "e945bbae1c0b725dde26204516a63691c1a3c58fa2edcd95b390f9d770745b38",
+      "size": 239020,
+      "package": "framed",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "geometry.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/geometry.doc.tar.xz",
+      "sha256": "9de80856957bc6f1a944141a7a777323812bbd2324e3c7c27288708658180d61",
+      "size": 871240,
+      "package": "geometry",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "gettitlestring.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/gettitlestring.doc.tar.xz",
+      "sha256": "6b61c2c8060386148ac5dfcf02c6c9d68eec5c9a03c701bf5405ac1e8838d6ba",
+      "size": 317828,
+      "package": "gettitlestring",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics.doc.tar.xz",
+      "sha256": "a6bd89f5fc3f14a9c92b5a7bddf5f9740a7e7e802eed0196e400926fd5a73a4f",
+      "size": 2446748,
+      "package": "graphics",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics-cfg.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics-cfg.doc.tar.xz",
+      "sha256": "100d51daf649a36f0b2f4c7b505aa21501e469bda19d63cf4247e1e315a428f5",
+      "size": 876,
+      "package": "graphics-cfg",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "graphics-def.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/graphics-def.doc.tar.xz",
+      "sha256": "270a8d4423774acfbc903036699fd689a76384260d75827e2ef3f9ad6e35e3d3",
+      "size": 604,
+      "package": "graphics-def",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hycolor.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hycolor.doc.tar.xz",
+      "sha256": "cfd6fd172ca675aeae8aaec350fa9104eb70cef69972ce5a3218aa59bbb3bfb5",
+      "size": 375200,
+      "package": "hycolor",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hyperref.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyperref.doc.tar.xz",
+      "sha256": "8a41392c1a6692117cad2dbecfb7d1828b75b34faf13a4422ad715920d0f98af",
+      "size": 3584520,
+      "package": "hyperref",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "hyph-utf8.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/hyph-utf8.doc.tar.xz",
+      "sha256": "ee7405b7471fb983bf6ac0b410554f4d1f16bb4154a0bd3a0e4ee1d712dbe5f0",
+      "size": 268452,
+      "package": "hyph-utf8",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "iftex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/iftex.doc.tar.xz",
+      "sha256": "0c08809797d548a331e2dcaa09f7d0989d032a0bf441ca5008aa0d67241d3abd",
+      "size": 229364,
+      "package": "iftex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "inconsolata.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/inconsolata.doc.tar.xz",
+      "sha256": "53777dc7d755dd6a017ed2f2350668a8e3a00d4278ec23dc8857c803567d34ef",
+      "size": 179192,
+      "package": "inconsolata",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "infwarerr.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/infwarerr.doc.tar.xz",
+      "sha256": "e0d12b8e4e98aa081ae9952e7eca02c98b1b3ce79d0badaa5375939c7619ddf2",
+      "size": 284916,
+      "package": "infwarerr",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "intcalc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/intcalc.doc.tar.xz",
+      "sha256": "62b6fb77012ad11172f99569a0e4a1116eff7e4467a14871581aeb20eb7d253f",
+      "size": 423200,
+      "package": "intcalc",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kpathsea.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kpathsea.doc.tar.xz",
+      "sha256": "6b98155c5fcf7cb666cd2b78ee35876100008395a1ff00197538da6caf8e4e7b",
+      "size": 1287828,
+      "package": "kpathsea",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvdefinekeys.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvdefinekeys.doc.tar.xz",
+      "sha256": "6088ddbdea7b835b4c66e76ee5eda3db3b8ec6f16db4d82ed839947c264bd206",
+      "size": 296812,
+      "package": "kvdefinekeys",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvoptions.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvoptions.doc.tar.xz",
+      "sha256": "d646b216e0681be7ce1e66bdd53268c2c9df1d79100f9b71dd75dfe10ce2fa5a",
+      "size": 485348,
+      "package": "kvoptions",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "kvsetkeys.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/kvsetkeys.doc.tar.xz",
+      "sha256": "469a14ac0edeee0d83e1b5880711960e844bdff3bc3cf30ca7622ac859924418",
+      "size": 390776,
+      "package": "kvsetkeys",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "l3kernel.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3kernel.doc.tar.xz",
+      "sha256": "aa1ee33ae2e54277b6e570c753c01675a91380968c2de1abd1c9ecb5b6abae1d",
+      "size": 12233824,
+      "package": "l3kernel",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "l3packages.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/l3packages.doc.tar.xz",
+      "sha256": "55b4ddcacd0bb772acbbae4b4f1451a019f51f77bc84e755303ef6249b573069",
+      "size": 1417396,
+      "package": "l3packages",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex.doc.tar.xz",
+      "sha256": "dcd3bddc04e35acc780276f97a0dc03aaec0e7aa8736f14b2bcfde1ae8af9d05",
+      "size": 39805068,
+      "package": "latex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex-bin.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex-bin.doc.tar.xz",
+      "sha256": "8817f3f66a68a00e0f5fa61782de5d04269b5d45afb6410e16cf585f5a0d8290",
+      "size": 49440,
+      "package": "latex-bin",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latex-fonts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latex-fonts.doc.tar.xz",
+      "sha256": "b230c2f8839d51e6584247a754141992c353bf9bca90969bda3cdd47ffc0d0aa",
+      "size": 1128,
+      "package": "latex-fonts",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "latexmk.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/latexmk.doc.tar.xz",
+      "sha256": "ba819fa5636d72bef257acc9227b7dbca53891b15622d07ebd74d83ed086c039",
+      "size": 575908,
+      "package": "latexmk",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "letltxmacro.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/letltxmacro.doc.tar.xz",
+      "sha256": "9a10861cf4aa617f46fcbc3ca1fd9d916a447b537de954803245f185bb896bbf",
+      "size": 290940,
+      "package": "letltxmacro",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lm.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lm.doc.tar.xz",
+      "sha256": "23a71d500b3d8e1fc8bb9b2a6ffc2c8c48a66dfd99fffe18a42616afc6ee175b",
+      "size": 2511620,
+      "package": "lm",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lm-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lm-math.doc.tar.xz",
+      "sha256": "8f748f31882efdd13370fdb9c708bc4bb6202647b21af140d3a86b47acd0bf9b",
+      "size": 94656,
+      "package": "lm-math",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "ltxcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/ltxcmds.doc.tar.xz",
+      "sha256": "5226ab87f9110a233d16b0750084f6a93e0be9051c19b276b14c2d93c3f249b4",
+      "size": 405948,
+      "package": "ltxcmds",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lua-alt-getopt.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lua-alt-getopt.doc.tar.xz",
+      "sha256": "c20f4fe5992b8b27ef1ec558b701cc53d12060a6efe3198186c3a1bd28251c68",
+      "size": 3320,
+      "package": "lua-alt-getopt",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lua-uni-algos.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lua-uni-algos.doc.tar.xz",
+      "sha256": "583f74d7e49510b0bb6518c9b4072d760eda1b579974313facb9d8788bb2bbbd",
+      "size": 77452,
+      "package": "lua-uni-algos",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luahbtex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luahbtex.doc.tar.xz",
+      "sha256": "9ca3eb7507cb8344cc88bed4b00c05e483b807abe981f45141fb132ba29a52cf",
+      "size": 26276,
+      "package": "luahbtex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lualatex-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualatex-math.doc.tar.xz",
+      "sha256": "966985ce547decaaecf39f8541429642048ef339a4e40bf9f3ea4f6fc8fda794",
+      "size": 201248,
+      "package": "lualatex-math",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "lualibs.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/lualibs.doc.tar.xz",
+      "sha256": "1ae0e263897ab46a4f07e381da47c035efbc31cc43a5227699f94781ed0d3f47",
+      "size": 88740,
+      "package": "lualibs",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luaotfload.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luaotfload.doc.tar.xz",
+      "sha256": "4ef473676fd9e280133e1e437df17712cbfe70a52949885f33967b2869102763",
+      "size": 641648,
+      "package": "luaotfload",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "luatex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/luatex.doc.tar.xz",
+      "sha256": "1df8f2241f745636c7ae07eca7941161fa9ba631097596ed861d186f71a0ce15",
+      "size": 2053460,
+      "package": "luatex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "mdwtools.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mdwtools.doc.tar.xz",
+      "sha256": "7192690ba5896c767da0e5dc8a7c27f94b4e4abb6308d347a7a89376fd0c8522",
+      "size": 1605404,
+      "package": "mdwtools",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "metafont.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/metafont.doc.tar.xz",
+      "sha256": "fbb7b5f2e0eba8564d17c18a65d49d31662da2d573acb6b25d732eac4dae09dd",
+      "size": 41984,
+      "package": "metafont",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "mfware.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/mfware.doc.tar.xz",
+      "sha256": "5f5deed160ececccd3d7399deeb0e7b02248ceaff6eb5bcc4a1680eb7d681626",
+      "size": 112436,
+      "package": "mfware",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "modes.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/modes.doc.tar.xz",
+      "sha256": "78f1d71a706d96bc9f793ce9ffb71f919805fda1903ca881368cd8d117a42187",
+      "size": 265132,
+      "package": "modes",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "natbib.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/natbib.doc.tar.xz",
+      "sha256": "96df99477a135273a14a1cbebcecbd97bcbcc3fa2283c89847dc5562fa73973d",
+      "size": 423672,
+      "package": "natbib",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdfescape.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdfescape.doc.tar.xz",
+      "sha256": "d1ec21c87c05a00112983d3cd251b008a257ffe37274a1a945169af96b5bef50",
+      "size": 342648,
+      "package": "pdfescape",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdftex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftex.doc.tar.xz",
+      "sha256": "0a3dc9b8a6134a35a4cc1e8779b284223dac707e397fd378cbbe9e3708dcb5c3",
+      "size": 3406880,
+      "package": "pdftex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "pdftexcmds.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/pdftexcmds.doc.tar.xz",
+      "sha256": "b2ca1e1eaea96fa258a8260a9f2a37ff1dfc504972e28d8ce6dec8ff29615d42",
+      "size": 379848,
+      "package": "pdftexcmds",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "psnfss.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/psnfss.doc.tar.xz",
+      "sha256": "f21004b5c61487da9fdeb0c954f220edf758c4b17e757c5fabe4b995a57864e9",
+      "size": 260864,
+      "package": "psnfss",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "refcount.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/refcount.doc.tar.xz",
+      "sha256": "55f97ba4d5cf45931f279cf4d351101425679e8937d595b52314e766cc9a28cb",
+      "size": 325412,
+      "package": "refcount",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "rerunfilecheck.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/rerunfilecheck.doc.tar.xz",
+      "sha256": "1efdfd6b0f42c110aec2d9686c909ecb8ee8f0536251b5182ea0dee4903eb9e8",
+      "size": 330220,
+      "package": "rerunfilecheck",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "stringenc.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/stringenc.doc.tar.xz",
+      "sha256": "78f3663bc368e757df42da3fa145ddf87af0f48fc4d0368c575dbd527f7ea62c",
+      "size": 664772,
+      "package": "stringenc",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tex.doc.tar.xz",
+      "sha256": "212b94c7f65457464413b04314748085715c07f0dc420eaa28a1a462d968aac6",
+      "size": 54924,
+      "package": "tex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tex-ini-files.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tex-ini-files.doc.tar.xz",
+      "sha256": "7dd9f8d9e53ecd1dac44ac5de0cf9fea5e390688f790206dddc3bc9676a74b69",
+      "size": 1472,
+      "package": "tex-ini-files",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive-scripts.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/09/30/tlnet/archive/texlive-scripts.doc.tar.xz",
+      "sha256": "1d9f5a3a673ec4b01cc2d0086bd0da3aa402568628f3537fae44dd1e1cf109fa",
+      "size": 471868,
+      "package": "texlive-scripts",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive-scripts-extra.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/texlive-scripts-extra.doc.tar.xz",
+      "sha256": "345bc6de2127f4e510868cfbdaa24bddbcb91f73073083edac7fa953f60a7f30",
+      "size": 197200,
+      "package": "texlive-scripts-extra",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "texlive.infra.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/texlive.infra.doc.tar.xz",
+      "sha256": "bf6687e48ba21b73b3afbfc43505a0430fcf5e1070d0d10bcec49ea0e824b5bf",
+      "size": 210524,
+      "package": "texlive.infra",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tipa.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tipa.doc.tar.xz",
+      "sha256": "eba555af781446dfa5e93b7f8d0cb821efcfe995b8c45c91a58a53e614c424b2",
+      "size": 2343456,
+      "package": "tipa",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "tools.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/tools.doc.tar.xz",
+      "sha256": "91353f3458797835d0b1d3a1f81b0b6bf2b97f60ee6ce5746a9a12c6036cf4e1",
+      "size": 6418344,
+      "package": "tools",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "unicode-data.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-data.doc.tar.xz",
+      "sha256": "6f06d8641ba871b883cd3fdc6c902a4553891a9218d4ef03b42536ef0a39e017",
+      "size": 3952,
+      "package": "unicode-data",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "unicode-math.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/unicode-math.doc.tar.xz",
+      "sha256": "3448444ecc07295092e2803b9f5d19127bed74bf90d6dd83a59f372f76afde45",
+      "size": 3336280,
+      "package": "unicode-math",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "uniquecounter.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/uniquecounter.doc.tar.xz",
+      "sha256": "162aaceba9320c2f93ce22c982074fae7df6e7e78abb72626bf52a99bfff2724",
+      "size": 291272,
+      "package": "uniquecounter",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "url.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/url.doc.tar.xz",
+      "sha256": "21a9d565c228bc8ae0a3afea4d32cd77b8627fab72f16d7ab2f11e58b3733611",
+      "size": 266856,
+      "package": "url",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xcolor.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xcolor.doc.tar.xz",
+      "sha256": "0968bcd9227b228058fdc14595a1adad4eb645e20aacda9096e9a5e9f730e6f0",
+      "size": 935036,
+      "package": "xcolor",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xetex.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xetex.doc.tar.xz",
+      "sha256": "4e3b698c5bfad4f5b319a4088d363a5c69d94f02619aaf49304d757aeadf0720",
+      "size": 641400,
+      "package": "xetex",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xkeyval.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xkeyval.doc.tar.xz",
+      "sha256": "8539784e5f0d375bb0556a971e46147780064c3c57b321ab5b8431120b308d90",
+      "size": 573640,
+      "package": "xkeyval",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "xunicode.doc.tar.xz",
+      "url": "https://texlive.info/tlnet-archive/2026/10/01/tlnet/archive/xunicode.doc.tar.xz",
+      "sha256": "e15130c1ace91a2a4ff39a0881b32f97b8f730e452eaa739ea855c6078436c58",
+      "size": 584,
+      "package": "xunicode",
+      "kind": "package-documentation"
+    },
+    {
+      "filename": "urw-base35-2005.zip",
+      "url": "https://tug.ctan.org/fonts/urw/base35.zip",
+      "sha256": "07abaf13d6dbff68b884a877c91c9692283562273adc2d52a4bf9bfdd90668fd",
+      "size": 1968003,
+      "package": "urw-base35",
+      "kind": "font-source"
+    }
+  ]
+}

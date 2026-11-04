@@ -23,15 +23,19 @@ function fixture(t) {
   const source = 'ffmpeg-source-test.tar.gz';
   fs.writeFileSync(path.join(dir, source), bytes);
   const manifest = { schema: 1, bundle: 'tools-2026.10.0', tools: { ffmpeg: { platforms: { mac_arm64: {
-    version: '1.0', asset, sha256: createHash('sha256').update(bytes).digest('hex'), size: bytes.length, format: 'tar.gz', bin: 'ffmpeg/ffmpeg',
-    correspondingSource:{asset:source,sha256:createHash('sha256').update(bytes).digest('hex'),size:bytes.length},
+    version: '1.0', upstreamSha256: createHash('sha256').update(bytes).digest('hex'), asset, sha256: createHash('sha256').update(bytes).digest('hex'), size: bytes.length, format: 'tar.gz', bin: 'ffmpeg/ffmpeg',
+    sourceBundle: 'complete', correspondingSource:{asset:source,sha256:createHash('sha256').update(bytes).digest('hex'),size:bytes.length},
   } } } } };
   fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest));
   const run = (script, environment = {}) => spawnSync(process.execPath, [path.join(scripts, script), dir], {
     encoding: 'utf8', env: { ...process.env, TOOLS_MANIFEST_SIGNING_KEY: '', TOOLS_MANIFEST_PUBLIC_KEY: '', ...environment },
   });
   assert.equal(run('sign-manifest.mjs', { TOOLS_MANIFEST_SIGNING_KEY: privateKey }).status, 0);
-  return { dir, key, privateKey, publicKey, asset, result, verify: (key = publicKey) => run('verify-bundle.mjs', { TOOLS_MANIFEST_PUBLIC_KEY: key }) };
+  const resign = () => {
+    fs.writeFileSync(path.join(dir, 'manifest.json'), JSON.stringify(manifest));
+    assert.equal(run('sign-manifest.mjs', { TOOLS_MANIFEST_SIGNING_KEY: privateKey }).status, 0);
+  };
+  return { dir, key, privateKey, publicKey, asset, result, manifest, resign, verify: (key = publicKey) => run('verify-bundle.mjs', { TOOLS_MANIFEST_PUBLIC_KEY: key }) };
 }
 
 test('key generation keeps private bytes out of output and refuses overwrite', t => {
@@ -66,4 +70,49 @@ test('missing or altered corresponding source blocks distribution',t=>{
  const f=fixture(t);const source=path.join(f.dir,'ffmpeg-source-test.tar.gz');
  fs.writeFileSync(source,'changed source');assert.notEqual(f.verify().status,0);
  fs.unlinkSync(source);assert.notEqual(f.verify().status,0);
+});
+
+
+test('split corresponding-source archives must all be present and authentic', t => {
+  const f = fixture(t), item = f.manifest.tools.ffmpeg.platforms.mac_arm64;
+  item.sourceBundle = ['complete', 'dependency'];
+  const second = { ...item.correspondingSource, asset: 'dependency-source.tar.gz' };
+  fs.copyFileSync(path.join(f.dir, item.correspondingSource.asset), path.join(f.dir, second.asset));
+  item.correspondingSource = [item.correspondingSource, second];
+  f.resign();
+  assert.equal(f.verify().status, 0);
+  fs.writeFileSync(path.join(f.dir, second.asset), 'altered');
+  assert.notEqual(f.verify().status, 0);
+  fs.unlinkSync(path.join(f.dir, second.asset));
+  assert.notEqual(f.verify().status, 0);
+});
+
+test('even signed missing or duplicate source descriptors are rejected', t => {
+  const f = fixture(t), item = f.manifest.tools.ffmpeg.platforms.mac_arm64;
+  item.sourceBundle = ['complete', 'dependency'];
+  f.resign();
+  assert.notEqual(f.verify().status, 0);
+  item.correspondingSource = [item.correspondingSource, item.correspondingSource];
+  f.resign();
+  assert.notEqual(f.verify().status, 0);
+});
+
+test('signed unsafe filenames and source symlinks are rejected', t => {
+  const f = fixture(t), item = f.manifest.tools.ffmpeg.platforms.mac_arm64;
+  const source = item.correspondingSource.asset;
+  item.correspondingSource.asset = '..\\outside.tar.gz';
+  f.resign();
+  assert.notEqual(f.verify().status, 0);
+  item.correspondingSource.asset = source;
+  fs.unlinkSync(path.join(f.dir, source));
+  fs.symlinkSync(f.asset, path.join(f.dir, source));
+  f.resign();
+  assert.notEqual(f.verify().status, 0);
+});
+
+test('a signed manifest with no conversions is rejected', t => {
+  const f = fixture(t);
+  f.manifest.tools = {};
+  f.resign();
+  assert.notEqual(f.verify().status, 0);
 });

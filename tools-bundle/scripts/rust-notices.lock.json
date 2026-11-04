@@ -1,0 +1,32 @@
+{
+  "gloo-utils-0.2.0": {
+    "crateSha256": "0b5555354113b18c547c1d3a98fbf7fb32a9ff4f6fa112ce823a21641a0ba3aa",
+    "crateCommit": "f3bb1d1a1c33dbcccaf26446aca7d0cea8e9d574",
+    "noticeCommit": "f3bb1d1a1c33dbcccaf26446aca7d0cea8e9d574",
+    "repository": "rustwasm/gloo",
+    "provenance": "crate-vcs-commit",
+    "files": [
+      {
+        "path": "LICENSE-MIT",
+        "sha256": "5a6f5443ea473f130adbdcf84254761d1292bc79759b5253915d4b5e7afbef66"
+      },
+      {
+        "path": "LICENSE-APACHE",
+        "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+      }
+    ]
+  },
+  "wee_alloc-0.4.5": {
+    "crateSha256": "dbb3b5a6b2bb17cb6ad44a2e68a43e8d2722c997da10e928665c72ec6c0a0b8e",
+    "crateCommit": "e782897d7f6f63c7f99ebba5d3c4aefc178e2231",
+    "noticeCommit": "e782897d7f6f63c7f99ebba5d3c4aefc178e2231",
+    "repository": "rustwasm/wee_alloc",
+    "provenance": "crate-vcs-commit",
+    "files": [
+      {
+        "path": "LICENSE",
+        "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+      }
+    ]
+  }
+}

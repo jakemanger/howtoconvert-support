@@ -1,0 +1,119 @@
+{
+  "version": "7.1.2-35",
+  "minimumMacOS": "14.0",
+  "formulaRepository": "https://github.com/leleliu008/xcpkg-formula-repository-official-core",
+  "formulaCommit": "8d65dc3e03a9fd8e681003ea19163172c7f4c78f",
+  "xcpkgSourceCommit": "a8a5363d81dff2a76355663d5fdbeef96f2ea0ee",
+  "bootstrap": {
+    "url": "https://github.com/leleliu008/test/releases/download/2023.10.08/xcpkg-0.30.0-macos-15.0-arm64.release.tar.xz",
+    "sha256": "1bbd73ee5c9362091ece6882dc31d43ede546df9163008fee9833d70e5462a59"
+  },
+  "rustVersion": "1.92.0",
+  "rustCommit": "ded5c06cf21d2b93bffd5d884aa6e96934ee4234",
+  "rustSources": [
+    {
+      "component": "rust-standard-library",
+      "version": "1.92.0",
+      "kind": "runtime-source",
+      "url": "https://static.rust-lang.org/dist/rust-src-1.92.0.tar.xz",
+      "sha256": "333d45eeb76f210966dc5c1440b535dea5876ed0162f9286273c85e7a1e3cb29",
+      "filename": "rust-src-1.92.0.tar.xz"
+    },
+    {
+      "component": "addr2line",
+      "version": "0.25.0",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/addr2line/addr2line-0.25.0.crate",
+      "sha256": "9acbfca36652500c911ddb767ed433e3ed99b032b5d935be73c6923662db1d43",
+      "filename": "addr2line-0.25.0.crate"
+    },
+    {
+      "component": "adler2",
+      "version": "2.0.1",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/adler2/adler2-2.0.1.crate",
+      "sha256": "320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa",
+      "filename": "adler2-2.0.1.crate"
+    },
+    {
+      "component": "cfg-if",
+      "version": "1.0.1",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/cfg-if/cfg-if-1.0.1.crate",
+      "sha256": "9555578bc9e57714c812a1f84e4fc5b4d21fcb063490c624de019f7464c91268",
+      "filename": "cfg-if-1.0.1.crate"
+    },
+    {
+      "component": "getopts",
+      "version": "0.2.24",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/getopts/getopts-0.2.24.crate",
+      "sha256": "cfe4fbac503b8d1f88e6676011885f34b7174f46e59956bba534ba83abded4df",
+      "filename": "getopts-0.2.24.crate"
+    },
+    {
+      "component": "gimli",
+      "version": "0.32.0",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/gimli/gimli-0.32.0.crate",
+      "sha256": "93563d740bc9ef04104f9ed6f86f1e3275c2cdafb95664e26584b9ca807a8ffe",
+      "filename": "gimli-0.32.0.crate"
+    },
+    {
+      "component": "hashbrown",
+      "version": "0.15.5",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/hashbrown/hashbrown-0.15.5.crate",
+      "sha256": "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1",
+      "filename": "hashbrown-0.15.5.crate"
+    },
+    {
+      "component": "libc",
+      "version": "0.2.177",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/libc/libc-0.2.177.crate",
+      "sha256": "2874a2af47a2325c2001a6e6fad9b16a53b802102b528163885171cf92b15976",
+      "filename": "libc-0.2.177.crate"
+    },
+    {
+      "component": "memchr",
+      "version": "2.7.5",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/memchr/memchr-2.7.5.crate",
+      "sha256": "32a282da65faaf38286cf3be983213fcf1d2e2a58700e808f83f4ea9a4804bc0",
+      "filename": "memchr-2.7.5.crate"
+    },
+    {
+      "component": "miniz_oxide",
+      "version": "0.8.9",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/miniz_oxide/miniz_oxide-0.8.9.crate",
+      "sha256": "1fa76a2c86f704bdb222d66965fb3d63269ce38518b83cb0575fca855ebb6316",
+      "filename": "miniz_oxide-0.8.9.crate"
+    },
+    {
+      "component": "object",
+      "version": "0.37.3",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/object/object-0.37.3.crate",
+      "sha256": "ff76201f031d8863c38aa7f905eca4f53abbfa15f609db4277d44cd8938f33fe",
+      "filename": "object-0.37.3.crate"
+    },
+    {
+      "component": "rustc-demangle",
+      "version": "0.1.26",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/rustc-demangle/rustc-demangle-0.1.26.crate",
+      "sha256": "56f7d92ca342cea22a06f2121d944b4fd82af56988c270852495420f961d4ace",
+      "filename": "rustc-demangle-0.1.26.crate"
+    },
+    {
+      "component": "rustc-literal-escaper",
+      "version": "0.0.5",
+      "kind": "runtime-source",
+      "url": "https://static.crates.io/crates/rustc-literal-escaper/rustc-literal-escaper-0.0.5.crate",
+      "sha256": "e4ee29da77c5a54f42697493cd4c9b9f31b74df666a6c04dfc4fde77abe0438b",
+      "filename": "rustc-literal-escaper-0.0.5.crate"
+    }
+  ]
+}

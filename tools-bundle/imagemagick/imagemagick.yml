@@ -1,0 +1,34 @@
+pkgtype: exe+lib
+summary: Tools and libraries to manipulate images in many formats
+web-url: https://imagemagick.org/
+src-url: https://github.com/ImageMagick/ImageMagick/releases/download/7.1.2-35/ImageMagick-7.1.2-35.7z
+src-sha: 1d95f7d0ed11e91a3ee9e3042a8e248cb88c666dd9256ab14cc871b1f73138fd
+license: ImageMagick
+dep-pkg: libheif liblqr libltdl libraw libjpeg-turbo libpng libtiff libwebp libopenjpeg libopenexr libjxl libfreetype fontconfig liblcms2 libbz2 liblzma libzstd
+
+install: |
+    configure \
+        --with-freetype=yes \
+        --with-gvc=no \
+        --with-modules \
+        --with-openjp2 \
+        --with-openexr \
+        --with-webp=yes \
+        --with-heic=yes \
+        --without-gslib \
+        --with-pango \
+        --with-lqr \
+        --with-raw=yes \
+        --without-x \
+        --without-wmf \
+        --without-fftw \
+        --disable-opencl \
+        --enable-openmp \
+        --enable-delegate-build
+
+caveats: |
+    The following environment variables should be set if you move/copy this software to other location
+
+    export MAGICK_HOME=/somewhere
+    export MAGICK_CODER_MODULE_PATH="$MAGICK_HOME/lib/ImageMagick-7.1.2/modules-Q16/coders"
+    export MAGICK_CONFIGURE_PATH="$MAGICK_HOME/etc/ImageMagick-7"

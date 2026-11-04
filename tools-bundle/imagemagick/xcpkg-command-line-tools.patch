@@ -1,0 +1,31 @@
+diff --git a/src/impl/toolchain.c b/src/impl/toolchain.c
+index 0ee74e6..27025d1 100644
+--- a/src/impl/toolchain.c
++++ b/src/impl/toolchain.c
+@@ -319,18 +319,16 @@ int xcpkg_toolchain_find(XCPKGToolChain * toolchain) {
+ 
+     /////////////////////////////////////////////////////
+ 
+-    char * xcodeVersion = NULL;
+-
+-    int ret1 = xcpkg_xcode_version(developerDIR, &xcodeVersion);
+-
+-    if (ret1 != XCPKG_OK) {
+-        return ret1;
++    if (strstr(developerDIR, "/CommandLineTools") != NULL) {
++        fprintf(stderr, "toolchain: Apple Command Line Tools (macOS only)\n");
++    } else {
++        char * xcodeVersion = NULL;
++        int ret1 = xcpkg_xcode_version(developerDIR, &xcodeVersion);
++        if (ret1 != XCPKG_OK) return ret1;
++        fprintf(stderr, "xcode-version: %s\n", xcodeVersion);
++        free(xcodeVersion);
+     }
+ 
+-    fprintf(stderr, "xcode-version: %s\n", xcodeVersion);
+-
+-    free(xcodeVersion);
+-
+     /////////////////////////////////////////////////////
+ 
+     const char * a[11] = { "clang", "clang++", "as", "ar", "ld", "nm", "size", "strip", "ranlib", "strings", "objdump" };

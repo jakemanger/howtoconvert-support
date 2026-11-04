@@ -1,0 +1,6 @@
+TeX Live engines, libraries, fonts and packages retain their upstream licenses.
+Original engine/library notices are in engines/, package notices in packages/,
+and URW font notices in fonts/. The original Inconsolata README identifies the
+font licenses; APACHE-2.0.txt supplies the Apache license text for its bold fonts.
+
+Matching sources, patches and build instructions accompany the release.

@@ -1,0 +1,11 @@
+summary: The fastest and safest AV1 video encoder
+src-url: https://github.com/xiph/rav1e/archive/refs/tags/v0.8.1.tar.gz
+src-sha: 06d1523955fb6ed9cf9992eace772121067cca7e8926988a1ee16492febbe01e
+license: BSD-2-Clause
+dep-pkg: libz
+dep-upp: nasm cargo-c
+install: |
+    # The version build script runs on the host, not the target architecture.
+    # Use the crate's bundled zlib instead of the target's pkg-config library.
+    if [ "$CROSS_COMPILING" = 1 ]; then export LIBZ_SYS_STATIC=1; fi
+    cargow cinstall --locked

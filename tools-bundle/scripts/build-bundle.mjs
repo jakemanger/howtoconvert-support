@@ -4,7 +4,7 @@
 // and an (unsigned) manifest.json.
 //
 //   node tools-bundle/scripts/build-bundle.mjs --out dist [--only ffmpeg,pandoc]
-//        [--platform mac_arm64] [--reuse] [--skip-sources] [--check] [--work .bundle-work]
+//        [--platform mac_arm64] [--source-dir SOURCES] [--reuse] [--skip-sources] [--check] [--work .bundle-work]
 //
 // --reuse keeps assets already in --out (the Windows job builds the
 // LibreOffice archive with msiexec and hands it to the Linux job).
@@ -16,12 +16,13 @@ import { fileURLToPath } from 'node:url';
 import {
   PLATFORMS, TOOL_IDS, assetName, commandExists, copyTree, createTarGz, exists,
   fetchPinned, findContaining, run, sha256File, sourceAssetName, verifyArchiveNotice,
+  sourceBundleIds, sourceAttachments, hasReviewedSourceBundle, resolveSourceArchive,
 } from './lib.mjs';
 
 const bundleDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function parseArguments(argv) {
-  const options = { out: 'dist', work: '.bundle-work', only: null, platforms: null, reuse: false, skipSources: false, check: false };
+  const options = { out: 'dist', work: '.bundle-work', only: null, platforms: null, sourceDirectories: [], reuse: false, skipSources: false, check: false };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     const next = () => argv[++i];
@@ -29,6 +30,7 @@ function parseArguments(argv) {
     else if (arg === '--work') options.work = next();
     else if (arg === '--only') options.only = next().split(',');
     else if (arg === '--platform') options.platforms = next().split(',');
+    else if (arg === '--source-dir') options.sourceDirectories.push(path.resolve(next()));
     else if (arg === '--reuse') options.reuse = true;
     else if (arg === '--skip-sources') options.skipSources = true;
     else if (arg === '--check') options.check = true;
@@ -111,8 +113,9 @@ async function stageContents({ tool, platform, entry, config, work }) {
       await copyTree(root, destination);
       break;
     }
+    case 'tar-gz-dir':
     case 'tar-xz-dir': {
-      run('tar', ['-xJf', downloaded, '-C', scratch]);
+      run('tar', [pkg.type === 'tar-gz-dir' ? '-xzf' : '-xJf', downloaded, '-C', scratch]);
       if (!await exists(path.join(scratch, pkg.dir))) throw new Error(`${tool}/${platform}: ${pkg.dir}/ missing from ${upstream.url}`);
       await copyTree(path.join(scratch, pkg.dir), destination);
       break;
@@ -177,6 +180,8 @@ function noticeText({ config, tool, toolConfig, platform, entry }) {
   return [
     `${toolConfig.name} ${entry.version} for ${platform}`,
     `Origin: ${entry.origin}`,
+    `Input SHA-256: ${config.upstream[entry.package.upstream].sha256}`,
+    ...(entry.minimumOS ? [`Minimum macOS: ${entry.minimumOS}`] : []),
     `License: ${toolConfig.license} (texts in HTC-LICENSES/)`,
     `Project: ${toolConfig.homepage}`,
     '',
@@ -184,7 +189,7 @@ function noticeText({ config, tool, toolConfig, platform, entry }) {
       ? 'Packaging: extracted AppImage with a launcher for use without FUSE.'
       : 'Packaging: upstream binaries unchanged.',
     '',
-    ...(entry.sourceBundle && config.sources[entry.sourceBundle]?.includesBuildInstructions ? [
+    ...(hasReviewedSourceBundle(entry, config) ? [
       'Matching source and build instructions (free download):',
       `https://github.com/${config.repository}/releases/download/${config.bundle}/SOURCES.md`,
     ] : [
@@ -230,7 +235,7 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
     ]),
     '',
     ...Object.entries(manifestTools).flatMap(([tool, value]) => Object.entries(value.platforms).map(([platform, item]) =>
-      `- ${tool}/${platform}: ${item.correspondingSource?.asset || 'Missing'}`)),
+      `- ${tool}/${platform}: ${sourceAttachments(item).map(source => source.asset).join(', ') || 'Missing'}`)),
     '',
     '## License texts',
     '',
@@ -252,9 +257,7 @@ async function main() {
       if (options.only && !options.only.includes(tool)) continue;
       for (const [platform, entry] of Object.entries(value.platforms)) {
         if (options.platforms && !options.platforms.includes(platform)) continue;
-        const source = config.sources[entry.sourceBundle];
-        if (!source?.attach || !/^[a-f0-9]{64}$/.test(source?.sha256 || '') || !source?.includesBuildInstructions
-          || !source?.binaryArchives?.includes(config.upstream[entry.package.upstream].sha256)) missing.push(`${tool}/${platform}`);
+        if (!hasReviewedSourceBundle(entry, config)) missing.push(`${tool}/${platform}`);
       }
     }
     if (missing.length) throw new Error(`Complete corresponding source has not been reviewed for: ${missing.join(', ')}. A main-project source tarball or an upstream homepage is not sufficient.`);
@@ -311,14 +314,16 @@ async function main() {
       const stat = await fs.stat(target);
       platforms[platform] = {
         version: entry.version,
+        upstreamSha256: config.upstream[entry.package.upstream].sha256,
         asset: name,
         sha256: await sha256File(target),
         size: stat.size,
         format,
         bin: entry.bin,
         origin: entry.origin,
-        sources: [...new Set([...(entry.sources || []), ...(entry.sourceBundle ? [entry.sourceBundle] : [])])],
+        sources: [...new Set([...(entry.sources || []), ...sourceBundleIds(entry)])],
         sourceBundle: entry.sourceBundle,
+        ...(entry.minimumOS ? { minimumOS: entry.minimumOS } : {}),
         ...(entry.installTo ? { installTo: entry.installTo } : {}),
         ...(entry.package.app ? { app: entry.package.app } : {}),
       };
@@ -344,15 +349,19 @@ async function main() {
       const source = config.sources[id];
       if (!source) throw new Error(`Unknown source ${id}`);
       if (!source.attach) continue;
-      const downloaded = await fetchPinned(source, path.join(work, 'sources'));
+      const downloaded = await resolveSourceArchive(id, source, path.join(work, 'sources'), options.sourceDirectories);
       const name = sourceAssetName(id, source);
       await fs.copyFile(downloaded, path.join(out, name));
       attached.set(id, name);
     }
   }
   for (const value of Object.values(manifestTools)) for (const item of Object.values(value.platforms)) {
-    const name = attached.get(item.sourceBundle);
-    if (name) item.correspondingSource = { asset: name, sha256: config.sources[item.sourceBundle].sha256, size: (await fs.stat(path.join(out, name))).size };
+    const parts = [];
+    for (const id of sourceBundleIds(item)) {
+      const name = attached.get(id);
+      if (name) parts.push({ asset: name, sha256: config.sources[id].sha256, size: (await fs.stat(path.join(out, name))).size });
+    }
+    if (parts.length) item.correspondingSource = Array.isArray(item.sourceBundle) ? parts : parts[0];
   }
   await writeSourcesRecord({ config, out, manifestTools, attached });
 
