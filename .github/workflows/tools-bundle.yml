@@ -1,4 +1,4 @@
-name: Build conversion tools bundle
+name: Build conversion tools
 
 # Runs only when started by hand from the Actions tab. It never publishes a
 # public release: with "draft" ticked it creates a *draft* release that you
@@ -122,4 +122,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           BUNDLE=$(node -p "require('./tools-bundle/bundle.config.json').bundle")
-          gh release create "$BUNDLE" release/* --target "$GITHUB_SHA" --draft --title "Conversion tools bundle $BUNDLE" --notes "Prebuilt command-line conversion tools for the selected platforms save you from finding or compiling each tool yourself. Sources and licenses are in SOURCES.md."
+          gh release create "$BUNDLE" release/* --target "$GITHUB_SHA" --draft --title "Conversion tools $BUNDLE" --notes "Prebuilt command-line conversion tools for the selected platforms save you from finding or compiling each tool yourself. Sources and licenses are in SOURCES.md."

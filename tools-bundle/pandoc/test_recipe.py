@@ -1,6 +1,9 @@
 import hashlib
 import importlib.util
 import io
+import subprocess
+import threading
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import tarfile
 import tempfile
@@ -44,6 +47,51 @@ class RecipeTests(unittest.TestCase):
             with patch.object(build.sources.subprocess, 'run', download):
                 with self.assertRaisesRegex(ValueError, 'Checksum or size mismatch'):
                     build.sources.fetch(item, root)
+            self.assertEqual(list(root.iterdir()), [])
+
+    def test_malformed_chunk_response_retries_without_appending_partial_bytes(self):
+        calls = []
+        class Handler(BaseHTTPRequestHandler):
+            def do_GET(self):
+                calls.append(self.path)
+                self.send_response(200)
+                if len(calls) == 1:
+                    self.send_header('Transfer-Encoding', 'chunked'); self.end_headers()
+                    self.wfile.write(b'4\r\nbad!\r\nZ\r\n'); self.close_connection = True
+                else:
+                    self.send_header('Content-Length', '4'); self.end_headers(); self.wfile.write(b'good')
+            def log_message(self, *args): pass
+        server = ThreadingHTTPServer(('127.0.0.1', 0), Handler)
+        thread = threading.Thread(target=server.serve_forever, daemon=True); thread.start()
+        try:
+            with tempfile.TemporaryDirectory() as folder:
+                root = Path(folder)
+                item = {'filename': 'source.cabal', 'url': f'http://127.0.0.1:{server.server_port}/source',
+                        'size': 4, 'sha256': hashlib.sha256(b'good').hexdigest()}
+                (root / 'source.cabal.partial').write_bytes(b'old incomplete download')
+                self.assertEqual(build.sources.fetch(item, root).read_bytes(), b'good')
+                self.assertEqual(len(calls), 2)
+                self.assertFalse((root / 'source.cabal.partial').exists())
+        finally:
+            server.shutdown(); server.server_close(); thread.join()
+
+    def test_transport_failure_has_three_retries_and_cleans_partial(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            item = {'filename': 'source.cabal', 'url': 'https://example.invalid/source',
+                    'size': 4, 'sha256': hashlib.sha256(b'good').hexdigest()}
+            def fail(args, **kwargs):
+                self.assertEqual(args[args.index('--retry') + 1], '3')
+                self.assertIn('--retry-all-errors', args)
+                self.assertEqual(args[args.index('--max-time') + 1], '300')
+                self.assertNotIn('--continue-at', args)
+                self.assertTrue(kwargs['check'])
+                partial = Path(args[args.index('--output') + 1])
+                self.assertFalse(partial.exists())
+                partial.write_bytes(b'broken response')
+                raise subprocess.CalledProcessError(56, args)
+            with patch.object(build.sources.subprocess, 'run', fail):
+                with self.assertRaises(subprocess.CalledProcessError): build.sources.fetch(item, root)
             self.assertEqual(list(root.iterdir()), [])
 
     def test_archive_cannot_write_outside_destination(self):

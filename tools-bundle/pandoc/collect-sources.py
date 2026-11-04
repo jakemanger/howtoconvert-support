@@ -99,13 +99,17 @@ def fetch(item, destination):
     if verify(path, item):
         return path
     temporary = path.with_name(name + '.partial')
-    subprocess.run(['curl', '--fail', '--location', '--retry', '3', '--silent',
-                    '--show-error', '--output', str(temporary), item['url']], check=True)
-    if not verify(temporary, item):
+    temporary.unlink(missing_ok=True)
+    try:
+        subprocess.run(['curl', '--fail', '--location', '--retry', '3', '--retry-all-errors',
+                        '--connect-timeout', '30', '--max-time', '300', '--silent',
+                        '--show-error', '--output', str(temporary), item['url']], check=True)
+        if not verify(temporary, item):
+            raise ValueError(f'Checksum or size mismatch: {name}')
+        temporary.replace(path)
+        return path
+    finally:
         temporary.unlink(missing_ok=True)
-        raise ValueError(f'Checksum or size mismatch: {name}')
-    temporary.replace(path)
-    return path
 
 
 def main():

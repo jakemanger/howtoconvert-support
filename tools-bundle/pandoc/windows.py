@@ -71,6 +71,20 @@ def collect_sources(destination, cache=None):
     return destination
 
 
+def prepare_source_cache(work):
+    _, windows = load_lock()
+    item = windows['sourceCache']
+    destination = work / 'reviewed-source-cache'
+    destination.mkdir(parents=True, exist_ok=True)
+    archive = base.sources.fetch(item, destination)
+    # fetch checks the whole archive before extract applies tarfile's data filter.
+    root = base.extract(archive, destination / 'unpacked')
+    if root.name != item['root']:
+        raise ValueError('Unexpected reviewed source-cache root')
+    print(f'Prepared verified source cache: {root}')
+    return root
+
+
 def pe_imports(path):
     """Read regular and delayed PE imports without executing the binary."""
     data = Path(path).read_bytes()
@@ -258,12 +272,15 @@ def main():
     parser.add_argument('--work', type=Path, required=True)
     parser.add_argument('--source-cache', type=Path, help='Reuse hash-verified source downloads')
     parser.add_argument('--collect-only', action='store_true')
+    parser.add_argument('--prepare-source-cache', action='store_true', help='Fetch the pinned reusable source archive')
     parser.add_argument('--jobs', type=int, default=2)
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error('--jobs must be positive')
     work = args.work.resolve()
-    if args.collect_only:
+    if args.prepare_source_cache:
+        prepare_source_cache(work)
+    elif args.collect_only:
         collect_sources(work / 'source-companion', args.source_cache)
     else:
         build(work, args.jobs, args.source_cache)

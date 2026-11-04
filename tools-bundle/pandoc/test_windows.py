@@ -1,5 +1,7 @@
 import importlib.util
 import json
+import io
+import hashlib
 from pathlib import Path
 import struct
 import tarfile
@@ -67,6 +69,24 @@ class WindowsRecipeTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'pinned GHC'):
                     windows.dependency_graph(args, environment, report, compiler)
                 self.assertEqual(run.call_count, 1)
+
+    def test_reviewed_source_cache_is_hash_checked_before_safe_extraction(self):
+        with tempfile.TemporaryDirectory() as folder:
+            work = Path(folder); cache = work / 'reviewed-source-cache'; cache.mkdir()
+            archive = cache / 'sources.tar.gz'
+            with tarfile.open(archive, 'w:gz') as bundle:
+                entry = tarfile.TarInfo('reviewed/file.cabal'); entry.size = 4
+                bundle.addfile(entry, io.BytesIO(b'good'))
+            item = {'filename': archive.name, 'url': 'https://example.invalid/pinned',
+                    'size': archive.stat().st_size, 'sha256': hashlib.sha256(archive.read_bytes()).hexdigest(),
+                    'root': 'reviewed'}
+            with mock.patch.object(windows, 'load_lock', return_value=({}, {'sourceCache': item})), mock.patch('builtins.print'):
+                result = windows.prepare_source_cache(work)
+            self.assertEqual((result / 'file.cabal').read_bytes(), b'good')
+            archive.write_bytes(b'bad archive')
+            with mock.patch.object(windows, 'load_lock', return_value=({}, {'sourceCache': item})), mock.patch.object(windows.base.sources.subprocess, 'run') as download, mock.patch.object(windows.base, 'extract') as extract:
+                with self.assertRaises(ValueError): windows.prepare_source_cache(work)
+                download.assert_called_once(); extract.assert_not_called()
 
     def test_regular_and_delayed_system_imports_are_allowed(self):
         with tempfile.TemporaryDirectory() as folder:

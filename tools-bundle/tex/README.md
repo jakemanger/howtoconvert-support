@@ -9,7 +9,7 @@ python3 restore-source.py sources svn78081 source-tree
 ```
 
 The smaller component archives reconstruct each complete upstream source tree,
-including bundled libraries, patches and build scripts. Every restored file is
+including the required libraries, patches and build scripts. Every restored file is
 checked against its recorded hash. For release downloads, extract
 `source-tex-2026.10-build-sources.tar.gz` beside the other source archives and run
 `restore-source.py` there. Both original filenames and the release's `source-`

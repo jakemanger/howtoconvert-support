@@ -228,10 +228,10 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
     '## Corresponding source',
     '',
     ...(Object.values(manifestTools).every(value => Object.values(value.platforms).every(item => item.correspondingSource)) ? [
-      'Download these matching source bundles, dependencies and build instructions',
+      'Download these matching source archives, dependencies and build instructions',
       'from this release without charge.',
     ] : [
-      'Local draft: matching source bundles are missing. Do not distribute.',
+      'Local draft: matching source archives are missing. Do not distribute.',
     ]),
     '',
     ...Object.entries(manifestTools).flatMap(([tool, value]) => Object.entries(value.platforms).map(([platform, item]) =>

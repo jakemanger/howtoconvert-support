@@ -1,2 +1,5 @@
 # Keep the reviewed source lock byte-identical on Windows.
 /tools-bundle/pandoc/sources.lock.json text eol=lf
+
+# Git applies this reviewed patch against byte-pinned upstream source.
+/tools-bundle/tex/windows/runscript-portable.patch text eol=lf

@@ -11,7 +11,7 @@ cd howtoconvert-support
 node tools-bundle/scripts/build-bundle.mjs --out dist --work .bundle-work
 ```
 
-To reproduce a published bundle, clone its `tools-YYYY.MM.N` tag instead.
+To reproduce a published release, clone its `tools-YYYY.MM.N` tag instead.
 The pinned versions and checksums are in [bundle.config.json](bundle.config.json).
 Source build instructions: [FFmpeg](ffmpeg/README.md),
 [ImageMagick](imagemagick/README.md), [Pandoc](pandoc/README.md),
@@ -59,7 +59,7 @@ signed manifest before release staging.
 ## Sources and licenses
 
 Retain upstream copyright, attribution and license notices, including those for
-bundled libraries and TeX packages. Include matching source, patches and build
+included libraries and TeX packages. Include matching source, patches and build
 instructions wherever the component’s license requires them. A project homepage
 or a different source version is insufficient.
 
@@ -80,6 +80,6 @@ node tools-bundle/scripts/stage-release.mjs dist release
 
 Staging verifies the signature and archive hashes, then copies only named release
 files into a new `release/` directory. Publish that directory under the configured
-bundle tag. The manual workflow does this and creates a draft tied to its build
+release tag. The manual workflow does this and creates a draft tied to its build
 commit. Keep existing release assets unchanged. Repacked archive timestamps may
 differ between builds; output hashes are recorded in `manifest.json`.

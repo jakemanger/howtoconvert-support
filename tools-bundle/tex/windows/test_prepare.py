@@ -57,6 +57,24 @@ class PreparationTests(unittest.TestCase):
             self.assertEqual(actual.read_bytes(), source)
             self.assertEqual(actual.relative_to(root / 'build').as_posix(), 'texk/texlive/windows_mingw_wrapper/runscript_dll.c')
 
+    def test_reviewed_patch_keeps_lf_and_exposes_bounded_apply_failures(self):
+        patchfile = prepare.HERE / 'runscript-portable.patch'
+        self.assertNotIn(b'\r\n', patchfile.read_bytes())
+        attributes = prepare.subprocess.check_output(['git', 'check-attr', 'eol', '--', str(patchfile)], cwd=prepare.HERE, text=True)
+        self.assertTrue(attributes.rstrip().endswith(': eol: lf'))
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary); root = work / 'runtime'; (root / 'bin').mkdir(parents=True)
+            (root / 'bin/runscript.dll').write_bytes(b'unchanged runtime')
+            companion = work / 'companion'; companion.mkdir()
+            def source(package, build):
+                path = build / 'source.c'; path.write_bytes(b'upstream source'); return path
+            error = prepare.subprocess.CalledProcessError(1, ['git', 'apply'], stderr='x' * 5000 + 'patch does not apply')
+            with patch.object(prepare, 'extract_wrapper_source', side_effect=source), patch.object(prepare.subprocess, 'run', side_effect=error):
+                with self.assertRaisesRegex(RuntimeError, 'patch does not apply') as caught:
+                    prepare.rebuild_wrapper(work / 'source', root, companion, work)
+            self.assertLess(len(str(caught.exception)), 4050)
+            self.assertEqual((root / 'bin/runscript.dll').read_bytes(), b'unchanged runtime')
+
     def test_rebuilt_wrapper_cannot_add_a_runtime_installer_dependency(self):
         self.assertEqual(prepare.rebuilt_wrapper_imports(executable('KERNEL32.dll')), ['kernel32.dll'])
         for name in ('vcruntime140.dll', 'libgcc_s_seh-1.dll', 'msys-2.0.dll'):

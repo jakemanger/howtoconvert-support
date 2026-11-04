@@ -399,7 +399,11 @@ def rebuild_wrapper(source_package, root, companion, work):
     original = source.read_bytes()
     patch = HERE / 'runscript-portable.patch'
     for arguments in (['--check'], []):
-        subprocess.run(['git', 'apply', *arguments, str(patch)], cwd=build, check=True, capture_output=True)
+        try:
+            subprocess.run(['git', 'apply', *arguments, str(patch)], cwd=build, check=True, capture_output=True, text=True)
+        except subprocess.CalledProcessError as error:
+            detail = (error.stderr or error.stdout or str(error))[-4000:]
+            raise RuntimeError('TeX wrapper patch failed: ' + detail) from error
     installed = Path('C:/mingw64/bin/gcc.exe')
     compiler = str(installed) if installed.is_file() else shutil.which('gcc')
     if not compiler:

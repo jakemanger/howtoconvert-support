@@ -25,6 +25,6 @@ python3 collect-sources.py --output /path/to/sources --archive /path/to/pandoc-s
 python3 collect-sources.py --output /path/to/sources --verify-only
 ```
 
-`sources.lock.json` pins archive hashes, exact Cabal revisions and toolchain versions. The source companion includes Pandoc, its dependencies and GHC's runtime sources, including bundled GMP and libffi sources and patches. Preserve the accompanying notices and provide this source companion alongside the resulting executable.
+`sources.lock.json` pins archive hashes, exact Cabal revisions and toolchain versions. The source companion includes Pandoc, its dependencies and GHC's runtime sources, including GMP and libffi sources and patches. Preserve the accompanying notices and provide this source companion alongside the resulting executable.
 
 Pandoc is GPL-2.0-or-later; this build selects GPL version 3. Dependencies retain their own licenses. The packaging scripts are MIT licensed.

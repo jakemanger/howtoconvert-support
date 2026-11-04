@@ -106,5 +106,12 @@
       "size": 1814016,
       "sha256": "73578f14d50f747efa82527a503f1ad542f9db170e2901eddb54d6bce93fc00e"
     }
+  },
+  "sourceCache": {
+    "filename": "source-pandoc-3.6.2-mac-sources.tar.gz",
+    "url": "https://downloads.howtoconvert.co/tools-inputs/tools-2026.10.0/40359988ddc6662ea8ec2ca37f3fb946a0e109fdd1f723bc0f5dd5e2ec748514",
+    "sha256": "40359988ddc6662ea8ec2ca37f3fb946a0e109fdd1f723bc0f5dd5e2ec748514",
+    "size": 68637598,
+    "root": "pandoc-3.6.2-sources"
   }
 }

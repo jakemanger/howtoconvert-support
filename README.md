@@ -21,7 +21,7 @@ Any purchase supports ongoing development and helps maintain the [free demo](htt
 
 If you want to contribute, raise an [issue](https://github.com/jakemanger/howtoconvert-support/issues/new/choose) or disclose a [vulnerability](https://github.com/jakemanger/howtoconvert-support/security).
 
-## Conversion tools bundle
+## Conversion tools
 
 Prebuilt command-line conversion tools for macOS, Windows and Linux, including Apple Silicon, save you from finding or compiling each tool yourself.
 
