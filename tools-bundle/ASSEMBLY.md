@@ -1,14 +1,14 @@
 # Build and release
 
-The scripts repackage checksum-pinned upstream binaries. Use Node.js 20+, tar,
-unzip, xz and 7-Zip. MSI extraction needs `msiexec` (Windows) or `msitools`;
-`.deb` extraction needs `dpkg-deb` or BSD tar. The working filesystem must support
-Unix permissions and symlinks.
+The scripts prepare checksum-pinned conversion tools and matching sources. Use
+Node.js 20+, tar, unzip, xz and 7-Zip. `.deb` extraction needs `dpkg-deb` or BSD tar.
+The working filesystem must support Unix permissions and symlinks.
 
 ```sh
 git clone --branch tools-bundle https://github.com/jakemanger/howtoconvert-support.git
 cd howtoconvert-support
-node tools-bundle/scripts/build-bundle.mjs --out dist --work .bundle-work
+node tools-bundle/scripts/build-bundle.mjs --out dist --work .bundle-work \
+  --platform mac_arm64,windows_x86_64
 ```
 
 To reproduce a published release, clone its `tools-YYYY.MM.N` tag instead.
@@ -23,8 +23,14 @@ Source build instructions: [FFmpeg](ffmpeg/README.md),
 | --- | --- |
 | ZIP, 7z or TinyTeX archive | Tool directory with its libraries and notices |
 | ImageMagick AppImage | Extracted files and a launcher that works without FUSE |
-| LibreOffice MSI or `.deb` | Extracted LibreOffice program tree |
+| Original Windows ImageMagick EXE or LibreOffice MSI | Direct download recorded in the signed manifest |
+| LibreOffice `.deb` | Extracted LibreOffice program tree |
 | LibreOffice DMG | Unchanged upstream disk image |
+
+Windows ImageMagick and LibreOffice use unchanged original installers. Their
+download URLs and checksums are signed in the manifest; the installers are not
+copied into the hosted release. Matching sources are separate release downloads
+listed in `SOURCES.md`.
 
 `--platform mac_arm64,windows_x86_64` selects platforms; `--only ffmpeg,pandoc` selects tools.
 `--reuse` checks existing archives and their notices. `--skip-sources` produces
@@ -40,7 +46,8 @@ companions before assembling the first release:
 ```sh
 node tools-bundle/scripts/input-cache.mjs stage \
   --url https://downloads.example.com/tool-inputs/ \
-  --input-dir build-output --out input-cache
+  --input-dir build-output --out input-cache \
+  --platform mac_arm64,windows_x86_64
 ```
 
 This verifies the configured hashes and source mappings, then writes only required
@@ -67,7 +74,8 @@ Each platform’s `sourceBundle` names one source entry or a list of smaller sou
 archives. Each must have `attach: true`, `sha256` and the binary’s upstream hash
 in `binaryArchives`; at least one must set `includesBuildInstructions: true`. Review the actual contents before recording this mapping.
 The scripts check mappings and integrity; they cannot establish legal compliance.
-`node tools-bundle/scripts/build-bundle.mjs --check` checks these mappings without downloads.
+`node tools-bundle/scripts/build-bundle.mjs --check --platform mac_arm64,windows_x86_64`
+checks these mappings without downloads.
 
 ## Release
 
@@ -75,7 +83,8 @@ Set `TOOLS_MANIFEST_SIGNING_KEY` and `TOOLS_MANIFEST_PUBLIC_KEY` securely, then:
 
 ```sh
 node tools-bundle/scripts/sign-manifest.mjs dist
-node tools-bundle/scripts/stage-release.mjs dist release
+node tools-bundle/scripts/stage-release.mjs dist release \
+  --vendor-dir .bundle-work/downloads
 ```
 
 Staging verifies the signature and archive hashes, then copies only named release
