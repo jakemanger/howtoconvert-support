@@ -1,6 +1,6 @@
 # Windows FFmpeg
 
-These conversion tool downloads save you from finding or compiling FFmpeg and its libraries yourself. It assembles pinned MSYS2 packages into a portable folder containing FFmpeg, ffprobe, their required libraries and licenses.
+These conversion tool downloads save you from finding or compiling FFmpeg and its libraries yourself. The preparation script assembles pinned MSYS2 packages into a portable folder containing FFmpeg, ffprobe, their required libraries and licenses.
 
 With Python 3.14 and Git on Windows:
 

@@ -174,3 +174,46 @@ export function hasReviewedSourceBundle(entry, config) {
       && config.sources[id].binaryArchives.includes(binaryHash))
     && ids.some(id => config.sources[id].includesBuildInstructions === true);
 }
+
+
+export function isVendorInstaller(format) {
+  return ['windows-inno', 'windows-msi-admin'].includes(format);
+}
+
+export function validateVendorAsset(tool, platform, item) {
+  const kind = platform === 'windows_x86_64' && (
+    tool === 'magick' && item.format === 'windows-inno' && item.asset?.endsWith('.exe') && item.bin === 'magick/magick.exe'
+    || tool === 'libreoffice' && item.format === 'windows-msi-admin' && item.asset?.endsWith('.msi') && item.bin === 'libreoffice/program/soffice.com');
+  let url;
+  try { url = new URL(item.downloadUrl); } catch { /* Rejected below. */ }
+  if (!kind || typeof item.version !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$/.test(item.version) || !isPlainAssetName(item.asset) || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,199}$/.test(item.asset)
+    || !url || url.protocol !== 'https:' || !url.hostname || url.username || url.password || url.hash
+    || item.sha256 !== item.upstreamSha256 || !/^[a-f0-9]{64}$/.test(item.sha256 || '')) {
+    throw new Error(`Invalid direct vendor installer: ${tool}/${platform}`);
+  }
+}
+
+export function vendorDelivery(tool, platform, entry, upstream) {
+  if (entry.package.delivery === undefined) return null;
+  if (entry.package.delivery !== 'direct' || entry.package.type !== 'as-is') throw new Error('Unsupported package delivery');
+  const asset = upstream.filename || decodeURIComponent(new URL(upstream.url).pathname.split('/').pop());
+  const delivery = { asset, version: entry.version, format: entry.package.format, downloadUrl: upstream.url, bin: entry.bin, sha256: upstream.sha256, upstreamSha256: upstream.sha256 };
+  validateVendorAsset(tool, platform, delivery);
+  return delivery;
+}
+
+export async function verifyReusableAsset(target, tool, entry, upstream, expectedNotice) {
+  if (entry.package.type === 'as-is') {
+    if (await sha256File(target) !== upstream.sha256) throw new Error(`Checksum mismatch for reused ${path.basename(target)}`);
+  } else {
+    verifyArchiveNotice(target, tool, expectedNotice);
+  }
+}
+
+// Link only immutable, verified release inputs when all directories share a filesystem.
+// The caller still verifies the resulting manifest and every staged source file.
+export async function copyReleaseFile(source, destination, link = false) {
+  if (!(await fs.lstat(source)).isFile()) throw new Error(`Not a regular file: ${source}`);
+  if (link) await fs.link(source, destination);
+  else await fs.copyFile(source, destination);
+}

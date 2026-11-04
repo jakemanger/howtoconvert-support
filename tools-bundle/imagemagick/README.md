@@ -1,5 +1,9 @@
 # Build ImageMagick
 
+For Windows, see [the original installer and source instructions](WINDOWS.md).
+
+## macOS
+
 Portable ImageMagick with LibRaw for camera RAW files. Ghostscript is excluded;
 applications must supply their own PDF renderer.
 

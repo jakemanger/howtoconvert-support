@@ -29,6 +29,7 @@ jobs:
     outputs:
       platforms: ${{ steps.selection.outputs.platforms }}
       windows: ${{ steps.selection.outputs.windows }}
+      portable_libreoffice: ${{ steps.libreoffice.outputs.portable }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -39,6 +40,10 @@ jobs:
         env:
           INPUT_PLATFORMS: ${{ inputs.platforms }}
         run: node tools-bundle/scripts/select-platforms.mjs
+      - name: Check whether LibreOffice needs packaging
+        id: libreoffice
+        run: |
+          node --input-type=module -e "import fs from 'node:fs'; const c=JSON.parse(fs.readFileSync('tools-bundle/bundle.config.json')); fs.appendFileSync(process.env.GITHUB_OUTPUT, 'portable='+(c.tools.libreoffice.platforms.windows_x86_64.package.delivery !== 'direct')+'\n');"
       - name: Test packaging and release checks
         run: node --test tools-bundle/scripts/*.test.mjs
       - name: Test TeX source reconstruction
@@ -50,7 +55,7 @@ jobs:
 
   windows-libreoffice:
     needs: validate
-    if: ${{ needs.validate.outputs.windows == 'true' }}
+    if: ${{ needs.validate.outputs.windows == 'true' && needs.validate.outputs.portable_libreoffice == 'true' }}
     # Extract with the Windows administrative installer.
     runs-on: windows-latest
     steps:
@@ -87,7 +92,7 @@ jobs:
       - name: Install archive tools
         run: sudo apt-get update && sudo apt-get install -y p7zip-full xz-utils
       - uses: actions/download-artifact@v4
-        if: ${{ needs.validate.outputs.windows == 'true' }}
+        if: ${{ needs.windows-libreoffice.result == 'success' }}
         with:
           name: windows-libreoffice
           path: dist
@@ -95,9 +100,9 @@ jobs:
         if: ${{ inputs.input_cache_url != '' }}
         env:
           INPUT_CACHE_URL: ${{ inputs.input_cache_url }}
-        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --platform "$TARGET_PLATFORMS" --all-sources
+        run: node tools-bundle/scripts/input-cache.mjs fetch --url "$INPUT_CACHE_URL" --platform "$TARGET_PLATFORMS"
       - name: Build packages, sources and manifest
-        run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse --platform "$TARGET_PLATFORMS"
+        run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse --link --platform "$TARGET_PLATFORMS"
       - name: Sign the manifest
         env:
           TOOLS_MANIFEST_SIGNING_KEY: ${{ secrets.TOOLS_MANIFEST_SIGNING_KEY }}
@@ -110,7 +115,7 @@ jobs:
       - name: Verify and stage release files
         env:
           TOOLS_MANIFEST_PUBLIC_KEY: ${{ vars.TOOLS_MANIFEST_PUBLIC_KEY }}
-        run: node tools-bundle/scripts/stage-release.mjs dist release
+        run: node tools-bundle/scripts/stage-release.mjs dist release --vendor-dir .bundle-work/downloads --link
       - uses: actions/upload-artifact@v4
         with:
           name: tools-bundle

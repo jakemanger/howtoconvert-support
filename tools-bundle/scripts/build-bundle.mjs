@@ -15,8 +15,8 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import {
   PLATFORMS, TOOL_IDS, assetName, commandExists, copyTree, createTarGz, exists,
-  fetchPinned, findContaining, run, sha256File, sourceAssetName, verifyArchiveNotice,
-  sourceBundleIds, sourceAttachments, hasReviewedSourceBundle, resolveSourceArchive,
+  fetchPinned, findContaining, run, sha256File, sourceAssetName,
+  sourceBundleIds, sourceAttachments, hasReviewedSourceBundle, resolveSourceArchive, vendorDelivery, verifyReusableAsset, copyReleaseFile,
 } from './lib.mjs';
 
 const bundleDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -32,6 +32,7 @@ function parseArguments(argv) {
     else if (arg === '--platform') options.platforms = next().split(',');
     else if (arg === '--source-dir') options.sourceDirectories.push(path.resolve(next()));
     else if (arg === '--reuse') options.reuse = true;
+    else if (arg === '--link') options.link = true;
     else if (arg === '--skip-sources') options.skipSources = true;
     else if (arg === '--check') options.check = true;
     else throw new Error(`Unknown argument ${arg}`);
@@ -212,7 +213,7 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
   ];
   for (const [tool, toolEntry] of Object.entries(manifestTools)) {
     for (const [platform, entry] of Object.entries(toolEntry.platforms)) {
-      lines.push(`| ${toolEntry.name} | ${platform} | ${entry.version} | ${toolEntry.license} | ${entry.origin} | ${entry.asset} | \`${entry.sha256}\` |`);
+      lines.push(`| ${toolEntry.name} | ${platform} | ${entry.version} | ${toolEntry.license} | ${entry.origin} | ${entry.downloadUrl ? `[${entry.asset}](${entry.downloadUrl})` : entry.asset} | \`${entry.sha256}\` |`);
     }
   }
   lines.push('', '## Source code', '');
@@ -220,7 +221,7 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
   for (const id of [...used].sort()) {
     const source = config.sources[id];
     const attachment = attached.get(id);
-    lines.push(`- **${source.title}**: ${source.url}${attachment ? ` · attached as \`${attachment}\` (SHA-256 \`${source.sha256}\`)` : ''}`);
+    lines.push(`- **${source.title}**: ${source.upstreamUrl || source.url}${attachment ? ` · attached as \`${attachment}\` (SHA-256 \`${source.sha256}\`)` : ''}`);
     if (source.notes) lines.push(`  - ${source.notes}`);
   }
   lines.push(
@@ -240,7 +241,7 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
     '## License texts',
     '',
     'Repacked archives include `HTC-LICENSES/` and retain upstream notices.',
-    'Unmodified LibreOffice disk images retain their own license files. See also:',
+    'Original vendor installers retain their own license files. See also:',
     `https://github.com/${config.repository}/tree/tools-bundle/tools-bundle/LICENSES.`,
     '',
   );
@@ -279,8 +280,10 @@ async function main() {
     for (const [platform, entry] of Object.entries(toolConfig.platforms)) {
       if (options.platforms && !options.platforms.includes(platform)) continue;
       const format = entry.package.type === 'as-is' ? entry.package.format : 'tar.gz';
-      const name = assetName(tool, entry.version, platform, format);
-      const target = path.join(out, name);
+      const upstream = config.upstream[entry.package.upstream];
+      const direct = vendorDelivery(tool, platform, entry, upstream);
+      const name = direct?.asset || assetName(tool, entry.version, platform, format);
+      let target = path.join(out, name);
       // Identical inputs (e.g. the universal macOS TinyTeX) share one asset.
       const key = `${tool}:${entry.package.upstream}:${JSON.stringify(entry.package)}:${entry.version}`;
       const sharedName = builtAssets.get(key);
@@ -289,16 +292,15 @@ async function main() {
         console.log(`${tool}/${platform}: shares ${sharedName}`);
         continue;
       }
-      if (options.reuse && await exists(target)) {
-        if (format === 'tar.gz') {
-          verifyArchiveNotice(target, tool, noticeText({ config, tool, toolConfig, platform, entry }));
-        } else if (await sha256File(target) !== config.upstream[entry.package.upstream].sha256) {
-          throw new Error(`Checksum mismatch for reused ${name}`);
-        }
+      if (direct) {
+        // Validate the original bytes in the private cache, never mirror them.
+        target = await fetchPinned(upstream, path.join(work, 'downloads'));
+      } else if (options.reuse && await exists(target)) {
+        await verifyReusableAsset(target, tool, entry, upstream, noticeText({ config, tool, toolConfig, platform, entry }));
         console.log(`${tool}/${platform}: reusing ${name}`);
       } else if (entry.package.type === 'as-is') {
         const downloaded = await fetchPinned(config.upstream[entry.package.upstream], path.join(work, 'downloads'));
-        await fs.copyFile(downloaded, target);
+        await copyReleaseFile(downloaded, target, options.link);
       } else {
         const staging = await stageContents({ tool, platform, entry, config, work });
         const licenseDirectory = path.join(staging, tool, 'HTC-LICENSES');
@@ -321,6 +323,7 @@ async function main() {
         format,
         bin: entry.bin,
         origin: entry.origin,
+        ...(direct ? { downloadUrl: direct.downloadUrl } : {}),
         sources: [...new Set([...(entry.sources || []), ...sourceBundleIds(entry)])],
         sourceBundle: entry.sourceBundle,
         ...(entry.minimumOS ? { minimumOS: entry.minimumOS } : {}),
@@ -351,7 +354,7 @@ async function main() {
       if (!source.attach) continue;
       const downloaded = await resolveSourceArchive(id, source, path.join(work, 'sources'), options.sourceDirectories);
       const name = sourceAssetName(id, source);
-      await fs.copyFile(downloaded, path.join(out, name));
+      await copyReleaseFile(downloaded, path.join(out, name), options.link);
       attached.set(id, name);
     }
   }
