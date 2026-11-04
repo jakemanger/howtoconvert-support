@@ -4,15 +4,20 @@ import argparse
 import concurrent.futures
 import gzip
 import hashlib
+import http.client
 import json
 import os
 import re
 import shutil
+import ssl
 import struct
 import subprocess
 import tarfile
 import tempfile
+import time
+import urllib.error
 import urllib.request
+import urllib.parse
 from pathlib import Path, PurePosixPath
 
 HERE = Path(__file__).resolve().parent
@@ -43,30 +48,58 @@ def relative(name):
     return path
 
 
-def fetch(item, cache):
+def input_cache_base(value):
+    parsed = urllib.parse.urlsplit(value)
+    if parsed.scheme != 'https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
+        raise ValueError('Input cache requires an HTTPS base URL without credentials, query or fragment')
+    return value.rstrip('/') + '/'
+
+
+def transient_download_error(error):
+    if isinstance(error, urllib.error.HTTPError):
+        return error.code in (408, 429) or 500 <= error.code <= 599
+    if isinstance(error, urllib.error.URLError):
+        error = error.reason
+    return isinstance(error, (TimeoutError, ConnectionError, http.client.IncompleteRead, ssl.SSLEOFError))
+
+
+def fetch(item, cache, input_cache_url=None):
     name = item['filename']
     if str(relative(name)) != name or '/' in name:
         raise ValueError('Expected a basename')
     path = cache / name
     if not path.exists():
         cache.mkdir(parents=True, exist_ok=True)
-        if not item['url'].startswith('https://'):
+        url = input_cache_base(input_cache_url) + item['sha256'] if input_cache_url else item['url']
+        if not url.startswith('https://'):
             raise ValueError('Downloads require HTTPS')
-        with tempfile.TemporaryDirectory(dir=cache) as temporary:
-            part = Path(temporary) / name
-            with urllib.request.urlopen(item['url'], timeout=90) as response, part.open('xb') as output:
-                shutil.copyfileobj(response, output)
-            verify_file(part, item)
-            part.rename(path)
+        for attempt in range(3):
+            with tempfile.TemporaryDirectory(dir=cache) as temporary:
+                part = Path(temporary) / name
+                request = urllib.request.Request(url, headers={'User-Agent': 'HowToConvert-Tools/1.0'})
+                try:
+                    with urllib.request.urlopen(request, timeout=90) as response, part.open('xb') as output:
+                        shutil.copyfileobj(response, output)
+                except (urllib.error.URLError, TimeoutError, ConnectionError, http.client.IncompleteRead, ssl.SSLEOFError) as error:
+                    if isinstance(error, urllib.error.HTTPError):
+                        error.close()
+                    if not transient_download_error(error) or attempt == 2:
+                        raise
+                else:
+                    # Integrity and local file errors never enter the retry path.
+                    verify_file(part, item)
+                    part.rename(path)
+                    break
+            time.sleep(attempt + 1)
     verify_file(path, item)
     return path
 
 
-def fetch_all(items, cache):
+def fetch_all(items, cache, input_cache_url=None):
     if len({item['filename'] for item in items}) != len(items):
         raise ValueError('Duplicate pinned filenames')
     with concurrent.futures.ThreadPoolExecutor(4) as pool:
-        paths = list(pool.map(lambda item: fetch(item, cache), items))
+        paths = list(pool.map(lambda item: fetch(item, cache, input_cache_url), items))
     return {item['filename']: path for item, path in zip(items, paths)}
 
 
@@ -391,6 +424,7 @@ def native_verify(root, work):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work', type=Path, required=True)
+    parser.add_argument('--input-cache-url', type=input_cache_base, help='HTTPS base URL for checksum-addressed TeX package/font sources')
     args = parser.parse_args()
     work = args.work.resolve(); work.mkdir(parents=True, exist_ok=True)
     report = {'status': 'failed', 'platform': 'windows', 'checks': []}
@@ -424,7 +458,7 @@ def main():
         report['checks'].append({'name': 'standalone-license-notices', 'passed': True, 'sourceNotices': len(notices)})
         for name, source in sources.items():
             shutil.copyfile(source, companion / name)
-        for name, source in fetch_all(lock['texSources'], cache).items():
+        for name, source in fetch_all(lock['texSources'], cache, args.input_cache_url).items():
             shutil.copyfile(source, companion / name)
         build_info = companion / 'build-info'; build_info.mkdir()
         for item in packages:

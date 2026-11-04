@@ -2,6 +2,7 @@
 """Verify a standalone FFmpeg/ffprobe payload with software conversion fixtures."""
 import argparse
 import json
+import ntpath
 import os
 from pathlib import Path
 import subprocess
@@ -16,14 +17,21 @@ def run(command, *, environment, timeout=120):
     return result.stdout
 
 
+def verification_environment(source, *, windows=False):
+    environment = dict(source)
+    if windows:
+        # Windows environment names are case-insensitive; plain dictionaries are not.
+        environment = {key.upper(): value for key, value in environment.items()}
+        system = environment['SYSTEMROOT']
+        environment['PATH'] = ';'.join([ntpath.join(system, 'System32'), system])
+    return environment
+
+
 def verify(ffmpeg, ffprobe, report, expected_version='8.1.1'):
     ffmpeg, ffprobe = Path(ffmpeg).resolve(strict=True), Path(ffprobe).resolve(strict=True)
     if ffmpeg.parent != ffprobe.parent:
         raise RuntimeError('FFmpeg and ffprobe must come from the same candidate directory')
-    environment = dict(os.environ)
-    if os.name == 'nt':
-        system = Path(environment['SystemRoot'])
-        environment['PATH'] = os.pathsep.join([str(system / 'System32'), str(system)])
+    environment = verification_environment(os.environ, windows=os.name == 'nt')
     version = run([str(ffmpeg), '-version'], environment=environment)
     if not version.startswith(f'ffmpeg version {expected_version}'):
         raise RuntimeError('Unexpected FFmpeg version')

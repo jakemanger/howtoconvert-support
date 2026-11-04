@@ -9,6 +9,8 @@ import unittest
 HERE = Path(__file__).resolve().parent
 spec = importlib.util.spec_from_file_location('prepare', HERE / 'prepare.py')
 prepare = importlib.util.module_from_spec(spec); spec.loader.exec_module(prepare)
+verify_spec = importlib.util.spec_from_file_location('verify', HERE / 'verify.py')
+verify = importlib.util.module_from_spec(verify_spec); verify_spec.loader.exec_module(verify)
 
 
 def executable(normal=None, delayed=None):
@@ -36,6 +38,17 @@ def archive(file, contents):
 
 
 class PreparationTests(unittest.TestCase):
+    def test_windows_environment_names_preserve_standalone_path_check(self):
+        for key in ['SYSTEMROOT', 'SystemRoot', 'systemroot']:
+            source = {key: r'C:\Windows', 'Path': r'C:\unrelated-tools', 'TEMP': r'C:\Temp',
+                      'Pathext': '.COM;.EXE;.BAT;.CMD'}
+            environment = verify.verification_environment(source, windows=True)
+            self.assertEqual(environment['PATH'], r'C:\Windows\System32;C:\Windows')
+            self.assertEqual(environment['TEMP'], r'C:\Temp')
+            self.assertEqual(environment['PATHEXT'], '.COM;.EXE;.BAT;.CMD')
+            self.assertNotIn('Path', environment)
+            self.assertEqual(source['Path'], r'C:\unrelated-tools')
+
     def test_imports_include_delayed_libraries(self):
         self.assertEqual(prepare.pe_imports(executable('KERNEL32.dll', 'codec.dll')), ['codec.dll', 'kernel32.dll'])
 

@@ -6,7 +6,7 @@ import tarfile
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import call, patch
 
 spec = importlib.util.spec_from_file_location('tex_prepare', Path(__file__).with_name('prepare.py'))
 prepare = importlib.util.module_from_spec(spec)
@@ -42,6 +42,105 @@ def archive(path, files):
 
 
 class PreparationTests(unittest.TestCase):
+    def test_source_cache_preserves_pins_and_rejects_changed_or_html_responses(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); data = b'pinned source archive'
+            item = {'filename': 'source.tar.xz', 'size': len(data), 'sha256': hashlib.sha256(data).hexdigest(),
+                    'url': 'https://upstream.example/source.tar.xz'}
+            base = 'https://cache.example/sources/'
+            with patch.object(prepare.urllib.request, 'urlopen', return_value=io.BytesIO(data)) as request:
+                result = prepare.fetch(item, root / 'good', base)
+                self.assertEqual(result.read_bytes(), data)
+                request.assert_called_once()
+                sent = request.call_args.args[0]
+                self.assertEqual(sent.full_url, base + item['sha256'])
+                self.assertEqual(sent.get_header('User-agent'), 'HowToConvert-Tools/1.0')
+                self.assertEqual(request.call_args.kwargs, {'timeout': 90})
+            with patch.object(prepare.urllib.request, 'urlopen', return_value=io.BytesIO(data)) as request:
+                self.assertEqual(prepare.fetch(item, root / 'upstream').read_bytes(), data)
+                self.assertEqual(request.call_args.args[0].full_url, item['url'])
+                self.assertEqual(request.call_args.args[0].get_header('User-agent'), 'HowToConvert-Tools/1.0')
+            with patch.object(prepare.urllib.request, 'urlopen', return_value=io.BytesIO(b'<html>Access challenge</html>')):
+                with self.assertRaisesRegex(ValueError, 'Checksum or size mismatch'):
+                    prepare.fetch(item, root / 'bad', base)
+            self.assertFalse((root / 'bad' / item['filename']).exists())
+            for value in ('http://cache.example/', 'https://user:pass@cache.example/',
+                          'https://cache.example/?token=secret', 'https://cache.example/#part', 'file:///tmp/'):
+                with self.assertRaisesRegex(ValueError, 'HTTPS base URL'):
+                    prepare.input_cache_base(value)
+
+    def test_transient_download_retries_clean_partial_files_before_backoff(self):
+        class InterruptedResponse(io.BytesIO):
+            def read(self, size=-1):
+                if self.tell():
+                    raise TimeoutError('read timed out')
+                return super().read(size)
+        with tempfile.TemporaryDirectory() as temporary:
+            cache = Path(temporary); data = b'verified source'
+            item = {'filename': 'source.tar.xz', 'url': 'https://example.test/source',
+                    'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+            busy = prepare.urllib.error.HTTPError(item['url'], 503, 'temporarily unavailable', {}, None)
+            responses = [InterruptedResponse(b'partial download'), busy, io.BytesIO(data)]
+            def backoff(seconds):
+                self.assertEqual(list(cache.iterdir()), [], 'partial input must be removed before retrying')
+            with patch.object(prepare.urllib.request, 'urlopen', side_effect=responses) as request, \
+                    patch.object(prepare.time, 'sleep', side_effect=backoff) as sleep:
+                self.assertEqual(prepare.fetch(item, cache).read_bytes(), data)
+                self.assertEqual(request.call_count, 3)
+                self.assertEqual(sleep.call_args_list, [call(1), call(2)])
+            self.assertEqual([p.name for p in cache.iterdir()], ['source.tar.xz'])
+
+    def test_download_retry_limit_is_three_attempts(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            cache = Path(temporary)
+            item = {'filename': 'source.tar.xz', 'url': 'https://example.test/source', 'size': 1, 'sha256': '0' * 64}
+            with patch.object(prepare.urllib.request, 'urlopen', side_effect=prepare.urllib.error.URLError(TimeoutError('timeout'))) as request, \
+                    patch.object(prepare.time, 'sleep') as sleep:
+                with self.assertRaises(prepare.urllib.error.URLError):
+                    prepare.fetch(item, cache)
+                self.assertEqual(request.call_count, 3)
+                self.assertEqual(sleep.call_args_list, [call(1), call(2)])
+            self.assertEqual(list(cache.iterdir()), [])
+
+    def test_only_transient_http_and_connection_errors_retry(self):
+        for status in (408, 429, 500, 502, 503, 599):
+            with prepare.urllib.error.HTTPError('https://example.test', status, 'error', {}, None) as error:
+                self.assertTrue(prepare.transient_download_error(error))
+        for status in (400, 401, 403, 404, 410, 600):
+            with prepare.urllib.error.HTTPError('https://example.test', status, 'error', {}, None) as error:
+                self.assertFalse(prepare.transient_download_error(error))
+        for error in (TimeoutError(), ConnectionResetError(), prepare.http.client.IncompleteRead(b'partial'), prepare.ssl.SSLEOFError()):
+            self.assertTrue(prepare.transient_download_error(error))
+            self.assertTrue(prepare.transient_download_error(prepare.urllib.error.URLError(error)))
+        for error in (ValueError('invalid URL'), PermissionError('file write'), prepare.ssl.SSLCertVerificationError('certificate')):
+            self.assertFalse(prepare.transient_download_error(error))
+            self.assertFalse(prepare.transient_download_error(prepare.urllib.error.URLError(error)))
+
+    def test_checksum_size_url_and_permanent_http_failures_never_retry(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); data = b'correct'
+            item = {'filename': 'source.tar.xz', 'url': 'https://example.test/source',
+                    'size': len(data), 'sha256': hashlib.sha256(data).hexdigest()}
+            for index, response in enumerate((b'changed', b'short', b'<html>Access denied</html>')):
+                cache = root / str(index)
+                with patch.object(prepare.urllib.request, 'urlopen', return_value=io.BytesIO(response)) as request, \
+                        patch.object(prepare.time, 'sleep') as sleep:
+                    with self.assertRaisesRegex(ValueError, 'Checksum or size mismatch'):
+                        prepare.fetch(item, cache)
+                    request.assert_called_once(); sleep.assert_not_called()
+                self.assertEqual(list(cache.iterdir()), [])
+            for index, error in enumerate((prepare.urllib.error.HTTPError(item['url'], 403, 'forbidden', {}, None),
+                                           prepare.urllib.error.URLError(ValueError('invalid URL')),
+                                           prepare.urllib.error.URLError(prepare.ssl.SSLCertVerificationError('certificate')))):
+                with patch.object(prepare.urllib.request, 'urlopen', side_effect=error) as request, patch.object(prepare.time, 'sleep') as sleep:
+                    with self.assertRaises(prepare.urllib.error.URLError):
+                        prepare.fetch(item, root / ('error-' + str(index)))
+                    request.assert_called_once(); sleep.assert_not_called()
+            with patch.object(prepare.urllib.request, 'urlopen') as request, patch.object(prepare.time, 'sleep') as sleep:
+                with self.assertRaises(ValueError):
+                    prepare.fetch(item, root / 'invalid-url', 'http://invalid.example/')
+                request.assert_not_called(); sleep.assert_not_called()
+
     def test_imports_include_delayed_libraries(self):
         self.assertEqual(prepare.pe_imports(executable('KERNEL32.dll', 'library.dll')), ['kernel32.dll', 'library.dll'])
 
