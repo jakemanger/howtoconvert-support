@@ -3818,7 +3818,8 @@
         "5ef9d90cd03b950f42f836d158ee67162ba51a686a759856207034d2c634b456"
       ],
       "includesBuildInstructions": true,
-      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-25.2.7.2.tar.xz"
+      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-25.2.7.2.tar.xz",
+      "filename": "libreoffice-25.2.7.2.tar.xz"
     },
     "libreoffice-26.2.6": {
       "title": "LibreOffice 26.2.6.3 core source code",
@@ -3840,7 +3841,8 @@
       "binaryArchives": [
         "5ef9d90cd03b950f42f836d158ee67162ba51a686a759856207034d2c634b456"
       ],
-      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-dictionaries-25.2.7.2.tar.xz"
+      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-dictionaries-25.2.7.2.tar.xz",
+      "filename": "libreoffice-dictionaries-25.2.7.2.tar.xz"
     },
     "libreoffice-dictionaries-26.2.6": {
       "title": "LibreOffice 26.2.6.3 dictionaries sources",
@@ -6134,7 +6136,8 @@
       "binaryArchives": [
         "5ef9d90cd03b950f42f836d158ee67162ba51a686a759856207034d2c634b456"
       ],
-      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-help-25.2.7.2.tar.xz"
+      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-help-25.2.7.2.tar.xz",
+      "filename": "libreoffice-help-25.2.7.2.tar.xz"
     },
     "libreoffice-help-26.2.6": {
       "title": "LibreOffice 26.2.6.3 help sources",
@@ -6155,7 +6158,8 @@
       "binaryArchives": [
         "5ef9d90cd03b950f42f836d158ee67162ba51a686a759856207034d2c634b456"
       ],
-      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-translations-25.2.7.2.tar.xz"
+      "upstreamUrl": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-translations-25.2.7.2.tar.xz",
+      "filename": "libreoffice-translations-25.2.7.2.tar.xz"
     },
     "libreoffice-translations-26.2.6": {
       "title": "LibreOffice 26.2.6.3 translations sources",
