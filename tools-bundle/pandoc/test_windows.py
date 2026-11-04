@@ -34,23 +34,39 @@ def pe_fixture(dll=b'kernel32.dll', delayed=False):
 
 
 class WindowsRecipeTests(unittest.TestCase):
-    def test_toolchain_setup_finishes_before_capturing_dependency_json(self):
+    def test_native_first_install_output_does_not_enter_dependency_json(self):
+        fixture = json.loads((ROOT / 'windows-dependencies.fixture.json').read_text())
+        common, _ = windows.load_lock()
+        windows.base.verify_coverage(common, fixture['graph'])
+        self.assertEqual(len(fixture['graph']), 255)
+        with self.assertRaises(json.JSONDecodeError):
+            json.loads(fixture['preamble'] + json.dumps(fixture['graph']))
         with tempfile.TemporaryDirectory() as folder:
-            report = Path(folder) / 'dependencies.json'
+            root = Path(folder)
+            compiler = root / 'pinned compiler.exe'; compiler.touch()
+            report = root / 'dependencies.json'
             args = ['stack.exe', '--system-ghc', '--no-install-ghc']
             environment = {'STACK_ROOT': folder}
-            graph = [{'name': 'pandoc-cli', 'version': '3.6.2'}]
+            calls = []
             def capture(command, **kwargs):
-                setup.assert_called_once_with(args + ['setup'], env=environment)
-                self.assertEqual(command[-4:], ['ls', 'dependencies', 'json', 'pandoc-cli'])
-                return json.dumps(graph)
-            with mock.patch.object(windows.base, 'run') as setup, mock.patch.object(windows.subprocess, 'check_output', side_effect=capture):
-                self.assertEqual(windows.dependency_graph(args, environment, report), graph)
-            self.assertEqual(json.loads(report.read_text()), graph)
-            with mock.patch.object(windows.base, 'run'), mock.patch.object(windows.subprocess, 'check_output', return_value='0\n[]'):
+                calls.append(command)
+                if len(calls) == 1:
+                    self.assertEqual(command, args + ['path', '--compiler-exe'])
+                    return fixture['preamble'] + str(compiler) + '\r\n'
+                self.assertEqual(command, args + ['ls', 'dependencies', 'json', 'pandoc-cli'])
+                return json.dumps(fixture['graph'])
+            with mock.patch.object(windows.subprocess, 'check_output', side_effect=capture), mock.patch('builtins.print'):
+                self.assertEqual(windows.dependency_graph(args, environment, report, compiler), fixture['graph'])
+            self.assertEqual(json.loads(report.read_text()), fixture['graph'])
+            with mock.patch.object(windows.subprocess, 'check_output', side_effect=[str(compiler), fixture['preamble'] + '[]']), mock.patch('builtins.print'):
                 with self.assertRaises(json.JSONDecodeError):
-                    windows.dependency_graph(args, environment, report)
-            self.assertEqual(report.read_text(), '0\n[]')
+                    windows.dependency_graph(args, environment, report, compiler)
+            self.assertEqual(report.read_text(), fixture['preamble'] + '[]')
+            other = root / 'unreviewed compiler.exe'; other.touch()
+            with mock.patch.object(windows.subprocess, 'check_output', return_value=str(other)) as run, mock.patch('builtins.print'):
+                with self.assertRaisesRegex(ValueError, 'pinned GHC'):
+                    windows.dependency_graph(args, environment, report, compiler)
+                self.assertEqual(run.call_count, 1)
 
     def test_regular_and_delayed_system_imports_are_allowed(self):
         with tempfile.TemporaryDirectory() as folder:

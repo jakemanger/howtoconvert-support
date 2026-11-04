@@ -22,7 +22,8 @@ spec.loader.exec_module(base)
 RECIPE_FILES = ('windows.py', 'windows.lock.json', 'WINDOWS.md', 'test_windows.py',
                 'sources.lock.json', 'stack.yaml', 'stack.yaml.lock', 'build.py',
                 'collect-sources.py', 'test_conversions.py', 'test_recipe.py',
-                'README.md', 'LICENSE', 'NOTICE.md', 'WINDOWS-NOTICE.md', 'GPL-3.0.txt', 'GFDL-1.3.txt')
+                'README.md', 'LICENSE', 'NOTICE.md', 'WINDOWS-NOTICE.md', 'GPL-3.0.txt', 'GFDL-1.3.txt',
+                'windows-dependencies.fixture.json')
 SYSTEM_DLLS = set('advapi32.dll bcrypt.dll crypt32.dll dnsapi.dll gdi32.dll '
                   'iphlpapi.dll kernel32.dll msvcrt.dll ntdll.dll ole32.dll oleaut32.dll '
                   'rpcrt4.dll secur32.dll shell32.dll shlwapi.dll user32.dll userenv.dll '
@@ -175,9 +176,15 @@ def setup_info(toolchain):
             'msys2': {'windows64': {'version': toolchain['msys2']['version'], **entry(toolchain['msys2'])}}}
 
 
-def dependency_graph(args, env, report):
-    # MSYS2's first-login setup writes to stdout; finish it before capturing JSON.
-    base.run(args + ['setup'], env=env)
+def dependency_graph(args, env, report, expected_compiler):
+    # Unlike `setup --no-install-ghc`, `path --compiler-exe` initializes MSYS2.
+    # Its final line is the compiler path; any first-install chatter stays in the log.
+    setup = subprocess.check_output([str(x) for x in args + ['path', '--compiler-exe']],
+                                    env=env, text=True)
+    print(setup, end='' if setup.endswith('\n') else '\n', flush=True)
+    lines = setup.strip().splitlines()
+    if not lines or not Path(lines[-1]).samefile(expected_compiler):
+        raise ValueError('Stack did not select the pinned GHC executable')
     text = subprocess.check_output([str(x) for x in args + ['ls', 'dependencies', 'json', 'pandoc-cli']],
                                    env=env, text=True)
     report.write_text(text, encoding='utf-8')
@@ -211,7 +218,7 @@ def build(work, jobs, cache):
             '--install-msys', '--setup-info-yaml', setup, '--lock-file', 'error-on-write', '--jobs', jobs]
     output = work / 'output'
     output.mkdir(exist_ok=True)
-    graph = dependency_graph(args, env, output / 'dependencies.json')
+    graph = dependency_graph(args, env, output / 'dependencies.json', ghc / 'bin/ghc.exe')
     base.verify_coverage(common, graph)
     base.run(args + ['build', 'pandoc-cli:exe:pandoc', '--no-haddock', '--no-test', '--no-bench'], env=env)
     base.run(args + ['--local-bin-path', output, 'install', 'pandoc-cli:exe:pandoc'], env=env)

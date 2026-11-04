@@ -4,11 +4,16 @@ Prepare a portable TeX runtime with pinned packages and fonts. The native
 programs come from MSYS2; their matching source archives include the build
 recipes and patches.
 
-Requires Windows 10 or later, Python 3.14 and 7-Zip:
+Requires Windows 10 or later, Python 3.14, 7-Zip, Git and GCC 14.2.0
+(MinGW-w64 12, x64 UCRT). The Windows CI runner already includes this compiler:
 
 ```powershell
 python prepare.py --work C:\tex-tools
 ```
+
+Only the small script-launcher DLL is rebuilt to handle paths containing spaces.
+Its original source, patch, build command and compiler details accompany the output;
+the TeX engines remain unchanged. No extra runtime installer is required.
 
 The script checks every input, keeps the required native libraries, regenerates
 TeX formats and tests PDF creation, fonts, EPS conversion and installation paths

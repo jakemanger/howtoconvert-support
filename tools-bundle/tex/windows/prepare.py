@@ -363,11 +363,85 @@ def configure(root):
     fmt.write_text('# Modified 2026-11-04: use the portable Windows bin directory and PATH separator.\n' + text)
 
 
+WRAPPER_SOURCE = 'texlive-20260301-source/texk/texlive/windows_mingw_wrapper/runscript_dll.c'
+WRAPPER_SOURCE_SHA = '7302d425b2bcd78a88c845bb06e95e65053becbf17f5b515214afe64092aa8bb'
+
+
+def extract_wrapper_source(source_package, build):
+    with tarfile.open(source_package, 'r:*') as package:
+        archives = [item for item in package if item.name.endswith('/texlive-20260301-source.tar.xz')]
+        if len(archives) != 1:
+            raise ValueError('Expected the pinned TeX source archive')
+        with tarfile.open(fileobj=package.extractfile(archives[0]), mode='r|*') as upstream:
+            for item in upstream:
+                if item.name == WRAPPER_SOURCE:
+                    data = upstream.extractfile(item).read()
+                    if hashlib.sha256(data).hexdigest() != WRAPPER_SOURCE_SHA:
+                        raise ValueError('TeX wrapper source changed')
+                    path = build / 'texk/texlive/windows_mingw_wrapper/runscript_dll.c'
+                    path.parent.mkdir(parents=True)
+                    path.write_bytes(data)
+                    return path
+    raise ValueError('Pinned TeX wrapper source missing')
+
+
+def rebuilt_wrapper_imports(data):
+    imports = pe_imports(data)
+    missing = [name for name in imports if not is_system_dll(name)]
+    if missing:
+        raise ValueError('Rebuilt TeX wrapper adds runtime dependencies: ' + ', '.join(missing))
+    return imports
+
+
+def rebuild_wrapper(source_package, root, companion, work):
+    build = work / 'wrapper-build'; build.mkdir()
+    source = extract_wrapper_source(source_package, build)
+    original = source.read_bytes()
+    patch = HERE / 'runscript-portable.patch'
+    for arguments in (['--check'], []):
+        subprocess.run(['git', 'apply', *arguments, str(patch)], cwd=build, check=True, capture_output=True)
+    installed = Path('C:/mingw64/bin/gcc.exe')
+    compiler = str(installed) if installed.is_file() else shutil.which('gcc')
+    if not compiler:
+        raise ValueError('GCC 14.2.0 (MinGW-w64 x64) is required to build the script wrapper')
+    def query(*arguments, input=None):
+        return subprocess.run([compiler, *arguments], input=input, check=True, capture_output=True, text=True).stdout.strip()
+    version = query('-dumpfullversion')
+    target = query('-dumpmachine')
+    macros = query('-dM', '-E', '-include', '_mingw_mac.h', '-', input='')
+    if version != '14.2.0' or target != 'x86_64-w64-mingw32':
+        raise ValueError(f'Unexpected wrapper compiler: {target} GCC {version}')
+    if not re.search(r'^#define __MINGW64_VERSION_MAJOR 12$', macros, re.M):
+        raise ValueError('Expected MinGW-w64 12 headers for the reviewed wrapper build')
+    output = build / 'runscript.dll'
+    arguments = [compiler, '-std=gnu11', '-O2', '-Werror=implicit-function-declaration', '-shared',
+                 '-Wl,--no-insert-timestamp', '-o', str(output), str(source), '-luser32']
+    result = subprocess.run(arguments, cwd=build, capture_output=True, text=True, check=True)
+    imports = rebuilt_wrapper_imports(output.read_bytes())
+    provenance = companion / 'wrapper-build'; provenance.mkdir()
+    (provenance / 'upstream-runscript_dll.c').write_bytes(original)
+    shutil.copyfile(source, provenance / 'runscript_dll.c')
+    shutil.copyfile(patch, provenance / patch.name)
+    notices = HERE / 'wrapper-licenses'
+    shutil.copytree(notices, provenance / 'licenses')
+    shutil.copytree(notices, companion / 'wrapper-licenses')
+    shutil.copytree(notices, root / 'share/licenses/runscript-portable')
+    (root / 'share/licenses/runscript-portable/TeX-wrapper.txt').write_bytes(original.split(b'#include', 1)[0])
+    record = {'sourceSha256': WRAPPER_SOURCE_SHA, 'patchedSourceSha256': digest(source),
+              'originalDllSha256': digest(root / 'bin/runscript.dll'), 'dllSha256': digest(output),
+              'compilerVersion': version, 'compilerTarget': target, 'compilerSha256': digest(Path(compiler)),
+              'compilerBanner': query('--version'), 'command': arguments, 'imports': imports,
+              'buildOutput': (result.stdout + result.stderr)[-5000:]}
+    (provenance / 'build.json').write_text(json.dumps(record, indent=2) + '\n')
+    shutil.copyfile(output, root / 'bin/runscript.dll')
+    return {'name': 'quoted-script-wrapper', 'passed': True, 'dllSha256': record['dllSha256'], 'imports': imports}
+
+
 def command(args, cwd, env, logs, name):
     result = subprocess.run([str(x) for x in args], cwd=cwd, env=env, capture_output=True, text=True, errors='replace', timeout=180)
     (logs / (name + '.log')).write_text(result.stdout + result.stderr)
     if result.returncode:
-        raise RuntimeError(f'{name} failed; see its log')
+        raise RuntimeError(f'{name} failed: {(result.stdout + result.stderr)[-4000:]}')
     return result.stdout
 
 
@@ -454,6 +528,7 @@ def main():
         companion = work / 'source-companion'; companion.mkdir()
         sources = fetch_all(lock['sources'], cache)
         verify_source_pairs(packages, sources)
+        report['checks'].append(rebuild_wrapper(sources['mingw-w64-texlive-bin-2026.20260301-1.src.tar.zst'], root, companion, work))
         notices = collect_notices(packages, sources, root, closure)
         report['checks'].append({'name': 'standalone-license-notices', 'passed': True, 'sourceNotices': len(notices)})
         for name, source in sources.items():
@@ -469,7 +544,7 @@ def main():
         with tarfile.open(companion / 'tex-package-runtime-sources.tar.gz', 'w:gz') as source_archive:
             for name in ('texmf-dist', 'texmf-local', 'texmf-config', 'tlpkg/TeXLive', 'bin/runscript.tlu', 'bin/texmf.cnf', 'etc/fonts/fonts.conf', 'etc/fonts/local.conf'):
                 source_archive.add(root / name, arcname=name)
-        for name in ('prepare.py', 'runtime.lock.json', 'README.md'):
+        for name in ('prepare.py', 'runtime.lock.json', 'README.md', 'runscript-portable.patch'):
             shutil.copyfile(HERE / name, companion / name)
         (root / 'SOURCE.txt').write_text('Matching source archives and build recipes accompany this tools release:\nhttps://github.com/jakemanger/howtoconvert-support/releases/tag/tools-2026.10.0\n\nOriginal component notices and license texts are in share/licenses; source-index.json identifies texts preserved from the matching sources.\n')
         report['checks'].append({'name': 'pinned-source-and-native-closure', 'passed': True, 'packages': len(closure['packages'])})

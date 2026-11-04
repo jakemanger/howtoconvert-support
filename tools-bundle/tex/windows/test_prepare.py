@@ -42,6 +42,75 @@ def archive(path, files):
 
 
 class PreparationTests(unittest.TestCase):
+    def test_wrapper_source_requires_exact_pinned_file(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); package = root / 'source.tar.gz'; source = b'original public-domain wrapper'
+            nested = io.BytesIO()
+            with tarfile.open(fileobj=nested, mode='w:xz') as target:
+                item = tarfile.TarInfo(prepare.WRAPPER_SOURCE); item.size = len(source)
+                target.addfile(item, io.BytesIO(source))
+            archive(package, {'texlive/texlive-20260301-source.tar.xz': nested.getvalue()})
+            with self.assertRaisesRegex(ValueError, 'wrapper source changed'):
+                prepare.extract_wrapper_source(package, root / 'bad')
+            with patch.object(prepare, 'WRAPPER_SOURCE_SHA', hashlib.sha256(source).hexdigest()):
+                actual = prepare.extract_wrapper_source(package, root / 'build')
+            self.assertEqual(actual.read_bytes(), source)
+            self.assertEqual(actual.relative_to(root / 'build').as_posix(), 'texk/texlive/windows_mingw_wrapper/runscript_dll.c')
+
+    def test_rebuilt_wrapper_cannot_add_a_runtime_installer_dependency(self):
+        self.assertEqual(prepare.rebuilt_wrapper_imports(executable('KERNEL32.dll')), ['kernel32.dll'])
+        for name in ('vcruntime140.dll', 'libgcc_s_seh-1.dll', 'msys-2.0.dll'):
+            with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'adds runtime dependencies'):
+                prepare.rebuilt_wrapper_imports(executable(delayed=name))
+
+    def test_rebuild_preserves_engines_and_records_exact_source_patch_and_command(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary); root = work / 'runtime'; (root / 'bin').mkdir(parents=True)
+            companion = work / 'companion'; companion.mkdir()
+            (root / 'bin/runscript.dll').write_bytes(b'original wrapper')
+            (root / 'bin/pdflatex.exe').write_bytes(b'unchanged TeX engine')
+            compiler = work / 'gcc.exe'; compiler.write_bytes(b'compiler')
+            def source(package, build):
+                target = build / 'runscript.c'; target.write_bytes(b'upstream source'); return target
+            def execute(args, **kwargs):
+                reply = ''
+                if '-dumpfullversion' in args: reply = '14.2.0\n'
+                elif '-dumpmachine' in args: reply = 'x86_64-w64-mingw32\n'
+                elif '-dM' in args: reply = '#define __MINGW64_VERSION_MAJOR 12\n'
+                elif '--version' in args: reply = 'gcc 14.2.0\n'
+                elif '-shared' in args:
+                    Path(args[args.index('-o') + 1]).write_bytes(executable('kernel32.dll'))
+                return prepare.subprocess.CompletedProcess(args, 0, stdout=reply, stderr='')
+            with patch.object(prepare, 'extract_wrapper_source', side_effect=source), \
+                    patch.object(prepare.shutil, 'which', return_value=str(compiler)), \
+                    patch.object(prepare.subprocess, 'run', side_effect=execute):
+                result = prepare.rebuild_wrapper(work / 'pinned-source', root, companion, work)
+            self.assertTrue(result['passed'])
+            self.assertEqual((root / 'bin/pdflatex.exe').read_bytes(), b'unchanged TeX engine')
+            self.assertEqual((companion / 'wrapper-build/upstream-runscript_dll.c').read_bytes(), b'upstream source')
+            record = prepare.json.loads((companion / 'wrapper-build/build.json').read_text())
+            self.assertEqual(record['originalDllSha256'], hashlib.sha256(b'original wrapper').hexdigest())
+            self.assertEqual(record['dllSha256'], prepare.digest(root / 'bin/runscript.dll'))
+            self.assertIn('-Wl,--no-insert-timestamp', record['command'])
+            self.assertTrue((root / 'share/licenses/runscript-portable/GCC-COPYING.RUNTIME').is_file())
+
+    def test_rebuild_rejects_unreviewed_compiler_before_replacing_runtime(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary); root = work / 'runtime'; (root / 'bin').mkdir(parents=True)
+            (root / 'bin/runscript.dll').write_bytes(b'original')
+            companion = work / 'companion'; companion.mkdir()
+            def source(package, build):
+                target = build / 'source.c'; target.write_bytes(b'upstream source'); return target
+            def execute(args, **kwargs):
+                reply = '15.0.0' if '-dumpfullversion' in args else 'x86_64-w64-mingw32'
+                return prepare.subprocess.CompletedProcess(args, 0, stdout=reply, stderr='')
+            with patch.object(prepare, 'extract_wrapper_source', side_effect=source), \
+                    patch.object(prepare.shutil, 'which', return_value='gcc'), \
+                    patch.object(prepare.subprocess, 'run', side_effect=execute):
+                with self.assertRaisesRegex(ValueError, 'Unexpected wrapper compiler'):
+                    prepare.rebuild_wrapper(work / 'source', root, companion, work)
+            self.assertEqual((root / 'bin/runscript.dll').read_bytes(), b'original')
+
     def test_source_cache_preserves_pins_and_rejects_changed_or_html_responses(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary); data = b'pinned source archive'
