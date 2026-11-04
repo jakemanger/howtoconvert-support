@@ -45,7 +45,8 @@ class WindowsRecipeTests(unittest.TestCase):
             json.loads(fixture['preamble'] + json.dumps(fixture['graph']))
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
-            compiler = root / 'pinned compiler.exe'; compiler.touch()
+            compiler = root / 'ghc-9.8.4.exe'; compiler.write_bytes(b'pinned compiler')
+            launcher = root / 'ghc.exe'; launcher.write_bytes(b'distinct launcher')
             report = root / 'dependencies.json'
             args = ['stack.exe', '--system-ghc', '--no-install-ghc']
             environment = {'STACK_ROOT': folder}
@@ -60,6 +61,11 @@ class WindowsRecipeTests(unittest.TestCase):
             with mock.patch.object(windows.subprocess, 'check_output', side_effect=capture), mock.patch('builtins.print'):
                 self.assertEqual(windows.dependency_graph(args, environment, report, compiler), fixture['graph'])
             self.assertEqual(json.loads(report.read_text()), fixture['graph'])
+            # Captured Windows output names the real versioned executable,
+            # while the same pinned archive's ghc.exe is a distinct launcher.
+            with mock.patch.object(windows.subprocess, 'check_output', return_value=str(compiler)), mock.patch('builtins.print'):
+                with self.assertRaisesRegex(ValueError, 'pinned GHC'):
+                    windows.dependency_graph(args, environment, report, launcher)
             with mock.patch.object(windows.subprocess, 'check_output', side_effect=[str(compiler), fixture['preamble'] + '[]']), mock.patch('builtins.print'):
                 with self.assertRaises(json.JSONDecodeError):
                     windows.dependency_graph(args, environment, report, compiler)

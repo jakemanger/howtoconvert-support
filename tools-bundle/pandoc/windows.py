@@ -224,15 +224,18 @@ def build(work, jobs, cache):
     env['STACK_ROOT'] = str(work / 'stack-root')
     env['PATH'] = str(ghc / 'bin') + os.pathsep + env['PATH']
     env.pop('STACK_YAML', None)
+    # The pinned Windows archive has a separate ghc.exe launcher. Stack
+    # reports the versioned compiler, so verify that exact extracted file.
+    compiler = ghc / 'bin' / f"ghc-{common['compiler']}.exe"
     for command, expected in [([stack, '--numeric-version'], common['stackVersion']),
-                              ([ghc / 'bin/ghc.exe', '--numeric-version'], common['compiler'])]:
+                              ([compiler, '--numeric-version'], common['compiler'])]:
         if subprocess.check_output(command, env=env, text=True).strip() != expected:
             raise ValueError('Unexpected compiler/build tool version')
     args = [stack, '--stack-yaml', project / 'stack.yaml', '--system-ghc', '--no-install-ghc',
             '--install-msys', '--setup-info-yaml', setup, '--lock-file', 'error-on-write', '--jobs', jobs]
     output = work / 'output'
     output.mkdir(exist_ok=True)
-    graph = dependency_graph(args, env, output / 'dependencies.json', ghc / 'bin/ghc.exe')
+    graph = dependency_graph(args, env, output / 'dependencies.json', compiler)
     base.verify_coverage(common, graph)
     base.run(args + ['build', 'pandoc-cli:exe:pandoc', '--no-haddock', '--no-test', '--no-bench'], env=env)
     base.run(args + ['--local-bin-path', output, 'install', 'pandoc-cli:exe:pandoc'], env=env)
