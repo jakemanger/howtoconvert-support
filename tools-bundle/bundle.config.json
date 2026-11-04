@@ -2,7 +2,6 @@
   "schema": 1,
   "bundle": "tools-2026.10.0",
   "repository": "jakemanger/howtoconvert-support",
-  "writtenOfferContact": "jake@howtoconvert.co",
   "upstream": {
     "v104-mac_arm64": {
       "url": "https://github.com/jakemanger/howtoconvert-support/releases/download/v1.0.4/mac_arm64.zip",
@@ -38,8 +37,8 @@
       "sha256": "d456cab221b5fc1c396768a026d0a33ee8665f7119c7fea7151b960c69058b21"
     },
     "libreoffice-mac_arm64": {
-      "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/mac/aarch64/LibreOffice_26.2.6_MacOS_aarch64.dmg",
-      "sha256": "94bb3248df074c225490a8a6d1d9dc87c7d6783dbb7a8e9f0d0c3d94348552af"
+      "url": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/mac/aarch64/LibreOffice_25.2.7.2_MacOS_aarch64.dmg",
+      "sha256": "5ef9d90cd03b950f42f836d158ee67162ba51a686a759856207034d2c634b456"
     },
     "libreoffice-mac_x86_64": {
       "url": "https://download.documentfoundation.org/libreoffice/stable/26.2.6/mac/x86_64/LibreOffice_26.2.6_MacOS_x86-64.dmg",
@@ -188,7 +187,8 @@
           "bin": "pandoc/bin/pandoc",
           "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
           "sources": [
-            "pandoc-3.6.2"
+            "pandoc-3.6.2",
+            "pandoc-release-3.6.2"
           ]
         },
         "mac_x86_64": {
@@ -203,7 +203,8 @@
           "bin": "pandoc/bin/pandoc",
           "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
           "sources": [
-            "pandoc-3.6.2"
+            "pandoc-3.6.2",
+            "pandoc-release-3.6.2"
           ]
         },
         "linux_x86_64": {
@@ -218,7 +219,8 @@
           "bin": "pandoc/bin/pandoc",
           "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
           "sources": [
-            "pandoc-3.6.2"
+            "pandoc-3.6.2",
+            "pandoc-release-3.6.2"
           ]
         },
         "linux_arm64": {
@@ -233,7 +235,8 @@
           "bin": "pandoc/bin/pandoc",
           "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
           "sources": [
-            "pandoc-3.6.2"
+            "pandoc-3.6.2",
+            "pandoc-release-3.6.2"
           ]
         },
         "windows_x86_64": {
@@ -248,7 +251,8 @@
           "bin": "pandoc/pandoc.exe",
           "origin": "Official Pandoc release (https://github.com/jgm/pandoc/releases/tag/3.6.2)",
           "sources": [
-            "pandoc-3.6.2"
+            "pandoc-3.6.2",
+            "pandoc-release-3.6.2"
           ]
         }
       }
@@ -338,7 +342,7 @@
       ],
       "platforms": {
         "mac_arm64": {
-          "version": "26.2.6",
+          "version": "25.2.7.2",
           "package": {
             "type": "as-is",
             "upstream": "libreoffice-mac_arm64",
@@ -349,7 +353,10 @@
           "installTo": "applications",
           "origin": "Official, signed and notarized The Document Foundation disk image (unchanged)",
           "sources": [
-            "libreoffice-26.2.6"
+            "libreoffice-25.2.7.2",
+            "libreoffice-dictionaries-25.2.7.2",
+            "libreoffice-help-25.2.7.2",
+            "libreoffice-translations-25.2.7.2"
           ]
         },
         "mac_x86_64": {
@@ -364,7 +371,10 @@
           "installTo": "applications",
           "origin": "Official, signed and notarized The Document Foundation disk image (unchanged)",
           "sources": [
-            "libreoffice-26.2.6"
+            "libreoffice-26.2.6",
+            "libreoffice-dictionaries-26.2.6",
+            "libreoffice-help-26.2.6",
+            "libreoffice-translations-26.2.6"
           ]
         },
         "windows_x86_64": {
@@ -376,7 +386,10 @@
           "bin": "libreoffice/program/soffice.com",
           "origin": "Official The Document Foundation MSI, extracted into a portable folder",
           "sources": [
-            "libreoffice-26.2.6"
+            "libreoffice-26.2.6",
+            "libreoffice-dictionaries-26.2.6",
+            "libreoffice-help-26.2.6",
+            "libreoffice-translations-26.2.6"
           ]
         },
         "linux_x86_64": {
@@ -389,7 +402,10 @@
           "bin": "libreoffice/program/soffice",
           "origin": "Official The Document Foundation .deb packages, extracted into a portable folder",
           "sources": [
-            "libreoffice-26.2.6"
+            "libreoffice-26.2.6",
+            "libreoffice-dictionaries-26.2.6",
+            "libreoffice-help-26.2.6",
+            "libreoffice-translations-26.2.6"
           ]
         },
         "linux_arm64": {
@@ -402,7 +418,10 @@
           "bin": "libreoffice/program/soffice",
           "origin": "Official The Document Foundation .deb packages, extracted into a portable folder",
           "sources": [
-            "libreoffice-26.2.6"
+            "libreoffice-26.2.6",
+            "libreoffice-dictionaries-26.2.6",
+            "libreoffice-help-26.2.6",
+            "libreoffice-translations-26.2.6"
           ]
         }
       }
@@ -451,7 +470,7 @@
           "package": {
             "type": "tar-xz-dir",
             "upstream": "tex-linux_x86_64",
-            "dir": "TinyTeX"
+            "dir": ".TinyTeX"
           },
           "bin": "tex/bin/x86_64-linux/pdflatex",
           "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
@@ -464,7 +483,7 @@
           "package": {
             "type": "tar-xz-dir",
             "upstream": "tex-linux_arm64",
-            "dir": "TinyTeX"
+            "dir": ".TinyTeX"
           },
           "bin": "tex/bin/aarch64-linux/pdflatex",
           "origin": "TinyTeX-1 prebuilt release (https://github.com/rstudio/tinytex-releases/releases/tag/v2026.10)",
@@ -494,14 +513,14 @@
       "url": "https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz",
       "sha256": "b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3",
       "attach": true,
-      "notes": "Build scripts for this binary, including the exact versions of every statically linked library: https://git.martin-riedl.de/ffmpeg/build-script"
+      "notes": "Upstream build scripts: https://git.martin-riedl.de/ffmpeg/build-script"
     },
     "ffmpeg-7.1": {
       "title": "FFmpeg 7.1 source code",
       "url": "https://ffmpeg.org/releases/ffmpeg-7.1.tar.xz",
       "sha256": "40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6",
       "attach": true,
-      "notes": "Build configuration for the macOS binary: https://evermeet.cx/ffmpeg/ . Build configuration and library versions for the Windows binary: https://www.gyan.dev/ffmpeg/builds/"
+      "notes": "Upstream builds: https://evermeet.cx/ffmpeg/ (macOS); https://www.gyan.dev/ffmpeg/builds/ (Windows)."
     },
     "ffmpeg-e20ee9f9ae": {
       "title": "FFmpeg source at commit e20ee9f9aec94f8cea1bf4fd8ed3fb096fb205e5",
@@ -509,36 +528,97 @@
       "filename": "ffmpeg-e20ee9f9aec94f8cea1bf4fd8ed3fb096fb205e5.tar.gz",
       "sha256": "267a43ea6e1d671ea031c872c28eb8c8946985ec6b82348450566865803d0ac2",
       "attach": true,
-      "notes": "Build scripts pinning every statically linked library: https://github.com/BtbN/FFmpeg-Builds (autobuild of 2025-01-24)"
+      "notes": "Upstream build scripts: https://github.com/BtbN/FFmpeg-Builds"
     },
     "pandoc-3.6.2": {
       "title": "Pandoc 3.6.2 source code",
       "url": "https://hackage.haskell.org/package/pandoc-3.6.2/pandoc-3.6.2.tar.gz",
       "sha256": "bcaa005395dfdfcf39b0724b43a620e4a1ee23be01c54e4cd3de86152c47f8a1",
       "attach": true,
-      "notes": "Haskell dependencies are listed in the release's cabal.project.freeze: https://github.com/jgm/pandoc/tree/3.6.2"
+      "notes": "Upstream build definitions: https://github.com/jgm/pandoc/tree/3.6.2"
     },
     "imagemagick-7.1.1-47": {
       "title": "ImageMagick 7.1.1-47 source code",
-      "url": "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.1-47.tar.gz",
-      "attach": false,
-      "notes": "Build recipe: https://github.com/leleliu008/xcpkg"
+      "url": "https://codeload.github.com/ImageMagick/ImageMagick/tar.gz/82572afc879b439cbf8c9c6f3a9ac7626adf98fb",
+      "attach": true,
+      "filename": "imagemagick-7.1.1-47-82572afc879b439cbf8c9c6f3a9ac7626adf98fb.tar.gz",
+      "sha256": "b65c597e803ad526d0f8654e69c83d017508fd3de07b4a22ddcfaae9b989d822"
     },
     "imagemagick-7.1.2-32": {
       "title": "ImageMagick 7.1.2-32 source code",
-      "url": "https://github.com/ImageMagick/ImageMagick/archive/refs/tags/7.1.2-32.tar.gz",
-      "attach": false
+      "url": "https://codeload.github.com/ImageMagick/ImageMagick/tar.gz/ad98b244c995d2e3051757fa3b7855f45b550d24",
+      "attach": true,
+      "filename": "imagemagick-7.1.2-32-ad98b244c995d2e3051757fa3b7855f45b550d24.tar.gz",
+      "sha256": "b917080691e66e9f708818edbcf5155f9ed2112dd7b726e8b84a95160da3bdc5"
     },
     "libreoffice-26.2.6": {
-      "title": "LibreOffice 26.2.6 source code",
-      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/",
-      "attach": false
+      "title": "LibreOffice 26.2.6.3 core source code",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-26.2.6.3.tar.xz",
+      "sha256": "3a2570aa7087bf8e0cbdf49ac5bd0e452c2025274af99e07882daa104c5685bd",
+      "attach": true,
+      "notes": "Upstream checksums: https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-26.2.6.3.tar.xz.mirrorlist"
     },
     "texlive": {
       "title": "TeX Live sources",
       "url": "https://tug.org/texlive/svn/",
       "attach": false,
       "notes": "TinyTeX build scripts: https://github.com/rstudio/tinytex"
+    },
+    "libreoffice-25.2.7.2": {
+      "title": "LibreOffice 25.2.7.2 core source code",
+      "url": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-25.2.7.2.tar.xz",
+      "sha256": "21b38b7f429d305b229fb70f3294dd6ccd803f52dad0463d0923cdf143e9c8bd",
+      "attach": true,
+      "notes": "Upstream checksums: https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-25.2.7.2.tar.xz.mirrorlist"
+    },
+    "libreoffice-dictionaries-26.2.6": {
+      "title": "LibreOffice 26.2.6.3 dictionaries sources",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-dictionaries-26.2.6.3.tar.xz",
+      "sha256": "5c0b2acf3d734d2cede32e3b37b5fbdd73dda9a1fbe6b5a00d98f7e234a40c9b",
+      "attach": true,
+      "notes": "Upstream checksums: https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-dictionaries-26.2.6.3.tar.xz.mirrorlist"
+    },
+    "libreoffice-help-26.2.6": {
+      "title": "LibreOffice 26.2.6.3 help sources",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-help-26.2.6.3.tar.xz",
+      "sha256": "e1e3ea2507f04e47d528cedd47c1ae5c35ad656652e83399043503cae36a97df",
+      "attach": true,
+      "notes": "Upstream checksums: https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-help-26.2.6.3.tar.xz.mirrorlist"
+    },
+    "libreoffice-translations-26.2.6": {
+      "title": "LibreOffice 26.2.6.3 translations sources",
+      "url": "https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-translations-26.2.6.3.tar.xz",
+      "sha256": "ed3575ba14fcd50fd52c61cb8c54ade2b57567cc916aa5c327b3c631192d345b",
+      "attach": true,
+      "notes": "Upstream checksums: https://download.documentfoundation.org/libreoffice/src/26.2.6/libreoffice-translations-26.2.6.3.tar.xz.mirrorlist"
+    },
+    "libreoffice-dictionaries-25.2.7.2": {
+      "title": "LibreOffice 25.2.7.2 dictionaries sources",
+      "url": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-dictionaries-25.2.7.2.tar.xz",
+      "sha256": "1ce174419f0bb899d8ac32d4f699bcfacdbf2f0d6bbc595039b0123d47a38745",
+      "attach": true,
+      "notes": "Upstream checksums: https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-dictionaries-25.2.7.2.tar.xz.mirrorlist"
+    },
+    "libreoffice-help-25.2.7.2": {
+      "title": "LibreOffice 25.2.7.2 help sources",
+      "url": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-help-25.2.7.2.tar.xz",
+      "sha256": "5a0b7e3f5c7d087491c9c9307c78fdb87f4ceb5c899fd7a98c0008c3a4c325ed",
+      "attach": true,
+      "notes": "Upstream checksums: https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-help-25.2.7.2.tar.xz.mirrorlist"
+    },
+    "libreoffice-translations-25.2.7.2": {
+      "title": "LibreOffice 25.2.7.2 translations sources",
+      "url": "https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-translations-25.2.7.2.tar.xz",
+      "sha256": "b15da015cd7c4b5297ad5afd63008ec25b02c6549e5436dd0fa3b05fa96d2c09",
+      "attach": true,
+      "notes": "Upstream checksums: https://downloadarchive.documentfoundation.org/libreoffice/old/25.2.7.2/src/libreoffice-translations-25.2.7.2.tar.xz.mirrorlist"
+    },
+    "pandoc-release-3.6.2": {
+      "title": "Pandoc 3.6.2 release repository",
+      "url": "https://codeload.github.com/jgm/pandoc/tar.gz/fd496848d8a9799edc5095ed3134522a9c14ad11",
+      "filename": "pandoc-release-3.6.2-fd496848d8a9799edc5095ed3134522a9c14ad11.tar.gz",
+      "sha256": "e2f0025b33a36487bda2c3b0575bec25505a6befecdc619d9007c7b40a186db6",
+      "attach": true
     }
   }
 }

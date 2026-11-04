@@ -16,12 +16,14 @@ const manifest = JSON.parse(manifestBytes);
 
 if (publicKeyBase64) {
   const raw = Buffer.from(publicKeyBase64, 'base64');
+  if (raw.length !== 32) throw new Error('The Ed25519 public key must contain exactly 32 bytes');
   const spkiPrefix = Buffer.from('302a300506032b6570032100', 'hex');
   const publicKey = createPublicKey({ key: Buffer.concat([spkiPrefix, raw]), format: 'der', type: 'spki' });
   const signature = Buffer.from((await fs.readFile(path.join(directory, 'manifest.json.sig'), 'utf8')).trim(), 'base64');
+  if (signature.length !== 64) throw new Error('The Ed25519 signature must contain exactly 64 bytes');
   if (!verify(null, manifestBytes, publicKey, signature)) problems.push('manifest.json.sig does not match the public key');
 } else {
-  console.log('No public key given; skipping signature check.');
+  problems.push('TOOLS_MANIFEST_PUBLIC_KEY is required; signature verification cannot be skipped');
 }
 
 if (manifest.schema !== 1) problems.push(`unsupported schema ${manifest.schema}`);
@@ -34,8 +36,16 @@ for (const [tool, entry] of Object.entries(manifest.tools || {})) {
       if (item[field] === undefined || item[field] === '') problems.push(`${tool}/${platform}: missing ${field}`);
     }
     if (item.bin.includes('..') || path.isAbsolute(item.bin)) problems.push(`${tool}/${platform}: unsafe bin path ${item.bin}`);
+    const source = item.correspondingSource;
+    if (!source || !source.asset || path.basename(source.asset) !== source.asset || !/^[a-f0-9]{64}$/.test(source.sha256 || '') || !Number.isSafeInteger(source.size) || source.size <= 0) {
+      problems.push(`${tool}/${platform}: missing verified corresponding-source attachment`);
+    } else {
+      const sourceFile = path.join(directory, source.asset);
+      if (!await exists(sourceFile)) problems.push(`missing corresponding source: ${source.asset}`);
+      else if ((await fs.stat(sourceFile)).size !== source.size || await sha256File(sourceFile) !== source.sha256) problems.push(`${source.asset}: corresponding-source checksum mismatch`);
+    }
     const file = path.join(directory, item.asset);
-    if (!await exists(file)) continue;
+    if (!await exists(file)) { problems.push(`missing archive: ${item.asset}`); continue; }
     const stat = await fs.stat(file);
     if (stat.size !== item.size) problems.push(`${item.asset}: size ${stat.size} != ${item.size}`);
     if (await sha256File(file) !== item.sha256) problems.push(`${item.asset}: sha256 mismatch`);

@@ -15,9 +15,21 @@ permissions:
   contents: write
 
 jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Test packaging and release checks
+        run: node --test tools-bundle/scripts/*.test.mjs
+      - name: Check required source mappings before building
+        run: node tools-bundle/scripts/build-bundle.mjs --check
+
   windows-libreoffice:
-    # msiexec's administrative install is the official way to unpack
-    # LibreOffice into a portable folder, and it only exists on Windows.
+    needs: validate
+    # Extract with the Windows administrative installer.
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +37,7 @@ jobs:
         with:
           node-version: 20
       - name: Build portable LibreOffice for Windows
-        run: node tools-bundle/scripts/build-bundle.mjs --out dist --platform windows_x86_64 --only libreoffice --skip-sources
+        run: node tools-bundle/scripts/build-bundle.mjs --out dist --platform windows_x86_64 --only libreoffice
       - uses: actions/upload-artifact@v4
         with:
           name: windows-libreoffice
@@ -47,7 +59,7 @@ jobs:
         with:
           name: windows-libreoffice
           path: dist
-      - name: Build every other archive, SOURCES.md and the manifest
+      - name: Build packages, sources and manifest
         run: node tools-bundle/scripts/build-bundle.mjs --out dist --reuse
       - name: Sign the manifest
         env:
@@ -58,14 +70,14 @@ jobs:
             exit 1
           fi
           node tools-bundle/scripts/sign-manifest.mjs dist
-      - name: Verify the bundle as the app will
+      - name: Verify and stage release files
         env:
           TOOLS_MANIFEST_PUBLIC_KEY: ${{ vars.TOOLS_MANIFEST_PUBLIC_KEY }}
-        run: node tools-bundle/scripts/verify-bundle.mjs dist
+        run: node tools-bundle/scripts/stage-release.mjs dist release
       - uses: actions/upload-artifact@v4
         with:
           name: tools-bundle
-          path: dist
+          path: release
           retention-days: 14
       - name: Create draft release
         if: ${{ inputs.draft }}
@@ -73,4 +85,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           BUNDLE=$(node -p "require('./tools-bundle/bundle.config.json').bundle")
-          gh release create "$BUNDLE" dist/* --draft --title "Conversion tools bundle $BUNDLE" --notes "Command line conversion tools for macOS, Windows and Linux. Sources and licenses are in SOURCES.md."
+          gh release create "$BUNDLE" release/* --target "$GITHUB_SHA" --draft --title "Conversion tools bundle $BUNDLE" --notes "Prebuilt command-line conversion tools for macOS, Windows and Linux, including Apple Silicon, save you from finding or compiling each tool yourself. Sources and licenses are in SOURCES.md."

@@ -1,8 +1,9 @@
 // Shared helpers for assembling the conversion tools bundle.
 import { createHash } from 'node:crypto';
-import { createReadStream, createWriteStream } from 'node:fs';
+import { createReadStream, createWriteStream, renameSync, rmSync } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import process from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import { Readable } from 'node:stream';
 import { spawnSync } from 'node:child_process';
@@ -90,10 +91,28 @@ export async function findContaining(root, relative) {
 // Every archive has exactly one top-level folder named after the tool, so the
 // whole tool can be extracted and swapped in as one folder.
 export function createTarGz(stagingRoot, topLevel, outputFile) {
-  const args = ['-czf', outputFile, '-C', stagingRoot, topLevel];
+  const partial = `${outputFile}.partial`;
+  const args = ['-czf', partial, '-C', stagingRoot, topLevel];
   const gnu = spawnSync('tar', ['--version'], { encoding: 'utf8' }).stdout?.includes('GNU');
   if (gnu) args.unshift('--owner=0', '--group=0', '--numeric-owner', '--sort=name');
-  run('tar', args);
+  try {
+    // macOS tar otherwise inserts AppleDouble ._ files outside the tool folder.
+    run('tar', args, { env: { ...process.env, COPYFILE_DISABLE: '1' } });
+    // Check the written archive, not just tar's successful creation exit code.
+    run('tar', ['-tzf', partial], { stdio: 'ignore' });
+    renameSync(partial, outputFile);
+  } catch (error) {
+    rmSync(partial, { force: true });
+    throw error;
+  }
+}
+
+export function verifyArchiveNotice(archive, tool, expected) {
+  run('tar', ['-tzf', archive], { stdio: 'ignore' });
+  const result = run('tar', ['-xOzf', archive, `${tool}/HTC-NOTICE.txt`], { encoding: 'utf8', stdio: 'pipe' });
+  if (result.stdout !== expected) {
+    throw new Error(`Stale package notices in ${path.basename(archive)}; rebuild without --reuse`);
+  }
 }
 
 export function assetName(tool, version, platform, format) {

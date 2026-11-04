@@ -1,14 +1,9 @@
 # Conversion tools bundle
 
-Command line conversion tools (FFmpeg, Pandoc, ImageMagick, LibreOffice and TinyTeX) for macOS,
-Windows and Linux, from one place. No downloading each tool from its own source, and no package
-manager needed.
+A bundle of command-line conversion tools for integrating file conversion into apps, scripts and workflows.
 
-The scripts that build the bundle are open source and live in this folder. Each tool keeps its own
-license, in [`LICENSES/`](LICENSES/).
+Prebuilt downloads for macOS, Windows and Linux, including Apple Silicon, save you from finding or compiling each tool yourself. Use the tools individually or install them together as a bundle.
 
-## Updating
+Fixed versions, corresponding source and build instructions belong together with each release, making the bundle easier to reproduce and distribute under the tools’ respective licenses.
 
-1. Edit `bundle.config.json`.
-2. Run **Build conversion tools bundle** from the Actions tab with **draft** ticked.
-3. Review the draft release and publish it.
+[Download from Releases](https://github.com/jakemanger/howtoconvert-support/releases) · [Build instructions](ASSEMBLY.md) · [Licenses](LICENSES/)

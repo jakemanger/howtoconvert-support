@@ -15,6 +15,7 @@ if (!key) {
   process.exit(1);
 }
 const privateKey = createPrivateKey(key.includes('BEGIN') ? key : { key: Buffer.from(key, 'base64'), format: 'der', type: 'pkcs8' });
+if (privateKey.asymmetricKeyType !== 'ed25519') throw new Error('Tools manifests require an Ed25519 signing key');
 const manifest = await fs.readFile(path.join(directory, 'manifest.json'));
 const signature = sign(null, manifest, privateKey);
 await fs.writeFile(path.join(directory, 'manifest.json.sig'), `${signature.toString('base64')}\n`);

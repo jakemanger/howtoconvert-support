@@ -1,0 +1,14 @@
+# Local metadata and build outputs
+.DS_Store
+._*
+/dist/
+/release/
+/.bundle-work/
+/test-results/
+
+# Private signing material
+*.pem
+*.key
+.env
+.env.*
+!.env.example

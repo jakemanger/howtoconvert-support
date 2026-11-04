@@ -4,7 +4,7 @@
 // and an (unsigned) manifest.json.
 //
 //   node tools-bundle/scripts/build-bundle.mjs --out dist [--only ffmpeg,pandoc]
-//        [--platform mac_arm64] [--reuse] [--skip-sources] [--work .bundle-work]
+//        [--platform mac_arm64] [--reuse] [--skip-sources] [--check] [--work .bundle-work]
 //
 // --reuse keeps assets already in --out (the Windows job builds the
 // LibreOffice archive with msiexec and hands it to the Linux job).
@@ -15,13 +15,13 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import {
   PLATFORMS, TOOL_IDS, assetName, commandExists, copyTree, createTarGz, exists,
-  fetchPinned, findContaining, run, sha256File, sourceAssetName,
+  fetchPinned, findContaining, run, sha256File, sourceAssetName, verifyArchiveNotice,
 } from './lib.mjs';
 
 const bundleDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function parseArguments(argv) {
-  const options = { out: 'dist', work: '.bundle-work', only: null, platforms: null, reuse: false, skipSources: false };
+  const options = { out: 'dist', work: '.bundle-work', only: null, platforms: null, reuse: false, skipSources: false, check: false };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     const next = () => argv[++i];
@@ -31,11 +31,18 @@ function parseArguments(argv) {
     else if (arg === '--platform') options.platforms = next().split(',');
     else if (arg === '--reuse') options.reuse = true;
     else if (arg === '--skip-sources') options.skipSources = true;
+    else if (arg === '--check') options.check = true;
     else throw new Error(`Unknown argument ${arg}`);
   }
   for (const tool of options.only || []) if (!TOOL_IDS.includes(tool)) throw new Error(`Unknown tool ${tool}`);
   for (const platform of options.platforms || []) if (!PLATFORMS.includes(platform)) throw new Error(`Unknown platform ${platform}`);
+  if (options.check && options.skipSources) throw new Error('--check requires source verification; do not combine it with --skip-sources');
   return options;
+}
+
+function sevenZip() {
+  for (const command of ['7z', '7zz']) if (commandExists(command)) return command;
+  throw new Error('Install 7-Zip (7z or 7zz) to unpack this archive');
 }
 
 const unzipped = new Map();
@@ -74,10 +81,19 @@ async function stageContents({ tool, platform, entry, config, work }) {
       break;
     }
     case 'appimage-extract': {
-      await fs.chmod(downloaded, 0o755);
-      // --appimage-extract runs the AppImage runtime, which needs no FUSE.
-      run(downloaded, ['--appimage-extract'], { cwd: scratch, stdio: 'ignore' });
-      await copyTree(path.join(scratch, 'squashfs-root'), destination);
+      let extracted;
+      if (process.platform === 'linux' && process.arch === 'x64') {
+        await fs.chmod(downloaded, 0o755);
+        // Only execute the runtime on a compatible build host.
+        run(downloaded, ['--appimage-extract'], { cwd: scratch, stdio: 'ignore' });
+        extracted = path.join(scratch, 'squashfs-root');
+      } else {
+        // 7-Zip reads the embedded SquashFS without running a foreign binary.
+        run(sevenZip(), ['x', '-y', `-o${scratch}`, downloaded], { stdio: 'ignore' });
+        extracted = await findContaining(scratch, 'AppRun');
+        if (!extracted) throw new Error(`${tool}/${platform}: AppRun missing from extracted AppImage`);
+      }
+      await copyTree(extracted, destination);
       const wrapper = path.join(destination, pkg.wrapper);
       await fs.mkdir(path.dirname(wrapper), { recursive: true });
       await fs.writeFile(wrapper, '#!/bin/sh\n# Runs the pre-extracted AppImage without FUSE.\nHERE="$(dirname "$(readlink -f "$0")")"\nexec "$HERE/../AppRun" "$@"\n');
@@ -85,7 +101,7 @@ async function stageContents({ tool, platform, entry, config, work }) {
       break;
     }
     case '7z-extract': {
-      run('7z', ['x', '-y', `-o${scratch}`, downloaded], { stdio: 'ignore' });
+      run(sevenZip(), ['x', '-y', `-o${scratch}`, downloaded], { stdio: 'ignore' });
       let root = scratch;
       if (pkg.dir) root = path.join(scratch, pkg.dir);
       else {
@@ -115,7 +131,20 @@ async function stageContents({ tool, platform, entry, config, work }) {
       }
       if (!debs.length) throw new Error(`${tool}/${platform}: no .deb files in ${upstream.url}`);
       const root = path.join(scratch, 'root');
-      for (const deb of debs.sort()) run('dpkg-deb', ['-x', deb, root]);
+      await fs.mkdir(root, { recursive: true });
+      for (const [index, deb] of debs.sort().entries()) {
+        if (commandExists('dpkg-deb')) run('dpkg-deb', ['-x', deb, root]);
+        else {
+          // BSD tar on macOS supports both the outer ar and inner data archive.
+          const ar = path.join(scratch, `deb-${index}`);
+          await fs.mkdir(ar);
+          run('tar', ['-xf', deb, '-C', ar]);
+          const data = (await fs.readdir(ar)).filter(name => /^data\.tar(?:\.|$)/.test(name));
+          if (data.length !== 1) throw new Error(`${tool}/${platform}: expected one data archive in ${deb}`);
+          run('tar', ['-xf', path.join(ar, data[0]), '-C', root]);
+          await fs.rm(ar, { recursive: true });
+        }
+      }
       const programDirectory = path.join(root, pkg.programDir);
       if (!await exists(path.join(programDirectory, 'program', 'soffice'))) {
         throw new Error(`${tool}/${platform}: program/soffice missing from ${pkg.programDir}`);
@@ -124,9 +153,13 @@ async function stageContents({ tool, platform, entry, config, work }) {
       break;
     }
     case 'msi-admin': {
-      if (process.platform !== 'win32') throw new Error(`${tool}/${platform}: msiexec /a must run on Windows (use the workflow's Windows job)`);
       const target = path.join(scratch, 'admin');
-      run('msiexec', ['/a', downloaded, '/qn', `TARGETDIR=${target}`]);
+      if (process.platform === 'win32') run('msiexec', ['/a', downloaded, '/qn', `TARGETDIR=${target}`]);
+      else {
+        if (!commandExists('msiextract')) throw new Error(`${tool}/${platform}: install msitools or use the Windows build job`);
+        await fs.mkdir(target, { recursive: true });
+        run('msiextract', ['--directory', target, downloaded], { stdio: 'ignore' });
+      }
       const programRoot = await findContaining(target, path.join('program', 'soffice.com'));
       if (!programRoot) throw new Error(`${tool}/${platform}: program\\soffice.com not found after administrative install`);
       await copyTree(programRoot, destination);
@@ -141,21 +174,22 @@ async function stageContents({ tool, platform, entry, config, work }) {
 }
 
 function noticeText({ config, tool, toolConfig, platform, entry }) {
-  const sources = (entry.sources || []).map(id => config.sources[id]).filter(Boolean);
   return [
     `${toolConfig.name} ${entry.version} for ${platform}`,
-    '',
     `Origin: ${entry.origin}`,
     `License: ${toolConfig.license} (texts in HTC-LICENSES/)`,
     `Project: ${toolConfig.homepage}`,
     '',
-    'Source code:',
-    ...sources.map(s => `  - ${s.title}: ${s.url}${s.attach ? ` (also attached to the ${config.bundle} release as ${sourceAssetName(Object.keys(config.sources).find(k => config.sources[k] === s), s)})` : ''}${s.notes ? `\n    ${s.notes}` : ''}`),
-    `  - Full record: https://github.com/${config.repository}/releases/download/${config.bundle}/SOURCES.md`,
+    entry.package.type === 'appimage-extract'
+      ? 'Packaging: extracted AppImage with a launcher for use without FUSE.'
+      : 'Packaging: upstream binaries unchanged.',
     '',
-    `Written offer: for at least three years from the date of the ${config.bundle} release,`,
-    `Merlinsbeard Pty Ltd will provide the complete corresponding source code for this`,
-    `binary, as required by its license, to anyone who asks at ${config.writtenOfferContact}.`,
+    ...(entry.sourceBundle && config.sources[entry.sourceBundle]?.includesBuildInstructions ? [
+      'Matching source and build instructions (free download):',
+      `https://github.com/${config.repository}/releases/download/${config.bundle}/SOURCES.md`,
+    ] : [
+      'Local draft: matching source and build instructions are required before distribution.',
+    ]),
     '',
   ].join('\n');
 }
@@ -164,7 +198,7 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
   const lines = [
     `# ${config.bundle} sources and licenses`,
     '',
-    'Command line conversion tools for macOS, Windows and Linux, from one place.',
+    'Source downloads and notices for the packages in this release.',
     '',
     '## Programs',
     '',
@@ -186,17 +220,23 @@ async function writeSourcesRecord({ config, out, manifestTools, attached }) {
   }
   lines.push(
     '',
-    '## Written offer',
+    '## Corresponding source',
     '',
-    `For at least three years from the publication of ${config.bundle}, Merlinsbeard Pty Ltd will give`,
-    'anyone a copy of the complete corresponding source code for any GPL- or LGPL-licensed binary in this',
-    `bundle, including the statically linked libraries, on request to ${config.writtenOfferContact}, for no`,
-    'more than the cost of physically performing the distribution.',
+    ...(Object.values(manifestTools).every(value => Object.values(value.platforms).every(item => item.correspondingSource)) ? [
+      'Download these matching source bundles, dependencies and build instructions',
+      'from this release without charge.',
+    ] : [
+      'Local draft: matching source bundles are missing. Do not distribute.',
+    ]),
+    '',
+    ...Object.entries(manifestTools).flatMap(([tool, value]) => Object.entries(value.platforms).map(([platform, item]) =>
+      `- ${tool}/${platform}: ${item.correspondingSource?.asset || 'Missing'}`)),
     '',
     '## License texts',
     '',
-    'Each archive contains the relevant texts in `HTC-LICENSES/`. The texts are also in',
-    `https://github.com/${config.repository}/tree/main/tools-bundle/LICENSES.`,
+    'Repacked archives include `HTC-LICENSES/` and retain upstream notices.',
+    'Unmodified LibreOffice disk images retain their own license files. See also:',
+    `https://github.com/${config.repository}/tree/tools-bundle/tools-bundle/LICENSES.`,
     '',
   );
   await fs.writeFile(path.join(out, 'SOURCES.md'), lines.join('\n'));
@@ -206,6 +246,23 @@ async function main() {
   const options = parseArguments(process.argv.slice(2));
   const config = JSON.parse(await fs.readFile(path.join(bundleDirectory, 'bundle.config.json'), 'utf8'));
   if (config.schema !== 1) throw new Error(`Unsupported bundle config schema ${config.schema}`);
+  if (!options.skipSources) {
+    const missing = [];
+    for (const [tool, value] of Object.entries(config.tools)) {
+      if (options.only && !options.only.includes(tool)) continue;
+      for (const [platform, entry] of Object.entries(value.platforms)) {
+        if (options.platforms && !options.platforms.includes(platform)) continue;
+        const source = config.sources[entry.sourceBundle];
+        if (!source?.attach || !/^[a-f0-9]{64}$/.test(source?.sha256 || '') || !source?.includesBuildInstructions
+          || !source?.binaryArchives?.includes(config.upstream[entry.package.upstream].sha256)) missing.push(`${tool}/${platform}`);
+      }
+    }
+    if (missing.length) throw new Error(`Complete corresponding source has not been reviewed for: ${missing.join(', ')}. A main-project source tarball or an upstream homepage is not sufficient.`);
+  }
+  if (options.check) {
+    console.log('Source mappings are configured. Build and staging will verify the downloads.');
+    return;
+  }
   const out = path.resolve(options.out);
   const work = path.resolve(options.work);
   await fs.mkdir(out, { recursive: true });
@@ -230,6 +287,11 @@ async function main() {
         continue;
       }
       if (options.reuse && await exists(target)) {
+        if (format === 'tar.gz') {
+          verifyArchiveNotice(target, tool, noticeText({ config, tool, toolConfig, platform, entry }));
+        } else if (await sha256File(target) !== config.upstream[entry.package.upstream].sha256) {
+          throw new Error(`Checksum mismatch for reused ${name}`);
+        }
         console.log(`${tool}/${platform}: reusing ${name}`);
       } else if (entry.package.type === 'as-is') {
         const downloaded = await fetchPinned(config.upstream[entry.package.upstream], path.join(work, 'downloads'));
@@ -242,7 +304,6 @@ async function main() {
           await fs.copyFile(path.join(bundleDirectory, 'LICENSES', file), path.join(licenseDirectory, file));
         }
         await fs.writeFile(path.join(staging, tool, 'HTC-NOTICE.txt'), noticeText({ config, tool, toolConfig, platform, entry }));
-        await fs.rm(target, { force: true });
         createTarGz(staging, tool, target);
         await fs.rm(staging, { recursive: true, force: true });
       }
@@ -256,7 +317,8 @@ async function main() {
         format,
         bin: entry.bin,
         origin: entry.origin,
-        sources: entry.sources || [],
+        sources: [...new Set([...(entry.sources || []), ...(entry.sourceBundle ? [entry.sourceBundle] : [])])],
+        sourceBundle: entry.sourceBundle,
         ...(entry.installTo ? { installTo: entry.installTo } : {}),
         ...(entry.package.app ? { app: entry.package.app } : {}),
       };
@@ -288,6 +350,10 @@ async function main() {
       attached.set(id, name);
     }
   }
+  for (const value of Object.values(manifestTools)) for (const item of Object.values(value.platforms)) {
+    const name = attached.get(item.sourceBundle);
+    if (name) item.correspondingSource = { asset: name, sha256: config.sources[item.sourceBundle].sha256, size: (await fs.stat(path.join(out, name))).size };
+  }
   await writeSourcesRecord({ config, out, manifestTools, attached });
 
   const manifest = {
@@ -301,7 +367,7 @@ async function main() {
   };
   await fs.writeFile(path.join(out, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
   console.log(`Wrote ${path.join(out, 'manifest.json')} for ${Object.keys(manifestTools).length} tools on ${os.platform()}`);
-  if (!commandExists('7z')) console.log('Note: 7z was not found; 7z-extract packages need p7zip-full.');
+  if (!commandExists('7z') && !commandExists('7zz')) console.log('Note: 7-Zip was not found; 7z-extract packages need 7z or 7zz.');
 }
 
 main().catch(error => {
