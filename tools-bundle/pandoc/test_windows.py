@@ -94,6 +94,51 @@ class WindowsRecipeTests(unittest.TestCase):
                 with self.assertRaises(ValueError): windows.prepare_source_cache(work)
                 download.assert_called_once(); extract.assert_not_called()
 
+    def test_project_extraction_preserves_linked_licences_and_data(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); archive = root / 'project.tar.gz'
+            with tarfile.open(archive, 'w:gz') as source:
+                for name, data in [('pandoc/COPYING.md', b'exact GPL notice\n'),
+                                   ('pandoc/data/translations/nb.yaml', b'abstract: Summary\n')]:
+                    entry = tarfile.TarInfo(name); entry.size = len(data)
+                    source.addfile(entry, io.BytesIO(data))
+                for package in ['pandoc-cli', 'pandoc-lua-engine', 'pandoc-server']:
+                    link = tarfile.TarInfo(f'pandoc/{package}/COPYING.md')
+                    link.type = tarfile.SYMTYPE; link.linkname = '../COPYING.md'
+                    source.addfile(link)
+                link = tarfile.TarInfo('pandoc/data/translations/no.yaml')
+                link.type = tarfile.SYMTYPE; link.linkname = 'nb.yaml'; source.addfile(link)
+            original_hash = hashlib.sha256(archive.read_bytes()).hexdigest()
+            project = windows.extract_project(archive, root / 'sources')
+            for package in ['pandoc-cli', 'pandoc-lua-engine', 'pandoc-server']:
+                self.assertEqual((project / package / 'COPYING.md').read_bytes(), b'exact GPL notice\n')
+            self.assertEqual((project / 'data/translations/no.yaml').read_bytes(), b'abstract: Summary\n')
+            self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), original_hash)
+
+    def test_project_filter_normalizes_windows_link_separators_after_safety_check(self):
+        with tempfile.TemporaryDirectory() as folder:
+            link = tarfile.TarInfo('pandoc/pandoc-cli/COPYING.md')
+            link.type = tarfile.SYMTYPE; link.linkname = '../COPYING.md'
+            with mock.patch.object(windows.os, 'sep', '\\'):
+                filtered = windows.project_source_filter(link, folder)
+            self.assertEqual(filtered.linkname, '..\\COPYING.md')
+            self.assertEqual(link.linkname, '../COPYING.md')
+            link.linkname = '../../../outside'
+            with self.assertRaises(tarfile.LinkOutsideDestinationError):
+                windows.project_source_filter(link, folder)
+
+    def test_project_extraction_rejects_broken_link_before_compilation(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); archive = root / 'project.tar.gz'
+            with tarfile.open(archive, 'w:gz') as source:
+                link = tarfile.TarInfo('pandoc/pandoc-server/COPYING.md')
+                link.type = tarfile.SYMTYPE; link.linkname = '../missing'
+                source.addfile(link)
+            # Some Windows accounts cannot create symlinks: tarfile's fallback
+            # also rejects the absent target instead of leaving a usable source.
+            with self.assertRaises((ValueError, tarfile.ExtractError)):
+                windows.extract_project(archive, root / 'sources')
+
     def test_regular_and_delayed_system_imports_are_allowed(self):
         with tempfile.TemporaryDirectory() as folder:
             exe = Path(folder) / 'test.exe'

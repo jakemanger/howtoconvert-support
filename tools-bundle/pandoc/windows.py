@@ -85,6 +85,37 @@ def prepare_source_cache(work):
     return root
 
 
+def project_source_filter(member, destination):
+    # Python 3.12 leaves POSIX link separators broken on Windows (CPython #57911).
+    # Keep the data-filter checks, then use native separators for the link itself.
+    filtered = tarfile.data_filter(member, destination)
+    if filtered is not None and filtered.issym():
+        filtered = filtered.replace(linkname=filtered.linkname.replace('/', os.sep))
+    return filtered
+
+
+def extract_project(archive, destination):
+    destination.mkdir(parents=True, exist_ok=True)
+    with tarfile.open(archive) as source:
+        members = source.getmembers()
+        roots = {Path(member.name).parts[0] for member in members
+                 if member.name and member.name != '.'}
+        if len(roots) != 1:
+            raise ValueError('Expected one Pandoc source archive root')
+        source.extractall(destination, filter=project_source_filter)
+        # Fail before compiling if a linked notice/data fixture is unreadable or
+        # differs from its original archive target; no source bytes are changed.
+        for member in members:
+            if member.issym() or member.islnk():
+                path = destination / member.name
+                if not path.is_file():
+                    raise ValueError('Unreadable Pandoc source link: ' + member.name)
+                with source.extractfile(member) as expected:
+                    if path.read_bytes() != expected.read():
+                        raise ValueError('Pandoc source link content changed: ' + member.name)
+    return destination / roots.pop()
+
+
 def pe_imports(path):
     """Read regular and delayed PE imports without executing the binary."""
     data = Path(path).read_bytes()
@@ -215,7 +246,7 @@ def build(work, jobs, cache):
     toolchain = windows['toolchain']
     stack = base.extract(base.sources.fetch(toolchain['stack'], downloads), work / 'toolchain') / 'stack.exe'
     ghc = base.extract(base.sources.fetch(toolchain['ghc'], downloads), work / 'toolchain')
-    project = base.extract(sources / common['archives'][0]['filename'], work / 'sources')
+    project = extract_project(sources / common['archives'][0]['filename'], work / 'sources')
     for name in ('stack.yaml', 'stack.yaml.lock'):
         shutil.copyfile(RECIPE / name, project / name)
     setup = work / 'stack-setup.json'
