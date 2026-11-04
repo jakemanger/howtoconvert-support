@@ -128,7 +128,9 @@ export function isPlainAssetName(value) {
 export function sourceAssetName(id, source) {
   const filename = source.filename || decodeURIComponent(new URL(source.url).pathname.split('/').pop());
   if (!isPlainAssetName(id) || !isPlainAssetName(filename)) throw new Error('Source assets must be plain filenames');
-  return `source-${filename.startsWith(id) ? filename : `${id}-${filename}`}`;
+  // GitHub rewrites tildes in uploaded release filenames. Keep the original
+  // source ID and upstream filename for fetching and matching the binary.
+  return `source-${filename.startsWith(id) ? filename : `${id}-${filename}`}`.replaceAll('~', '.');
 }
 
 // Local collectors can supply first-release sources before their public URLs exist.
