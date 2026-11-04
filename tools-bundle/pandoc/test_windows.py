@@ -139,6 +139,41 @@ class WindowsRecipeTests(unittest.TestCase):
             with self.assertRaises((ValueError, tarfile.ExtractError)):
                 windows.extract_project(archive, root / 'sources')
 
+    def test_version_accepts_only_exact_release_with_native_executable_name(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder); executable = root / 'pandoc.exe'
+            for name in ['pandoc', 'pandoc.exe']:
+                for ending in ['\n', '\r\n']:
+                    output = ending.join([name + ' 3.6.2', 'Features: +server +lua', 'Scripting engine: Lua 5.4', ''])
+                    result = windows.subprocess.CompletedProcess([], 0, output, '')
+                    with mock.patch.object(windows.subprocess, 'run', return_value=result) as run, mock.patch('builtins.print'):
+                        self.assertEqual(windows.verify_version(executable, '3.6.2', root), output)
+                    self.assertEqual((root / 'version.txt').read_text(), output.replace('\r\n', '\n'))
+                    self.assertEqual(run.call_args.args[0], [str(executable), '--version'])
+                    self.assertEqual(run.call_args.kwargs['encoding'], 'utf-8')
+                    self.assertEqual(run.call_args.kwargs['timeout'], 30)
+            for first in ['', 'pandoc.exe 3.6.20', 'pandoc.exe 3.6.3', 'pandoc.exe 3.6.2-nightly',
+                          'other.exe 3.6.2', 'notice before version\npandoc.exe 3.6.2']:
+                output = first + '\nFeatures: +server +lua\n'
+                result = windows.subprocess.CompletedProcess([], 0, output, '')
+                with mock.patch.object(windows.subprocess, 'run', return_value=result), mock.patch('builtins.print'):
+                    with self.assertRaisesRegex(ValueError, 'Unexpected Pandoc executable version'):
+                        windows.verify_version(executable, '3.6.2', root)
+                self.assertEqual((root / 'version.txt').read_text(), output)
+
+    def test_version_failure_keeps_output_and_requires_both_configured_features(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            for code, features, message in [(1, '+server +lua', 'exited 1'), (0, '-server +lua', 'configured'),
+                                             (0, '+server -lua', 'configured')]:
+                output = 'pandoc.exe 3.6.2\nFeatures: ' + features + '\n'
+                result = windows.subprocess.CompletedProcess([], code, output, 'native detail')
+                with mock.patch.object(windows.subprocess, 'run', return_value=result), mock.patch('builtins.print'):
+                    with self.assertRaisesRegex(ValueError, message):
+                        windows.verify_version(root / 'pandoc.exe', '3.6.2', root)
+                self.assertEqual((root / 'version.txt').read_text(), output)
+                self.assertEqual((root / 'version-stderr.txt').read_text(), 'native detail')
+
     def test_regular_and_delayed_system_imports_are_allowed(self):
         with tempfile.TemporaryDirectory() as folder:
             exe = Path(folder) / 'test.exe'

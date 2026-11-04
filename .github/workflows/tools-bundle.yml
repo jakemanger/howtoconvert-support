@@ -121,6 +121,7 @@ jobs:
           name: tools-bundle
           path: release
           retention-days: 14
+          compression-level: 0
       - name: Create draft release
         if: ${{ inputs.draft }}
         env:

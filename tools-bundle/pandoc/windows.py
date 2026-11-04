@@ -236,6 +236,25 @@ def dependency_graph(args, env, report, expected_compiler):
     return json.loads(text)
 
 
+def verify_version(executable, expected, output):
+    result = subprocess.run([str(executable), '--version'], capture_output=True,
+                            text=True, encoding='utf-8', timeout=30)
+    (output / 'version.txt').write_text(result.stdout, encoding='utf-8', newline='')
+    (output / 'version-stderr.txt').write_text(result.stderr, encoding='utf-8', newline='')
+    lines = result.stdout.splitlines()
+    first = lines[0] if lines else ''
+    print('Pandoc version: ' + repr(first), flush=True)
+    if result.returncode:
+        raise ValueError(f'Pandoc version command exited {result.returncode}: {first!r}; see version.txt')
+    # The pinned CLI uses getProgName, which retains .exe on Windows.
+    # Match the entire release version, never a prefix or a nightly suffix.
+    if first not in {f'pandoc {expected}', f'pandoc.exe {expected}'}:
+        raise ValueError(f'Unexpected Pandoc executable version: {first!r}; expected {expected}')
+    if 'Features: +server +lua' not in lines:
+        raise ValueError('Pandoc is missing the configured server/Lua features; see version.txt')
+    return result.stdout
+
+
 def build(work, jobs, cache):
     if platform.system() != 'Windows' or platform.machine().lower() not in ('amd64', 'x86_64'):
         raise ValueError('Run the build on Windows x64; --collect-only works on other platforms')
@@ -271,9 +290,7 @@ def build(work, jobs, cache):
     base.run(args + ['build', 'pandoc-cli:exe:pandoc', '--no-haddock', '--no-test', '--no-bench'], env=env)
     base.run(args + ['--local-bin-path', output, 'install', 'pandoc-cli:exe:pandoc'], env=env)
     executable = output / 'pandoc.exe'
-    version = subprocess.check_output([executable, '--version'], text=True)
-    if not version.startswith('pandoc ' + common['version'] + '\n'):
-        raise ValueError('Unexpected Pandoc executable version')
+    verify_version(executable, common['version'], output)
     imports = verify_windows_runtime(executable)
     licenses = output / 'licenses'
     shutil.copytree(sources / 'licenses', licenses, dirs_exist_ok=True)
